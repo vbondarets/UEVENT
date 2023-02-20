@@ -1,16 +1,21 @@
 const ApiError = require("../helpers/error/ApiError");
-const sportEventService = require("../services/sportEventApi")
+const {EventModel} = require('../models/eventModel');
+const eventListing = require('../helpers/eventListing')
 
 class EventController {
     async getAll(req, res, next) {
         try {
-            sportEventService.getAll().then(resolve => {
+            eventListing();
+            EventModel.findAll().then(resolve => {
                 if(resolve.length > 0){
                     return res.json(resolve)
                 }
-            }).catch(err => {
-                return next(ApiError.internal('Unknown error: ' + err));
-            });
+                else {
+                    return next(ApiError.badRequest('Not Found'));
+                }
+            }).catch(error => {
+                return next(ApiError.internal('Unknown error: ' + error));
+            })
         } catch (error) {
             return next(ApiError.internal('Unknown error: ' + error));
         }

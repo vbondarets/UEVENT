@@ -1,7 +1,7 @@
 const sequelize = require('./db');
 const {DataTypes, Model} = require('sequelize');
 
-const EventModel = sequelize.define( 'user', {
+const EventModel = sequelize.define( 'event', {
     event_id: {
         type: DataTypes.INTEGER, 
         primaryKey: true, 
@@ -27,7 +27,7 @@ const EventModel = sequelize.define( 'user', {
     endDateTime: {
         type: DataTypes.DATE, 
         unique: false, 
-        allowNull: false
+        allowNull: true
     },
     tickets: {
         type: DataTypes.INTEGER, 
@@ -38,6 +38,11 @@ const EventModel = sequelize.define( 'user', {
         type: DataTypes.STRING, 
         unique: false, 
         defaultValue: "ukr"
+    },
+    imgLink: {
+        type: DataTypes.STRING, 
+        unique: false, 
+        defaultValue: "/"
     }
 });
 

@@ -20,6 +20,7 @@
     "express-fileupload": "^1.4.0",
     "joi": "^17.7.1",
     "jsonwebtoken": "^9.0.0",
+    "moment": "^2.29.4",
     "mysql2": "^3.1.2",
     "nodemailer": "^6.9.1",
     "sequelize": "^6.28.0",
