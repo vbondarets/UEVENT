@@ -5,7 +5,8 @@ const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const router = require('./routes/index');
 const errorHandler = require('./middleware/ErrorHanlingMinddleware');
-const seqelize = require('./models/db')
+const seqelize = require('./models/db');
+const eventClearing = require("./helpers/eventCleaning");
 
 const app = express();
 
@@ -27,5 +28,10 @@ const start = async () =>{
     }
 }
 start();
+setInterval(
+    () => eventClearing(), 
+    8 * 60 * 60 * 1000 //vremya =kajdie 8 chasov
+);
+
 
 module.exports = app;
