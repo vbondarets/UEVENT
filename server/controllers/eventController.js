@@ -1,5 +1,5 @@
 const ApiError = require("../helpers/error/ApiError");
-const {EventModel} = require('../models/eventModel');
+const {EventModel, EventCategoryModel} = require('../models/eventModel');
 const eventListing = require('../helpers/eventListing');
 const {TicketModel} = require('../models/ticketModel');
 
@@ -37,7 +37,30 @@ class EventController {
     }
     async getByCategory(){
         try {
-            
+            const {categoryId} = req.body;
+            EventCategoryModel.findAll({
+                attributes: ['event_id'],
+                where: {
+                    category_id: categoryId
+                }
+            }).then(resolve => {
+                let event_array = [];
+                resolve.forEach(element => {
+                    EventModel.findAll({
+                        where: {event_id: element.event_id}
+                    }).then(result => {
+                        event_array.push(result);
+                    })
+                });
+                if(event_array.length > 0){
+                    return res.json(event_array);
+                }
+                else {
+                    return next(ApiError.badRequest('Not Found'));
+                }
+            }).catch(err => {
+                return next(ApiError.internal('Unknown error: ' + err));
+            })
         } catch (error) {
             return next(ApiError.internal('Unknown error: ' + error));
         }
