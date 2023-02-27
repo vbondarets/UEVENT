@@ -13,12 +13,6 @@ const EventModel = sequelize.define( 'event', {
         unique: false, 
         allowNull: false
     },
-    type: {
-        type: DataTypes.STRING, 
-        unique: false, 
-        allowNull: true,
-        defaultValue: "event"
-    },
     startDateTime: {
         type: DataTypes.DATE, 
         unique: false, 
@@ -29,7 +23,7 @@ const EventModel = sequelize.define( 'event', {
         unique: false, 
         allowNull: true
     },
-    tickets: {
+    tickets_count: {
         type: DataTypes.INTEGER, 
         unique: false,  
         defaultValue: 0
@@ -45,8 +39,50 @@ const EventModel = sequelize.define( 'event', {
         defaultValue: "/"
     }
 });
+const EventTypeModel = sequelize.define( 'event_type', {
+    type_id: {
+        type: DataTypes.INTEGER, 
+        primaryKey: true, 
+        unique: true, 
+        autoIncrement: true
+    },
+    name: {
+        type: DataTypes.STRING, 
+        unique: false, 
+        allowNull: false
+    }
+});
+const EventCategoryModel = sequelize.define( 'event_category', {
+    category_id: {
+        type: DataTypes.INTEGER, 
+        primaryKey: true, 
+        unique: true, 
+        autoIncrement: true
+    },
+    name: {
+        type: DataTypes.STRING, 
+        unique: false, 
+        allowNull: false
+    }
+});
+
+EventModel.hasMany(EventTypeModel, {
+    foreignKey: {
+        name: 'event_id'
+    }
+});
+EventTypeModel.belongsTo(EventModel);
+
+EventModel.hasMany(EventCategoryModel, {
+    foreignKey: {
+        name: 'event_id'
+    }
+});
+EventCategoryModel.belongsTo(EventModel);
 
 
 module.exports = {
-    EventModel
+    EventModel,
+    EventTypeModel,
+    EventCategoryModel
 };

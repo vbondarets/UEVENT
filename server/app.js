@@ -8,6 +8,7 @@ const errorHandler = require('./middleware/ErrorHanlingMinddleware');
 const seqelize = require('./models/db');
 const eventClearing = require("./helpers/eventCleaning");
 
+
 const app = express();
 
 app.use(cors());

@@ -13,7 +13,6 @@ const eventListing = async () => {
                 if (element.type === "event") {
                     let Event = {
                         name: element.name,
-                        type: element.type,
                         startDateTime: element.dates.start.dateTime,
                         endDateTime: moment(element.dates.start.dateTime).add(3, 'hours'),
                         tickets: Math.floor(Math.random() * 600),
@@ -27,28 +26,44 @@ const eventListing = async () => {
                 if (resolve.length > 0) {
                     if (resolve.lenght < 70) {
                         EventModel.drop().finally(() => {
-                            eventList.forEach((Event) => {
-                                EventModel.create(Event).catch(err => {
-                                    return ApiError.internal('Unknown error: ' + err);
+                            if (eventList.length > 0) {
+                                eventList.forEach((Event) => {
+                                    EventModel.create(Event).then(resolve => {
+                                        console.log(resolve.dataValues.event_id)
+                                    }).catch(err => {
+                                        return ApiError.internal('Unknown error: ' + err);
+                                    });
                                 });
-                            });
+                            }
                         })
                     }
                 }
                 else {
-                    eventList.forEach((Event) => {
-                        EventModel.create(Event).catch(err => {
-                            return ApiError.internal('Unknown error: ' + err);
+                    if (eventList.length > 0) {
+                        eventList.forEach((Event) => {
+                            EventModel.create(Event).then(resolve => {
+                                console.log(resolve.dataValues.event_id)
+                            }).catch(err => {
+                                return ApiError.internal('Unknown error: ' + err);
+                            });
                         });
-                    });
+                    }
 
                 }
             }).catch(error => {
-                eventList.forEach((Event) => {
-                    EventModel.create(Event).catch(err => {
-                        return ApiError.internal('Unknown error: ' + err);
+                if (eventList.length > 0) {
+                    eventList.forEach((Event) => {
+                        EventModel.create(Event).then(resolve => {
+                            console.log(resolve.dataValues.event_id)
+                        }).catch(err => {
+                            return ApiError.internal('Unknown error: ' + err);
+                        });
                     });
-                });
+                }
+                else {
+                    return (ApiError.badRequest('Not Found'));
+                }
+
             });
         }
         return (ApiError.badRequest('Not Found'));
