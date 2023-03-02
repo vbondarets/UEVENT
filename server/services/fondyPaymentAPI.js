@@ -9,7 +9,8 @@ const paymentService = async (order_id, order_desc, amount, currency, merchant_d
         merchant_id: merchantConfig.merchantId,
         order_desc: order_desc,
         amount: amount,
-        currency: currency
+        currency: currency,
+        merchant_data: JSON.stringify(merchant_data)
     }
     const orederKeys = Object.keys(orderBody).sort((a, b) => {
         if (a < b) {
@@ -28,9 +29,10 @@ const paymentService = async (order_id, order_desc, amount, currency, merchant_d
         order_desc: order_desc,
         amount: amount,
         currency: currency,
-        merchant_data: merchant_data
+        merchant_data: JSON.stringify(merchant_data)
     };
     const signature = crypto.createHash('sha1');
+    console.log(params);
     signature.update(`${merchantConfig.paymentKey}|${signatureString}`);
 
     const { data } = await axios.post(url, {
@@ -40,18 +42,6 @@ const paymentService = async (order_id, order_desc, amount, currency, merchant_d
         }
     })
 
-    // axios.post(url, {
-    //     request: {
-    //         ...params,
-    //         signature: signature.digest('hex')
-    //     }
-    // }).then((resolve) => {
-    //     console.log(resolve.data);
-    //     return resolve.data;
-    // }).catch((err) => {
-    //     console.log(err);
-    //     return resolve.data;
-    // })
     return data;
 }
 

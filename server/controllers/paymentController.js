@@ -4,8 +4,8 @@ const paymentService = require("../services/fondyPaymentAPI");
 class PaymentController {
     async createPayment(req, res, next) {
         try {
-            const {order_id, order_desc, amount, currency} = req.body;
-            const result = await paymentService(order_id, order_desc, amount, currency);
+            const {order_id, order_desc, amount, currency, merchant_data} = req.body;
+            const result = await paymentService(order_id, order_desc, amount, currency, merchant_data);
             return res.json(result)
 
         } catch (error) {
