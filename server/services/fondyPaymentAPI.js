@@ -22,7 +22,6 @@ const paymentService = async (order_id, order_desc, amount, currency, merchant_d
         return 0;
     })
     const signatureString = orederKeys.map((value) => orderBody[value]).join("|");
-    console.log(signatureString);
     const params = {
         order_id: order_id,
         merchant_id: merchantConfig.merchantId,
@@ -32,16 +31,13 @@ const paymentService = async (order_id, order_desc, amount, currency, merchant_d
         merchant_data: JSON.stringify(merchant_data)
     };
     const signature = crypto.createHash('sha1');
-    console.log(params);
     signature.update(`${merchantConfig.paymentKey}|${signatureString}`);
-
     const { data } = await axios.post(url, {
         request: {
             ...params,
             signature: signature.digest('hex'),
         }
     })
-
     return data;
 }
 
