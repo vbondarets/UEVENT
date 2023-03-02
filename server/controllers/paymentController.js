@@ -6,7 +6,6 @@ class PaymentController {
         try {
             const {order_id, order_desc, amount, currency} = req.body;
             const result = await paymentService(order_id, order_desc, amount, currency);
-
             return res.json(result)
 
         } catch (error) {
