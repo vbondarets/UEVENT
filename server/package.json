@@ -22,7 +22,10 @@
     "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.4",
     "mysql2": "^3.1.2",
+    "node-html-parser": "^6.1.5",
     "nodemailer": "^6.9.1",
+    "pdf-creator-node": "^2.3.5",
+    "qrcode": "^1.5.1",
     "sequelize": "^6.28.0",
     "uuid": "^9.0.0"
   }

@@ -1,3 +1,6 @@
+const secureConfig = require('../../secureConfig.json');
+const jwt = require('jsonwebtoken');
+
 const resetJwtGenerator = (id, email) => {
     const token = jwt.sign(
         { id: id, email: email },

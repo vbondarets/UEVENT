@@ -1,5 +1,10 @@
 const ApiError = require("../helpers/error/ApiError");
 const paymentService = require("../services/fondyPaymentAPI");
+const secureConfig = require('../secureConfig.json');
+const jwt = require('jsonwebtoken');
+const PdfGenerator = require('../helpers/PdfGenerator/PdfGenerator');
+const fileMailingService = require("../services/fileMailingService");
+const fs = require("fs");
 
 class PaymentController {
     async createPayment(req, res, next) {
@@ -14,6 +19,15 @@ class PaymentController {
     }
     async checkPayment(req, res, next) {
         try {
+            const {merchant_data, response_status, currency, amount, masked_card} = req.body;
+            if(response_status === "success"){
+                const decoded = jwt.verify(merchant_data.seqToken, secureConfig.SECRET_KEY);
+                if(decoded){
+                    const path = await PdfGenerator(merchant_data.seqToken);
+                    await fileMailingService('bondaretsdirect@gmail.com', path);
+                    return res.json(decoded)
+                }
+            }
             
         } catch (error) {
             return next(ApiError.internal('Unknown error: ' + error));

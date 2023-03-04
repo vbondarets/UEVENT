@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Event ticket</title>
+  <link rel="stylesheet" href="./template.css">
+  <style>
+    body {background-color: rgb(60, 250, 145);}
+    h1   {color: rgb(5, 5, 177);}
+    .content{
+      min-width: 10mm;
+      min-height: 10mm;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Event ticket</h1>
+  <div class="content">
+    {{#each data}}
+    <ul>
+
+      <li>Name: {{this.name}}</li>
+      <li>Age: {{this.age}}</li>
+      <br />
+    </ul>
+    {{/each}}
+  </div>
+  <div id="qrcode"></div>
+  <canvas id="canvas"></canvas>
+
+</body>
+
+</html>

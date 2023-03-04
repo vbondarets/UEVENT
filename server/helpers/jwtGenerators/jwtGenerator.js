@@ -1,6 +1,9 @@
-const JwtGenerator = (id, login, email, fullname, role) => {
+const secureConfig = require('../../secureConfig.json');
+const jwt = require('jsonwebtoken');
+
+const JwtGenerator = (params) => {
     const token = jwt.sign(
-        { id: id, login: login, email: email, fullname: fullname, role: role },
+        { ...params},
         secureConfig.SECRET_KEY,
         { expiresIn: '5040h' }
     );

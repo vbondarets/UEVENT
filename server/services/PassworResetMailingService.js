@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const mailingService = (email, token) => {
+const PassworResetMailingService = (email, token) => {
     const transporter = nodemailer.createTransport({
         host: "smtp.mailtrap.io",
         port: 2525,
@@ -12,7 +12,7 @@ const mailingService = (email, token) => {
         requireTLS: true
     });
     const message = {
-        from: "no-reply@progress-app.com",
+        from: "no-reply@ucode-uevent.com",
         to: email,
         subject: "Subject",
         html: `<h1>Your link for password resetting<a href="http://localhost:5000/api/auth/password-reset/${token}">click here</a></h1>`
@@ -28,4 +28,4 @@ const mailingService = (email, token) => {
     })
 }
 
-module.exports = mailingService;
+module.exports = PassworResetMailingService;

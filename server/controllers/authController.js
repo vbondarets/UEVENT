@@ -3,7 +3,7 @@ const {UserModel} = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const secureConfig = require('../secureConfig.json');
-const mailingService = require('../services/mailingService');
+const mailingService = require('../services/PassworResetMailingService');
 const JwtGenerator = require('../helpers/jwtGenerators/jwtGenerator');
 const resetJwtGenerator = require('../helpers/jwtGenerators/resetJwtGenerator');
 
