@@ -23,7 +23,7 @@ class PaymentController {
             if(response_status === "success"){
                 const decoded = jwt.verify(merchant_data.seqToken, secureConfig.SECRET_KEY);
                 if(decoded){
-                    const path = await PdfGenerator(merchant_data.seqToken);
+                    const path = await PdfGenerator(merchant_data.seqToken, decoded);
                     await fileMailingService('bondaretsdirect@gmail.com', path);
                     return res.json(decoded)
                 }

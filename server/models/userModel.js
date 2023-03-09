@@ -36,7 +36,42 @@ const UserModel = sequelize.define( 'user', {
     }
 });
 
+const OrganisationModel = sequelize.define( 'organization', {
+    organization_id: {
+        type: DataTypes.INTEGER, 
+        primaryKey: true, 
+        unique: true, 
+        autoIncrement: true
+    },
+    name: {
+        type: DataTypes.STRING, 
+        unique: true, 
+        allowNull: false
+    },
+    email: {
+        type: DataTypes.STRING, 
+        unique: true, 
+        allowNull: false
+    },
+    location: {
+        type: DataTypes.STRING, 
+        unique: true, 
+        allowNull: false
+    },
+    description: {
+        type: DataTypes.TEXT, 
+        unique: false, 
+        allowNull: false
+    }
+});
+UserModel.hasMany(OrganisationModel, {
+    foreignKey: {
+        name: 'author_id'
+    }
+});
+OrganisationModel.belongsTo(UserModel);
 
 module.exports = {
+    OrganisationModel,
     UserModel
 };

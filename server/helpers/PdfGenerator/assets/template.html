@@ -20,16 +20,19 @@
   <h1>Event ticket</h1>
   <div class="content">
     {{#each data}}
-    <ul>
-
+    <p>Name: {{this.name}}</p>
+    <p>Event: {{this.event}}</p>
+    <p>Date: {{this.date}}</p>
+    <p>Time: {{this.time}}</p>
+    <p>Location: {{this.location}}</p>
+    <!-- <ul>
       <li>Name: {{this.name}}</li>
       <li>Age: {{this.age}}</li>
       <br />
-    </ul>
+    </ul> -->
     {{/each}}
   </div>
   <div id="qrcode"></div>
-  <canvas id="canvas"></canvas>
 
 </body>
 

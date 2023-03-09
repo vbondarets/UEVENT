@@ -17,7 +17,8 @@ const eventListing = async () => {
                         endDateTime: moment(element.dates.start.dateTime).add(3, 'hours'),
                         tickets: Math.floor(Math.random() * 600),
                         region: element.locale,
-                        imgLink: element.images[1].url
+                        imgLink: element.images[1].url,
+                        
                     }
                     eventList.push(Event);
                 }

@@ -36,8 +36,11 @@ const PdfGenerator = async (token) => {
         // }
     };
     const data = [{
-        name: "Shyam",
-        age: "26",
+        name: "Vladimir Bondarets",
+        event: "Genocid rusni",
+        date: "as soon as possible",
+        time: "4:20",
+        location: "belgorodskaya narodnaya respublika"
     }];
     const document = {
         html: root.toString(),

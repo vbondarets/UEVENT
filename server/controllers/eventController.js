@@ -1,5 +1,5 @@
 const ApiError = require("../helpers/error/ApiError");
-const {EventModel, EventCategoryModel} = require('../models/eventModel');
+const {EventModel, EventCategoryModel, EventSubModel} = require('../models/eventModel');
 const eventListing = require('../helpers/eventListing');
 const {TicketModel} = require('../models/ticketModel');
 
@@ -58,6 +58,20 @@ class EventController {
                 else {
                     return next(ApiError.badRequest('Not Found'));
                 }
+            }).catch(err => {
+                return next(ApiError.internal('Unknown error: ' + err));
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error));
+        }
+    }
+    async createEventSub(req, res, next) {
+        try {
+            const {eventID, userId} = req.body;
+            EventSubModel.create({
+                eventID, userId
+            }).then(() => {
+                return res.json("Event sub created");
             }).catch(err => {
                 return next(ApiError.internal('Unknown error: ' + err));
             })
