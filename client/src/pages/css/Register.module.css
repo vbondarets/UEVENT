@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&display=swap');
+
+.registerWrapper{
+    display: flex;
+    justify-self: center;
+    max-width: 100vw;
+    max-height: 100%;
+    height: 90%;
+    flex-direction: row;
+    background-image: url("../../assets/images/registration_bg.jpeg");
+    background-size: cover;
+}
+.blur{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(31, 31, 31, 0.776);
+}
+.h1{
+    margin-left: 15%;
+    color: rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    letter-spacing: 2px;
+    width: fit-content;
+}
+.registration_form{
+    display: flex;
+    width: 40%;
+    height: 100%;
+    background-color: rgb(31, 31, 31);
+    flex-direction: column;
+}
+.error_message{
+    margin-top: 15px;
+    font-weight: 100;
+    color: rgb(201, 41, 17);
+    font-family: 'Climate Crisis', cursive;
+    letter-spacing: 3px;
+    margin: 10px auto;
+}
+.form_buttons{
+    display: flex;
+    width: 80%;
+    margin: 10px auto;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.login_link{
+    margin: auto 0px;
+    color: rgb(19, 156, 19);
+    text-decoration: none;
+    font-family: 'Climate Crisis', cursive;
+    transition: border .3s ease-in-out;
+    padding: 0px 6px;
+    border-radius: 5px;
+    border: 2px solid rgb(31, 31, 31);
+}
+.login_link:hover{
+    border-radius: 5px;
+    border: 2px solid rgb(19, 156, 19);
+}

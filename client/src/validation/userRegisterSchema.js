@@ -7,8 +7,7 @@ const joiUserRegisterSchema = Joi.object({
       tlds: { allow: ['com', 'net', 'ua'] }
     }).required(),
     password: Joi.string().min(8).required(),
-    fullName:  Joi.string().min(4).max(50).required(),
-    role: Joi.string()
+    fullName:  Joi.string().min(4).max(50).required()
 });
 
 module.exports = joiUserRegisterSchema;

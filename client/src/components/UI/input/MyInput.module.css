@@ -1,0 +1,11 @@
+.myInput{
+    width: 80%;
+    height:30px;
+    border-radius: 15px;
+    padding: 5px 15px;
+    margin: 10px auto;
+    border: 3px solid rgb(19, 156, 19);
+    background-color: rgb(31, 31, 31);
+    font-family: 'Climate Crisis', cursive;
+    color: rgb(19, 156, 19);
+}

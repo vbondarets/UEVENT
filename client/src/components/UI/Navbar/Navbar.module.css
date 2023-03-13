@@ -1,0 +1,41 @@
+.navbar{
+    padding-top: 20px;
+    max-height: 200px;
+    min-height: 50px;
+    width: 100vw;
+    border-bottom: 1px solid rgb(19, 156, 19);
+}
+.navbar__links{
+    display: flex;
+    flex-direction: row;
+    width: 100%; 
+}
+.navbar__link{
+    margin-left: 20px;
+    padding: 0px 6px;
+    border-radius: 5px;
+    color: rgb(19, 156, 19);
+    text-decoration: none;
+    margin-left: 20px;
+    font-family: 'Climate Crisis', cursive;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+.navbar__link:hover{
+    border-radius: 5px;
+    box-shadow: inset 300px 0 0 0 rgb(19, 156, 19);
+    color: rgb(31, 31, 31);
+}
+.navbar__link__username{
+    text-decoration: none;
+    margin-left: auto;
+    margin-right: 2%;
+}
+
+.navbar__title{
+    font-family: 'Climate Crisis', cursive;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+.login_link{
+    margin-left: auto;
+}
