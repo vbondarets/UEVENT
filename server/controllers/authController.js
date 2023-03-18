@@ -54,7 +54,13 @@ class AuthController {
                     }
                     else {
                         if (bcrypt.compareSync(password, result[0].password)) {
-                            const token = JwtGenerator(result[0].user_id, result[0].login, result[0].email, result[0].fullname, result[0].role);
+                            const token = JwtGenerator({
+                                userId: result[0].user_id, 
+                                login: result[0].login, 
+                                email: result[0].email, 
+                                fullName: result[0].fullname, 
+                                role: result[0].role
+                            });
                             return res.json({
                                 token: token,
                                 userData: {
