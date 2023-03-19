@@ -15,6 +15,7 @@ class AuthController {
                 return next(ApiError.conflict('Missing Data'));
             }
             else {
+                console.log("Lox");
                 if (!role) {
                     role = "USER";
                 }

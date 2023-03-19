@@ -5,9 +5,8 @@ import { publicRoutes, privateRoutes, adminRoutes } from '../router';
 
 
 const AppRouter = () => {
-    const isAuth = useSelector(state => state.status);
-    const role = useSelector(state => state.user.role);
-    
+    const isAuth = useSelector(store => store.Auth.status);
+    const role = useSelector(store => store.Auth.user.role);
     return (
         isAuth 
             ?
