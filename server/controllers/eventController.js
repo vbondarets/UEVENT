@@ -21,6 +21,27 @@ class EventController {
             return next(ApiError.internal('Unknown error: ' + error));
         }
     }
+
+    async getEventById(req, res, next) {
+        try {
+            const {id} = req.params
+            EventModel.findAll({where:{
+                event_id: id
+            }}).then(resolve => {
+                if(resolve.length > 0){
+                    return res.json(resolve)
+                }
+                else {
+                    return next(ApiError.badRequest('Not Found'));
+                }
+            }).catch(error => {
+                return next(ApiError.internal('Unknown error: ' + error));
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error));
+        }
+    }
+    
     async create(req, res, next) {
         try {
             const {name, startDateTime, endDateTime, tickets_count, region, imgLink} = req.body;
