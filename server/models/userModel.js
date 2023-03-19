@@ -36,7 +36,7 @@ const UserModel = sequelize.define( 'user', {
     }
 });
 
-const OrganisationModel = sequelize.define( 'organization', {
+const OrganizationModel = sequelize.define( 'organization', {
     organization_id: {
         type: DataTypes.INTEGER, 
         primaryKey: true, 
@@ -72,6 +72,6 @@ UserModel.hasMany(OrganisationModel, {
 OrganisationModel.belongsTo(UserModel);
 
 module.exports = {
-    OrganisationModel,
+    OrganizationModel,
     UserModel
 };
