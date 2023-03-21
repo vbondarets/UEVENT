@@ -4,6 +4,15 @@ const ApiError = require("../helpers/error/ApiError");
 const sportEventService = require("../services/sportEventApi");
 const moment = require('moment');
 
+const categoryParsing = (eventName) => {
+    const result = eventName.split('vs.');
+    if(result[0].length > 0 && result[1].length > 0 && result.length >= 2){
+        return 1
+    }
+    else {
+        return 2
+    }
+}
 
 const eventListing = async () => {
     let eventList = []
@@ -18,7 +27,7 @@ const eventListing = async () => {
                         tickets: Math.floor(Math.random() * 600),
                         region: element.locale,
                         imgLink: element.images[1].url,
-                        
+                        category_id: categoryParsing(element.name)
                     }
                     eventList.push(Event);
                 }

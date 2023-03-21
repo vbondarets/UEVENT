@@ -100,6 +100,28 @@ UserModel.hasMany(EventSubModel, {
     }
 });
 EventSubModel.belongsTo(UserModel);
+const BasicCategories = ["Sport", "Music", "Education", "Party", "Meetings"];
+try {
+    EventCategoryModel.findAll({
+        where: {
+            category_id: 1
+        }
+    }).then((resolve) => {
+        if(resolve.length <= 0){
+            BasicCategories.forEach((category) => {
+                EventCategoryModel.create({
+                    name: category,
+                }).catch(error => {
+                    console.log(error)
+                });
+            })
+        }
+    }).catch((error) =>{
+        console.log(error)
+    })
+} catch (error) {
+    console.log(error)
+}
 
 
 module.exports = {
