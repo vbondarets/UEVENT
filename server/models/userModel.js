@@ -1,5 +1,8 @@
 const sequelize = require('./db');
 const {DataTypes, Model} = require('sequelize');
+const { Sequelize} = require('sequelize');
+// const sequelize = new Sequelize(/* ... */);
+const queryInterface = sequelize.getQueryInterface();
 
 const UserModel = sequelize.define( 'user', {
     user_id: {
@@ -64,12 +67,35 @@ const OrganizationModel = sequelize.define( 'organization', {
         allowNull: false
     }
 });
-UserModel.hasMany(OrganisationModel, {
+UserModel.hasMany(OrganizationModel, {
     foreignKey: {
         name: 'author_id'
     }
 });
-OrganisationModel.belongsTo(UserModel);
+OrganizationModel.belongsTo(UserModel);
+
+try {
+    OrganizationModel.findAll({
+        where: {
+            organization_id: 1
+        }
+    }).then((resolve) => {
+        if(resolve.length <= 0){
+            OrganizationModel.create({
+                name: 'Ticket Master',
+                email: 'ticketmaster@support.com',
+                location: 'en-us',
+                description: "Order tickets for concerts, festivals, comedy shows, sporting events and more."
+            }).catch(error => {
+                console.log(error)
+            })
+        }
+    }).catch((error) =>{
+        console.log(error)
+    })
+} catch (error) {
+    console.log(error)
+}
 
 module.exports = {
     OrganizationModel,
