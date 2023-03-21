@@ -4,5 +4,7 @@ const eventController = require('../controllers/eventController');
 
 router.get('/', eventController.getAll);
 router.post('/', eventController.create);
-router.get('/:id', eventController.getEventById)
+router.get('/allcategories', eventController.getAllCategories)
+router.get("/categories/:category_id",eventController.getByCategory);
+router.get('/:id', eventController.getEventById);
 module.exports = router;

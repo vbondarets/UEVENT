@@ -11,6 +11,7 @@ class AuthController {
     async registration(req, res, next) {
         try {
             let { login, password, email, role, fullName } = req.body;
+            console.log(login);
             if (!login || !password || !email || !fullName) {
                 return next(ApiError.conflict('Missing Data'));
             }

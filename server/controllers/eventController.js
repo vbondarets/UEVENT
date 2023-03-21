@@ -6,13 +6,12 @@ const {TicketModel} = require('../models/ticketModel');
 class EventController {
     async getAll(req, res, next) {
         try {
-            eventListing();
             EventModel.findAll().then(resolve => {
                 if(resolve.length > 0){
                     return res.json(resolve)
                 }
                 else {
-                    return next(ApiError.badRequest('Not Found'));
+                    return res.json('No events yet')
                 }
             }).catch(error => {
                 return next(ApiError.internal('Unknown error: ' + error));
@@ -44,9 +43,9 @@ class EventController {
     
     async create(req, res, next) {
         try {
-            const {name, startDateTime, endDateTime, tickets_count, region, imgLink} = req.body;
+            const {name, startDateTime, endDateTime, tickets_count, region, imgLink, category_id, price} = req.body;
             EventModel.create({
-                name, startDateTime, endDateTime, tickets_count, region, imgLink
+                name, startDateTime, endDateTime, tickets_count, price, region, imgLink, category_id, 
             }).then(() => {
                 return res.json("Event created");
             }).catch(err => {
@@ -56,36 +55,42 @@ class EventController {
             return next(ApiError.internal('Unknown error: ' + error));
         }
     }
-    async getByCategory(){
+    
+    async getAllCategories (req, res, next) {
         try {
-            const {categoryId} = req.body;
-            EventCategoryModel.findAll({
-                attributes: ['event_id'],
-                where: {
-                    category_id: categoryId
-                }
-            }).then(resolve => {
-                let event_array = [];
-                resolve.forEach(element => {
-                    EventModel.findAll({
-                        where: {event_id: element.event_id}
-                    }).then(result => {
-                        event_array.push(result);
-                    })
-                });
-                if(event_array.length > 0){
-                    return res.json(event_array);
+            EventCategoryModel.findAll().then(resolve => {
+                if (resolve.length > 0) {
+                    return res.json(resolve)
                 }
                 else {
                     return next(ApiError.badRequest('Not Found'));
                 }
-            }).catch(err => {
-                return next(ApiError.internal('Unknown error: ' + err));
             })
         } catch (error) {
             return next(ApiError.internal('Unknown error: ' + error));
         }
     }
+
+    async getByCategory(req, res, next){
+        try {
+            const {category_id} = req.params;
+            EventModel.findAll ({
+                where:{
+                    category_id: category_id
+                }
+            }).then(resolve => {
+                if (resolve.length > 0) {
+                    return res.json(resolve)
+                }
+                else {
+                    return res.json("No events in this category")
+                }
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error));
+        }
+    }
+    
     async createEventSub(req, res, next) {
         try {
             const {eventID, userId} = req.body;

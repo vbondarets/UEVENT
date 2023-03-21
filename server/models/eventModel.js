@@ -29,6 +29,11 @@ const EventModel = sequelize.define( 'event', {
         unique: false,  
         defaultValue: 0
     },
+    price: {
+        type: DataTypes.INTEGER, 
+        unique: false,  
+        defaultValue: 0
+    },
     region: {
         type: DataTypes.STRING, 
         unique: false, 
@@ -75,14 +80,12 @@ EventModel.hasMany(EventTypeModel, {
         name: 'event_id'
     }
 });
-EventTypeModel.belongsTo(EventModel);
-
-EventModel.hasMany(EventCategoryModel, {
+EventCategoryModel.hasMany(EventModel, {
     foreignKey: {
-        name: 'event_id'
+        name: 'category_id'
     }
 });
-EventCategoryModel.belongsTo(EventModel);
+EventModel.belongsTo(EventCategoryModel);
 
 EventModel.hasMany(EventSubModel, {
     foreignKey: {
