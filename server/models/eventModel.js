@@ -80,6 +80,8 @@ EventModel.hasMany(EventTypeModel, {
         name: 'event_id'
     }
 });
+EventTypeModel.belongsTo(EventModel);
+
 EventCategoryModel.hasMany(EventModel, {
     foreignKey: {
         name: 'category_id'
