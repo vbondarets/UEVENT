@@ -109,7 +109,7 @@ class organizationController {
                     organization_id: id
                 }
             }).then(() => {
-                return res.json("Organization updated");
+                return res.json("Organization delited");
             }).catch(error => {
                 return next(ApiError.internal('Unknown error: ' + error));
             })
