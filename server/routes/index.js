@@ -6,12 +6,14 @@ const authRouter = require('./authRouter');
 const eventRouter = require('./eventRouter');
 const paymentRouter = require('./paymentRouter');
 const ticketRouter = require('./ticketRouter');
+const organizationRouter = require('./organizationRouter');
 
 router.use('/auth', authRouter);
 // router.use('/user', userRouter);
 router.use('/event', eventRouter);
 router.use('/payment', paymentRouter);
 router.use('/ticket', ticketRouter);
+router.use('/organization', ticketRouter);
 
 
 module.exports = router;
