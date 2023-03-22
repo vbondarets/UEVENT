@@ -1,4 +1,4 @@
-import { getAllCategories, getAllEvents, getEventById, sortByCategories } from "../API/EventApi"
+import { getAllCategories, getAllEvents, getAllTypes, getEventById, sort } from "../API/EventApi"
 
 export const getAllEventsAction = () => async(dispatch) => {
     try {
@@ -39,29 +39,66 @@ export const getAllCategory = () => async(dispatch) => {
     }
 }
 
-export const sortByCategory = (category_id) => async(dispatch) => {
+export const getTypes = () => async(dispatch) => {
     try {
-        console.log(category_id);
-        if (category_id.length === 0) {
+        const {data} = await getAllTypes()
+        if (data.length > 0) {
+            return dispatch( { type: 'getTypes', payload: data})   
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const sortEvents = (category_id, type_id) => async(dispatch) => {
+    try {
+        if (category_id.length === 0 && type_id.length === 0) {
             const Data = await getAllEvents()
             if(Data.data.length > 0) {
                 return dispatch({type:'getAllEvents', payload:Data.data})
             }
             else {
-                return dispatch({type:'getAllEvents', payload:"No events yet"})
+                return dispatch({type:'getAllEvents', payload:[]})
             }
         }
         else {
             let arrEvents = []
-            for (let index = 0; index < category_id.length; index++) {
-                const {data} = await sortByCategories(category_id[index])
-                for (let i = 0; i< data.length; i++) {
-                    arrEvents.push(data[i])
+            let info = []
+            if (type_id.length === 0) {
+                for (let index = 0; index < category_id.length; index++) {
+                    const {data} = await sort(category_id[index])
+                    for (let i = 0; i < data.length; i++) {
+                        info.push(data[i])
+                    }
                 }
+            }
+            if (category_id.length === 0) {
+                for (let index = 0; index < type_id.length; index++) {
+                    const {data} = await sort(type_id[index])
+                    for (let i = 0; i < data.length; i++) {
+                        info.push(data[i])
+                    }
+                }
+            }
+            else {
+                for (let index = 0; index < category_id.length; index++) {
+                    for (let j = 0; j < type_id.length; j++) {
+                        const {data} = await sort(category_id[index], type_id[j])
+                        for (let i = 0; i < data.length; i++) {
+                            info.push(data[i])
+                        }
+                    }
+                }
+            }
+            for (let i = 0; i < info.length; i++) {
+                arrEvents.push(info[i])
             }
             console.log(arrEvents);
             if (arrEvents.length > 0) {
                 return dispatch({type:'sortCategories', payload:arrEvents})
+            }
+            if (arrEvents.length === 0) {
+                return dispatch({type:'sortCategories', payload:[]})
             }
             // if (arrEvents === 'No events in this category'){
             //     return dispatch({type:'sortCategories', payload:arrEvents})

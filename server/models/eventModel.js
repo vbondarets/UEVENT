@@ -34,6 +34,11 @@ const EventModel = sequelize.define( 'event', {
         unique: false,  
         defaultValue: 0
     },
+    description: {
+        type:DataTypes.STRING,
+        unique:false,
+        allowNull: true
+    },
     region: {
         type: DataTypes.STRING, 
         unique: false, 
@@ -71,17 +76,13 @@ const EventCategoryModel = sequelize.define( 'event_category', {
         allowNull: false
     }
 });
-const EventSubModel = sequelize.define( 'event_sub', {
-    
-});
 
-EventModel.hasMany(EventTypeModel, {
+EventTypeModel.hasMany (EventModel, {
     foreignKey: {
-        name: 'event_id'
+        name:'type_id'
     }
-});
-EventTypeModel.belongsTo(EventModel);
-
+})
+EventModel.belongsTo(EventTypeModel)
 EventCategoryModel.hasMany(EventModel, {
     foreignKey: {
         name: 'category_id'
@@ -89,19 +90,6 @@ EventCategoryModel.hasMany(EventModel, {
 });
 EventModel.belongsTo(EventCategoryModel);
 
-EventModel.hasMany(EventSubModel, {
-    foreignKey: {
-        name: 'event_id'
-    }
-});
-EventSubModel.belongsTo(EventModel);
-
-UserModel.hasMany(EventSubModel, {
-    foreignKey: {
-        name: 'user_id'
-    }
-});
-EventSubModel.belongsTo(UserModel);
 const BasicCategories = ["Sport", "Music", "Education", "Party", "Meetings"];
 try {
     EventCategoryModel.findAll({
@@ -130,5 +118,4 @@ module.exports = {
     EventModel,
     EventTypeModel,
     EventCategoryModel,
-    EventSubModel
 };
