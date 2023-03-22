@@ -6,8 +6,14 @@ const moment = require('moment');
 
 const categoryParsing = (eventName) => {
     const result = eventName.split('vs.');
-    if(result[0].length > 0 && result[1].length > 0 && result.length >= 2){
-        return 1
+    // console.log(result);
+    if(result.length >= 2){
+        if(result[0].length > 0 && result[1].length > 0){
+            return 1
+        }
+        else {
+            return 2
+        }
     }
     else {
         return 2
@@ -34,7 +40,7 @@ const eventListing = async () => {
             });
             EventModel.findAll().then(async (resolve) => {
                 if (resolve.length > 0) {
-                    if (resolve.lenght < 70) {
+                    if (resolve.length < 70) {
                         EventModel.drop().finally(() => {
                             if (eventList.length > 0) {
                                 eventList.forEach((Event) => {

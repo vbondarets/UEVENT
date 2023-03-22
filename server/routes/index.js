@@ -13,7 +13,7 @@ router.use('/auth', authRouter);
 router.use('/event', eventRouter);
 router.use('/payment', paymentRouter);
 router.use('/ticket', ticketRouter);
-router.use('/organization', ticketRouter);
+router.use('/organization', organizationRouter);
 
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const sequelize = require('./db');
 const {DataTypes, Model} = require('sequelize');
 const {UserModel} = require('./userModel');
+const {OrganizationModel} = require('./userModel')
 
 const EventModel = sequelize.define( 'event', {
     event_id: {
@@ -83,6 +84,13 @@ EventCategoryModel.hasMany(EventModel, {
     }
 });
 EventModel.belongsTo(EventCategoryModel);
+
+OrganizationModel.hasMany(EventModel, {
+    foreignKey: {
+        name: 'organization_id'
+    }
+});
+EventModel.belongsTo(OrganizationModel);
 
 EventModel.hasMany(EventSubModel, {
     foreignKey: {

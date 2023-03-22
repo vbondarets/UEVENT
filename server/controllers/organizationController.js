@@ -1,4 +1,5 @@
-const {OrganizationModel} = require('../models/userModel')
+const {OrganizationModel} = require('../models/userModel');
+const ApiError = require("../helpers/error/ApiError");
 
 class organizationController {
     
