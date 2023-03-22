@@ -1,6 +1,7 @@
 const sequelize = require('./db');
 const {DataTypes, Model} = require('sequelize');
 const {UserModel} = require('./userModel');
+const {OrganizationModel} = require('./userModel')
 
 const EventModel = sequelize.define( 'event', {
     event_id: {
@@ -28,6 +29,16 @@ const EventModel = sequelize.define( 'event', {
         type: DataTypes.INTEGER, 
         unique: false,  
         defaultValue: 0
+    },
+    price: {
+        type: DataTypes.INTEGER, 
+        unique: false,  
+        defaultValue: 0
+    },
+    description: {
+        type:DataTypes.STRING,
+        unique:false,
+        allowNull: true
     },
     region: {
         type: DataTypes.STRING, 
@@ -66,23 +77,27 @@ const EventCategoryModel = sequelize.define( 'event_category', {
         allowNull: false
     }
 });
-const EventSubModel = sequelize.define( 'event_sub', {
-    
-});
 
-EventModel.hasMany(EventTypeModel, {
+EventTypeModel.hasMany (EventModel, {
     foreignKey: {
-        name: 'event_id'
+        name:'type_id'
+    }
+})
+EventModel.belongsTo(EventTypeModel)
+EventCategoryModel.hasMany(EventModel, {
+    foreignKey: {
+        name: 'category_id'
     }
 });
-EventTypeModel.belongsTo(EventModel);
+EventModel.belongsTo(EventCategoryModel);
 
-EventModel.hasMany(EventCategoryModel, {
+<<<<<<< HEAD
+OrganizationModel.hasMany(EventModel, {
     foreignKey: {
-        name: 'event_id'
+        name: 'organization_id'
     }
 });
-EventCategoryModel.belongsTo(EventModel);
+EventModel.belongsTo(OrganizationModel);
 
 EventModel.hasMany(EventSubModel, {
     foreignKey: {
@@ -97,11 +112,34 @@ UserModel.hasMany(EventSubModel, {
     }
 });
 EventSubModel.belongsTo(UserModel);
+=======
+>>>>>>> 8c49442170688bf58b33ff105c44f9e3e7cf70db
+const BasicCategories = ["Sport", "Music", "Education", "Party", "Meetings"];
+try {
+    EventCategoryModel.findAll({
+        where: {
+            category_id: 1
+        }
+    }).then((resolve) => {
+        if(resolve.length <= 0){
+            BasicCategories.forEach((category) => {
+                EventCategoryModel.create({
+                    name: category,
+                }).catch(error => {
+                    console.log(error)
+                });
+            })
+        }
+    }).catch((error) =>{
+        console.log(error)
+    })
+} catch (error) {
+    console.log(error)
+}
 
 
 module.exports = {
     EventModel,
     EventTypeModel,
     EventCategoryModel,
-    EventSubModel
 };

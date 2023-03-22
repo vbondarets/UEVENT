@@ -1,13 +1,34 @@
 const ApiError = require("../helpers/error/ApiError");
-const {EventModel, EventCategoryModel, EventSubModel} = require('../models/eventModel');
+const {EventModel, EventCategoryModel, EventTypeModel} = require('../models/eventModel');
 const eventListing = require('../helpers/eventListing');
 const {TicketModel} = require('../models/ticketModel');
+const { json } = require("body-parser");
+const { Op } = require("sequelize");
 
 class EventController {
     async getAll(req, res, next) {
         try {
-            eventListing();
             EventModel.findAll().then(resolve => {
+                if(resolve.length > 0){
+                    return res.json(resolve)
+                }
+                else {
+                    return res.json('No events yet')
+                }
+            }).catch(error => {
+                return next(ApiError.internal('Unknown error: ' + error));
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error));
+        }
+    }
+
+    async getEventById(req, res, next) {
+        try {
+            const {id} = req.params
+            EventModel.findAll({where:{
+                event_id: id
+            }}).then(resolve => {
                 if(resolve.length > 0){
                     return res.json(resolve)
                 }
@@ -21,11 +42,13 @@ class EventController {
             return next(ApiError.internal('Unknown error: ' + error));
         }
     }
+    
     async create(req, res, next) {
         try {
-            const {name, startDateTime, endDateTime, tickets_count, region, imgLink} = req.body;
+            const {name, startDateTime, endDateTime, tickets_count, region, imgLink, category_id, price, description, type_id} = req.body;
+            console.log(type_id);
             EventModel.create({
-                name, startDateTime, endDateTime, tickets_count, region, imgLink
+                name, startDateTime, endDateTime, tickets_count, price, region, imgLink, category_id, description,type_id
             }).then(() => {
                 return res.json("Event created");
             }).catch(err => {
@@ -35,50 +58,101 @@ class EventController {
             return next(ApiError.internal('Unknown error: ' + error));
         }
     }
-    async getByCategory(){
+    
+    async getAllTypes (req, res, next) {
         try {
-            const {categoryId} = req.body;
-            EventCategoryModel.findAll({
-                attributes: ['event_id'],
-                where: {
-                    category_id: categoryId
+            EventTypeModel.findAll({
+                attributes: { exclude: ['eventEventId'] }
+            }).then( resolve => {
+                if (resolve.length > 0) {
+                    return res.json(resolve)
                 }
-            }).then(resolve => {
-                let event_array = [];
-                resolve.forEach(element => {
-                    EventModel.findAll({
-                        where: {event_id: element.event_id}
-                    }).then(result => {
-                        event_array.push(result);
+                else {
+                    return res.json("No types yet")
+                }
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error));
+        }
+    }
+
+    async sortEventByTypeCategory (req, res, next) {
+        try {
+            const {category_id, type_id} = req.params
+            console.log(category_id);
+            console.log(type_id);
+            if (type_id != "undefined" && category_id != "undefined") {
+                console.log("hyu");
+                EventModel.findAll ( {
+                    where: {
+                        category_id: category_id,
+                        type_id:type_id
+                    }
+                }).then ( result => {
+                    return res.json(result)
+                })         
+            }
+            else {
+                console.log("hyu1");
+                if(type_id === "undefined") {
+                    EventModel.findAll( {
+                        where: {
+                            category_id: category_id
+                        }
+                    }).then (resolve => {
+                        return res.json(resolve)
                     })
-                });
-                if(event_array.length > 0){
-                    return res.json(event_array);
+                }
+                else {
+                    EventModel.findAll( {
+                        where: {
+                            type_id: type_id
+                        }
+                    }).then (resolve => {
+                        return res.json(resolve)
+                    })
+                }
+            }
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error));
+        }
+    }
+
+    async getAllCategories (req, res, next) {
+        try {
+            EventCategoryModel.findAll().then(resolve => {
+                if (resolve.length > 0) {
+                    return res.json(resolve)
                 }
                 else {
                     return next(ApiError.badRequest('Not Found'));
                 }
-            }).catch(err => {
-                return next(ApiError.internal('Unknown error: ' + err));
             })
         } catch (error) {
             return next(ApiError.internal('Unknown error: ' + error));
         }
     }
-    async createEventSub(req, res, next) {
+
+    async getByCategory(req, res, next){
         try {
-            const {eventID, userId} = req.body;
-            EventSubModel.create({
-                eventID, userId
-            }).then(() => {
-                return res.json("Event sub created");
-            }).catch(err => {
-                return next(ApiError.internal('Unknown error: ' + err));
+            const {category_id} = req.params;
+            EventModel.findAll ({
+                where:{
+                    category_id: category_id
+                }
+            }).then(resolve => {
+                if (resolve.length > 0) {
+                    return res.json(resolve)
+                }
+                else {
+                    return res.json("No events in this category")
+                }
             })
         } catch (error) {
             return next(ApiError.internal('Unknown error: ' + error));
         }
     }
+    
 }
 
 module.exports = new EventController();

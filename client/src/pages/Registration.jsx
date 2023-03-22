@@ -21,6 +21,7 @@ const Register = () => {
 
     const [fetchCreateUser, isCreateUserLoading, CreateUserError] = useFetching(async (User) => {
         try {
+            if(isCreateUserLoading){}
             const response = await UserSevice.register(User);
             console.log(response);
             if (response.data.message === "User created") {

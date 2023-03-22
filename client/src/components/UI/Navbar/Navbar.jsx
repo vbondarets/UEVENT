@@ -8,12 +8,12 @@ import classes from "./Navbar.module.css";
 
 const Navbar = () => {
     // const isAuth = false;
-    const isAuth = useSelector(state => state.status);
+    const isAuth = useSelector(state => state.Auth.status);
     // const user = {
     //     login: "test",
     //     role: "USER"
     // }
-    const user = useSelector(state => state.user);
+    const user = useSelector(state => state.Auth.user);
     // const [check, setCheck] = useState(isAuth);
     // useEffect(() => {
     //     setCheck(isAuth);
