@@ -1,10 +1,13 @@
 import registrationPage from '../pages/Registration';
 import loginPage from '../pages/Login'
-
+import passwordResetPage from '../pages/PasswordReset'
+import passwordResetStep2Page from '../pages/PasswordResetToken'
 
 export const publicRoutes = [
     {path: "/login", component: loginPage, exact: true},
     {path: "/register", component: registrationPage, exact: true},
+    {path: "/password-reset", component: passwordResetPage, exact: true},
+    {path: "/password-reset/:token", component: passwordResetStep2Page, exact: true},
     {path: "/", component: registrationPage, exact: true},
     {path: "/events", component: registrationPage, exact: true},
     {path: "/events/:id", component: registrationPage, exact: true},
