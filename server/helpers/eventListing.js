@@ -33,7 +33,8 @@ const eventListing = async () => {
                         tickets: Math.floor(Math.random() * 600),
                         region: element.locale,
                         imgLink: element.images[1].url,
-                        category_id: categoryParsing(element.name)
+                        category_id: categoryParsing(element.name),
+                        organization_id: 1
                     }
                     eventList.push(Event);
                 }
