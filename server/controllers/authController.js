@@ -114,7 +114,7 @@ class AuthController {
                         else {
                             const token = resetJwtGenerator(result[0].user_id, result[0].email)
                             const message = mailingService(email, token);
-                            return res.json(`http://localhost:5000/api/auth/password-reset/${token}`);
+                            return res.json({message: "Succesfull"});//res.json(`http://localhost:5000/api/auth/password-reset/${token}`);
                         }
                     })
                     .catch(err => {
@@ -129,6 +129,10 @@ class AuthController {
         try {
             const { token } = req.params;
             const { password } = req.body;
+			if(password.length < 8)
+			{
+				return res.json({ message: "Password must be at least 8 characters long" });
+			}
             const decoded = jwt.verify(token, secureConfig.SECRET_KEY_FOR_EMAIL)
             if (!decoded) {
                 return next(ApiError.forbidden('Token decoding error'));

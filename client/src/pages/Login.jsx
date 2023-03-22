@@ -91,6 +91,7 @@ const Register = () => {
                     <div className={classes.form_buttons}>
                         <MyButton onClick={(e) => logining(e)}>{"Login"}</MyButton>
                         <Link className={`${classes.login_link}`} to="/register">New here?</Link>
+                        <Link className={`${classes.login_link}`} to="/password-reset">Forgot password?</Link>
                     </div>
                     <h3 className={classes.error_message}>{message}</h3>
 
