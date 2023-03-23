@@ -1,11 +1,11 @@
-const {OrganizationModel} = require('../models/userModel');
+const {EventCategoryModel} = require('../models/eventModel');
 const ApiError = require("../helpers/error/ApiError");
 
-class organizationController {
+class categoryController {
     
     async getAll(req, res, next) {
         try {
-            OrganizationModel.findAll().then(resolve => {
+            EventCategoryModel.findAll().then(resolve => {
                 if(resolve.length > 0){
                     return res.json(resolve)
                 }
@@ -22,31 +22,9 @@ class organizationController {
     async getById(req, res, next) {
         try {
             const {id} = req.params;
-            OrganizationModel.findAll({
+            EventCategoryModel.findAll({
                 where:{
-                    organization_id: id
-                }
-            }).then(resolve => {
-                if(resolve.length > 0){
-                    return res.json(resolve)
-                }
-                else {
-                    return next(ApiError.badRequest('Not Found'));
-                }
-            }).catch(error => {
-                return next(ApiError.internal('Unknown error: ' + error));
-            }) 
-            
-        } catch (error) {
-            return next(ApiError.internal('Unknown error: ' + error));
-        }
-    }
-    async getByCreator(req, res, next) {
-        try {
-            const {author_id} = req.body;
-            OrganizationModel.findAll({
-                where:{
-                    author_id: author_id
+                    category_id: id
                 }
             }).then(resolve => {
                 if(resolve.length > 0){
@@ -65,16 +43,11 @@ class organizationController {
     }
     async create(req, res, next) {
         try {
-            const {author_id, name, email, location, description,img} = req.body;
-            OrganizationModel.create({
-                author_id, 
-                name,   
-                email, 
-                img,
-                location, 
-                description
+            const {name} = req.body;
+            EventCategoryModel.create({ 
+                name
             }).then(() => {
-                return res.json("Organization created");
+                return res.json("Category created");
             }).catch(error => {
                 return next(ApiError.internal('Unknown error: ' + error));
             }) 
@@ -85,16 +58,13 @@ class organizationController {
     }
     async update(req, res, next) {
         try {
-            const {organization_id, author_id, name, email, location, description} = req.body;
-            OrganizationModel.update({ 
-                name, 
-                email, 
-                location, 
-                description
+            const {category_id, name} = req.body;
+            EventCategoryModel.update({ 
+                name
             }, {where: {
-                organization_id: organization_id,
+                category_id: category_id,
             }}).then(() => {
-                return res.json("Organization updated");
+                return res.json("Category updated");
             }).catch(error => {
                 return next(ApiError.internal('Unknown error: ' + error));
             }) 
@@ -106,12 +76,12 @@ class organizationController {
     async delete(req, res, next) {
         try {
             const {id} = req.body;
-            OrganizationModel.destroy({
+            EventCategoryModel.destroy({
                 where:{
-                    organization_id: id
+                    cattegory_id: id
                 }
             }).then(() => {
-                return res.json("Organization delited");
+                return res.json("Category delited");
             }).catch(error => {
                 return next(ApiError.internal('Unknown error: ' + error));
             })
@@ -121,4 +91,4 @@ class organizationController {
     }
 }
 
-module.exports = new organizationController();
+module.exports = new categoryController();

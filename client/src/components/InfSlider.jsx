@@ -6,17 +6,17 @@ const InfSlider = (props) => {
         <div className={classes.slider}>
             <div className={classes.slide_track}>
                 {props.categories.map((category) => 
-                    <div className={classes.slide} key={category.id}>
+                    <div className={classes.slide} key={category.category_id}>
                         <p>{category.name}</p>
                     </div>
                 )}
                 {props.categories.map((category) => 
-                    <div className={classes.slide} key={category.id}>
+                    <div className={classes.slide} key={category.category_id}>
                         <p>{category.name}</p>
                     </div>
                 )}
                 {props.categories.map((category) => 
-                    <div className={classes.slide} key={category.id}>
+                    <div className={classes.slide} key={category.category_id}>
                         <p>{category.name}</p>
                     </div>
                 )}

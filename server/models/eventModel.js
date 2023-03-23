@@ -77,10 +77,11 @@ const EventCategoryModel = sequelize.define( 'event_category', {
         allowNull: false
     }
 });
-
 const EventSubModel = sequelize.define( 'event_sub', {
-    
+
 });
+
+
 
 EventTypeModel.hasMany (EventModel, {
     foreignKey: {
@@ -94,6 +95,7 @@ EventCategoryModel.hasMany(EventModel, {
     }
 });
 EventModel.belongsTo(EventCategoryModel);
+
 
 
 OrganizationModel.hasMany(EventModel, {

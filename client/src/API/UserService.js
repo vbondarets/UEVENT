@@ -29,4 +29,12 @@ export default class UserSevice {
         const response = await axios.delete(`http://localhost:8080/api/users/${id}`);
         return response;
     }
+	static async requestPasswordReset(email) {
+		const response = await axios.post(`http://localhost:8080/api/auth/password-reset`, {email: email});
+		return response;
+	}
+	static async resetPassword(token, pass) {
+		const response = await axios.post(`http://localhost:8080/api/auth/password-reset/${token}`, {token: token, password: pass});
+		return response;
+	}
 }

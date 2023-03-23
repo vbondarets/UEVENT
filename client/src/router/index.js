@@ -1,4 +1,6 @@
 import registrationPage from '../pages/Registration';
+import passwordResetPage from '../pages/PasswordReset'
+import passwordResetStep2Page from '../pages/PasswordResetToken'
 import loginPage from '../pages/Login';
 import mainPage from '../pages/Main';
 import EventsPage from '../pages/EventsPage';
@@ -7,6 +9,8 @@ import EventPage from '../pages/EventPage';
 export const publicRoutes = [
     {path: "/login", component: loginPage, exact: true},
     {path: "/register", component: registrationPage, exact: true},
+    {path: "/password-reset", component: passwordResetPage, exact: true},
+    {path: "/password-reset/:token", component: passwordResetStep2Page, exact: true},
     {path: "/", component: mainPage, exact: true},
     {path: "/events", component: registrationPage, exact: true},
     {path: "/events/:id", component: registrationPage, exact: true},

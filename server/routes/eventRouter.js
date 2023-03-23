@@ -10,5 +10,8 @@ router.get('/types', eventController.getAllTypes)
 router.get('/sort/:category_id/:type_id', eventController.sortEventByTypeCategory)
 
 router.post('/', eventController.create);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3cf3d977c9cee37cbdf81cf36691901942c6c07d
 module.exports = router;

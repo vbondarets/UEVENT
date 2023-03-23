@@ -8,12 +8,13 @@ const { Op } = require("sequelize");
 class EventController {
     async getAll(req, res, next) {
         try {
+            //await eventListing();
             EventModel.findAll().then(resolve => {
                 if(resolve.length > 0){
                     return res.json(resolve)
                 }
                 else {
-                    return res.json('No events yet')
+                    return next(ApiError.badRequest('Not Found'));
                 }
             }).catch(error => {
                 return next(ApiError.internal('Unknown error: ' + error));
