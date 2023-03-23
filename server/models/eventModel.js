@@ -82,7 +82,6 @@ const EventSubModel = sequelize.define( 'event_sub', {
 });
 
 
-
 EventTypeModel.hasMany (EventModel, {
     foreignKey: {
         name:'type_id'
@@ -95,8 +94,6 @@ EventCategoryModel.hasMany(EventModel, {
     }
 });
 EventModel.belongsTo(EventCategoryModel);
-
-
 
 OrganizationModel.hasMany(EventModel, {
     foreignKey: {

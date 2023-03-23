@@ -12,7 +12,7 @@ import axios from "axios";
 import { MapComponent } from "./MapComponent";
 
 
-Geocode.setApiKey("AIzaSyCDY1JcSvcRDQw6KD4jXqsbreVFzw8JN9g");
+Geocode.setApiKey("");
 const geocodingQuery = async (address) => {
     const res = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyCDY1JcSvcRDQw6KD4jXqsbreVFzw8JN9g`);
     const json = res.data;

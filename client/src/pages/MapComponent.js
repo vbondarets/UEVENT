@@ -31,7 +31,7 @@ export const MapComponent = (props) => {
         return (
             <div>
                 <p>hyu</p>
-            <LoadScript googleMapsApiKey="AIzaSyCDY1JcSvcRDQw6KD4jXqsbreVFzw8JN9g">
+            <LoadScript googleMapsApiKey="">
                 <GoogleMap 
                     mapContainerStyle={mapStyle} 
                     center={center}
