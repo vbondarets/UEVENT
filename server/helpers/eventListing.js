@@ -34,7 +34,8 @@ const eventListing = async () => {
                         region: element.locale,
                         imgLink: element.images[1].url,
                         category_id: categoryParsing(element.name),
-                        organization_id: 1
+                        organization_id: 1,
+                        price: 20
                     }
                     eventList.push(Event);
                 }

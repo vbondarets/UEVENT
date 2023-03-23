@@ -21,10 +21,10 @@ class categoryController {
     }
     async getById(req, res, next) {
         try {
-            const {id} = req.body;
+            const {id} = req.params;
             EventCategoryModel.findAll({
                 where:{
-                    organization_id: id
+                    category_id: id
                 }
             }).then(resolve => {
                 if(resolve.length > 0){
@@ -58,11 +58,11 @@ class categoryController {
     }
     async update(req, res, next) {
         try {
-            const {cattegory_id, name} = req.body;
+            const {category_id, name} = req.body;
             EventCategoryModel.update({ 
                 name
             }, {where: {
-                cattegory_id: cattegory_id,
+                category_id: category_id,
             }}).then(() => {
                 return res.json("Category updated");
             }).catch(error => {

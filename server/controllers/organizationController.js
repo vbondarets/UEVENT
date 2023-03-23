@@ -21,7 +21,7 @@ class organizationController {
     }
     async getById(req, res, next) {
         try {
-            const {id} = req.body;
+            const {id} = req.params;
             OrganizationModel.findAll({
                 where:{
                     organization_id: id
