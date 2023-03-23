@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sono:wght@200&display=swap');
+.container {
+    color: aliceblue;
+}
+.info_container {
+    display: flex;
+}
+.info_event {
+    height: 10%;
+    width: 22%;
+    margin-right: 4%;
+    border-left: 1px solid white;
+    padding-left: 0.5%;
+    border-bottom: 1px solid white;
+    padding-bottom: 0.5%;
+    border-radius: 5px;
+}
+.other_info_container {
+    margin-left: 1%;
+    width: 78%;
+}
+.other_info_container h2 {
+    color: rgb(19, 156, 19);
+    font-family: 'Sono', sans-serif;
+    border-bottom: 1px solid white;
+    width: 50%;
+    padding-bottom: 0.5%;
+}
+.constainer_org_events {
+    display: flex;
+}
+.container_sim_events {
+    display: flex;
+}
+.sim_and_org_events {
+    margin-left: 1%;
+    margin-right: 4%;
+}
+.sim_and_org_events h2{
+    font-family: 'Sono', sans-serif;
+    color: rgb(19, 156, 19);
+    padding-bottom: 0.5%;
+    padding-top: 0.5%;
+    text-align: center;
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+}

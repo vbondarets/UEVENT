@@ -65,11 +65,12 @@ class organizationController {
     }
     async create(req, res, next) {
         try {
-            const {author_id, name, email, location, description} = req.body;
+            const {author_id, name, email, location, description,img} = req.body;
             OrganizationModel.create({
                 author_id, 
-                name, 
+                name,   
                 email, 
+                img,
                 location, 
                 description
             }).then(() => {

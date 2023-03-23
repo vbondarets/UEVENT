@@ -1,4 +1,4 @@
-import { getAllCategories, getAllEvents, getAllTypes, getEventById, sort } from "../API/EventApi"
+import { getAllCategories, getAllEvents,getEventById, getLanLog, sort } from "../API/EventApi"
 
 export const getAllEventsAction = () => async(dispatch) => {
     try {
@@ -8,6 +8,21 @@ export const getAllEventsAction = () => async(dispatch) => {
         }
         else {
             return dispatch({type:'getAllEvents', payload:"No events yet"})
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getMap = (address) => async(dispatch) => {
+    try {
+        const Data = await getLanLog(address)
+        const info = Data.data.results
+        if (info.length === 0) {
+            return dispatch( {type:'map', payload:null})
+        }
+        else {
+            return dispatch( {type:'map', payload:info[0].geometry.location})
         }
     } catch (error) {
         console.log(error);
@@ -39,16 +54,7 @@ export const getAllCategory = () => async(dispatch) => {
     }
 }
 
-export const getTypes = () => async(dispatch) => {
-    try {
-        const {data} = await getAllTypes()
-        if (data.length > 0) {
-            return dispatch( { type: 'getTypes', payload: data})   
-        }
-    } catch (error) {
-        console.log(error);
-    }
-}
+
 
 export const sortEvents = (category_id, type_id) => async(dispatch) => {
     try {
@@ -66,7 +72,7 @@ export const sortEvents = (category_id, type_id) => async(dispatch) => {
             let info = []
             if (type_id.length === 0) {
                 for (let index = 0; index < category_id.length; index++) {
-                    const {data} = await sort(category_id[index])
+                    const {data} = await sort(category_id[index], undefined)
                     for (let i = 0; i < data.length; i++) {
                         info.push(data[i])
                     }
@@ -74,7 +80,7 @@ export const sortEvents = (category_id, type_id) => async(dispatch) => {
             }
             if (category_id.length === 0) {
                 for (let index = 0; index < type_id.length; index++) {
-                    const {data} = await sort(type_id[index])
+                    const {data} = await sort(undefined, type_id[index])
                     for (let i = 0; i < data.length; i++) {
                         info.push(data[i])
                     }

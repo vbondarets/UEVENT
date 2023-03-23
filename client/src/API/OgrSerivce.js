@@ -1,5 +1,9 @@
 import axios from "axios";
 
+const api = axios.create({
+    baseURL:"http://localhost:8080/api"
+})
+
 export default class OrgSevice {
     static async getAll() {
         const response = await axios.get("http://localhost:8080/api/organization");
@@ -26,3 +30,5 @@ export default class OrgSevice {
         return response;
     }
 }
+
+export const getOrganizations = () => api.get(`http://localhost:8080/api/organization`)

@@ -78,6 +78,10 @@ const EventCategoryModel = sequelize.define( 'event_category', {
     }
 });
 
+const EventSubModel = sequelize.define( 'event_sub', {
+    
+});
+
 EventTypeModel.hasMany (EventModel, {
     foreignKey: {
         name:'type_id'
@@ -91,7 +95,7 @@ EventCategoryModel.hasMany(EventModel, {
 });
 EventModel.belongsTo(EventCategoryModel);
 
-<<<<<<< HEAD
+
 OrganizationModel.hasMany(EventModel, {
     foreignKey: {
         name: 'organization_id'
@@ -112,8 +116,7 @@ UserModel.hasMany(EventSubModel, {
     }
 });
 EventSubModel.belongsTo(UserModel);
-=======
->>>>>>> 8c49442170688bf58b33ff105c44f9e3e7cf70db
+
 const BasicCategories = ["Sport", "Music", "Education", "Party", "Meetings"];
 try {
     EventCategoryModel.findAll({

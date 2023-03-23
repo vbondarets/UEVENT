@@ -2,7 +2,8 @@ const initialState = {
     allEvents: [],
     Event: [],
     categories:[],
-    types:[]
+    types:[],
+    map:[]
 }
 
 export const EventReducer = (events = initialState, action) => {
@@ -15,7 +16,9 @@ export const EventReducer = (events = initialState, action) => {
             return {...events, categories: action.payload}
         case 'getTypes':
             return {...events, types: action.payload}
-
+        case 'map':
+            return {...events, map: action.payload}
+        
         case 'sortCategories':
             return {...events, allEvents: action.payload}
         default:

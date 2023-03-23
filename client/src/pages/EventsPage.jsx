@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getAllCategory, getAllEventsAction, getTypes, sort, sortEvents } from "../actions/EventAction";
+import { getAllCategory, getAllEventsAction, sort, sortEvents } from "../actions/EventAction";
+import { getTypes } from "../actions/TypeAction";
 import style from './css/EventsPage.module.css';
 
 const EventsPage = () => {
     const EventsStrore = useSelector(state => state.Events.allEvents)
     const CategoriesStore = useSelector(state => state.Events.categories)
-    const TypesStore = useSelector(state => state.Events.types)
+    const TypesStore = useSelector(state => state.Type.allTypes)
 
     let [array_category, setArray] = useState([])
     let [array_types, setArrayT] = useState([])
@@ -53,8 +54,7 @@ const EventsPage = () => {
     const AllEvents = EventsStrore
     const categories = CategoriesStore
     const types = TypesStore
-    console.log(array_category);
-    console.log(array_types);
+
     if (AllEvents==='No events yet') {
         return (
             <div>
