@@ -8,6 +8,7 @@ const paymentRouter = require('./paymentRouter');
 const ticketRouter = require('./ticketRouter');
 const organizationRouter = require('./organizationRouter');
 const categoryRouter = require('./categoryRouter');
+const commentRouter = require ('./commentRouter')
 
 router.use('/auth', authRouter);
 // router.use('/user', userRouter);
@@ -16,5 +17,6 @@ router.use('/payment', paymentRouter);
 router.use('/ticket', ticketRouter);
 router.use('/organization', organizationRouter);
 router.use('/category', categoryRouter);
+router.use('/comment', commentRouter)
 
 module.exports = router;

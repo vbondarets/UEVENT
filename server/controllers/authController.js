@@ -8,6 +8,19 @@ const JwtGenerator = require('../helpers/jwtGenerators/jwtGenerator');
 const resetJwtGenerator = require('../helpers/jwtGenerators/resetJwtGenerator');
 
 class AuthController {
+
+    async getAllUser (req, res, next) {
+        try {
+            UserModel.findAll().then(resolve => {
+                if (resolve.length > 0) {
+                    return res.json(resolve)
+                }
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error));
+        }
+    }
+
     async registration(req, res, next) {
         try {
             let { login, password, email, role, fullName } = req.body;

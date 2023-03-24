@@ -10,6 +10,7 @@ import { GoogleMap, InfoWindow, LoadScript, Marker } from "@react-google-maps/ap
 import Geocode from "react-geocode";
 import axios from "axios";
 import { MapComponent } from "./MapComponent";
+import { CommentComponent } from "./CommentComponent";
 
 
 Geocode.setApiKey("");
@@ -138,6 +139,10 @@ const EventPage = (props) => {
                             )
                             
                         })}
+                    </div>
+                    <div>
+                        <h2>Comments</h2>
+                        <CommentComponent event_id = {id}></CommentComponent>
                     </div>
                 </div>
             </div>
