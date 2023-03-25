@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import CategorySevice from '../API/CategoryService';
 import OrgSevice from '../API/OgrSerivce';
 import { useFetching } from '../hooks/useFetching';
-import classes from './css/EventPreview.module.css'
+import classes from './css/EventPreview.module.css';
+import moment from 'moment';
 
 const EventPreview = (props) => {
     const [org, setOrg] = useState({});
@@ -37,10 +38,12 @@ const EventPreview = (props) => {
     }, []);
 
     return (
-        <div>
-            <p>{props.event.name}</p>
-            <p>{"By "}{org.name}</p>
-            <p>{category.name}</p>
+        <div onClick={() => props.goTo(`events/${props.event.event_id}`)} className={classes.event_prew_wrapper}>
+            <p className={`${classes.event_prew_text} ${classes.event_prew_name}`}>{props.event.name}</p>
+            <p className={`${classes.event_prew_text} ${classes.event_prew_date}`}>{moment(props.event.startDateTime).format('MMMM Do YYYY')}</p>
+            <p className={`${classes.event_prew_text} ${classes.event_prew_time}`}>{moment(props.event.startDateTime).format('h:mm a')}</p>
+            <p className={`${classes.event_prew_text} ${classes.event_prew_org}`}>{"By "}{org.name}</p>
+            <p className={`${classes.event_prew_text} ${classes.event_prew_category}`}>{category.name}</p>
 
         </div>
     )
