@@ -79,6 +79,7 @@ const Main = () => {
         <div className={classes.main_page_container}>
             <InfSlider 
                 categories={categoryArr} 
+                goTo = {goTo}
             />
             <div className={classes.organizations_container}>
                 {orgArr.map((element, index) =>
@@ -86,6 +87,8 @@ const Main = () => {
                         key={element.organization_id}
                         name={element.name}
                         img={element.img}
+                        organization_id={element.organization_id}
+                        goTo = {goTo}
                         // onClick={() => goTo(`organization/${element.organization_id}`)}
                     />
                 )}
