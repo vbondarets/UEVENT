@@ -10,12 +10,14 @@ import OrgSevice from '../API/OgrSerivce';
 import CategorySevice from '../API/CategoryService';
 import EventSevice from '../API/EventService';
 import EventPreview from '../components/EventPreview';
+import { useHistory } from 'react-router-dom';
 
 
 const Main = () => {
     const [orgArr, setOrgArr] = useState([]);
     const [categoryArr, setCategoryArr] = useState([]);
     const [randomEvents, setRandomEvents] = useState([]);
+    const router = useHistory();
 
     function randomIntFromInterval(min, max) { // min and max included 
         return Math.floor(Math.random() * (max - min + 1) + min)
@@ -69,15 +71,25 @@ const Main = () => {
         fetchCategory();
         fetchEvent();
     }, []);
+
+    const goTo = (link) =>{
+        router.push(link)
+    }
     return (
         <div className={classes.main_page_container}>
-            <InfSlider categories={categoryArr} />
+            <InfSlider 
+                categories={categoryArr} 
+                goTo = {goTo}
+            />
             <div className={classes.organizations_container}>
                 {orgArr.map((element, index) =>
                     <OrganizationDiv
                         key={element.organization_id}
                         name={element.name}
                         img={element.img}
+                        organization_id={element.organization_id}
+                        goTo = {goTo}
+                        // onClick={() => goTo(`organization/${element.organization_id}`)}
                     />
                 )}
             </div>
@@ -86,6 +98,7 @@ const Main = () => {
                     <EventPreview 
                         event={element}
                         key={element.event_id}
+                        goTo = {goTo}
                     />
                 )}
             </div>

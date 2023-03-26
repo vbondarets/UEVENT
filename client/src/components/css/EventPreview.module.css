@@ -1,0 +1,31 @@
+.event_prew_wrapper{
+    width: 90%;
+    height: 90%;
+    background-color: rgb(19, 156, 19);
+    border-radius: 15px;
+    display: flex;
+    border: 2px solid rgb(19, 156, 19);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding-bottom: 5px;
+    cursor: pointer;
+    transition: background-color .3s ease-in-out;
+}
+.event_prew_text{
+    font-family: 'Climate Crisis', cursive;
+    color: rgb(31, 31, 31);
+    font-size: 15px;
+    margin: 5px;
+    transition: color .3s ease-in-out;
+}
+.event_prew_date{
+    font-size: 12px;
+}
+.event_prew_wrapper:hover {
+    background-color: transparent;
+}
+.event_prew_wrapper:hover p{
+    color: rgb(19, 156, 19);
+}
