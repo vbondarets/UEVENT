@@ -8,7 +8,10 @@ router.get("/categories/:category_id",eventController.getByCategory);
 router.get('/event/:id', eventController.getEventById);
 router.get('/types', eventController.getAllTypes)
 router.get('/sort/:category_id/:type_id', eventController.sortEventByTypeCategory)
+router.get(`/subscribe/:event_id`, eventController.getAllSubscriptionOnEvent)
 
 router.post('/', eventController.create);
+router.post('/subscripe/:event_id', eventController.SubscripeOnEvent)
+router.delete(`/subscripe/:event_id/user/:user_id`, eventController.DeleteSubs)
 
 module.exports = router;

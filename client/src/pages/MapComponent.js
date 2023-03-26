@@ -30,16 +30,15 @@ export const MapComponent = (props) => {
         console.log(center);
         return (
             <div>
-                <p>hyu</p>
-            <LoadScript googleMapsApiKey="AIzaSyCDY1JcSvcRDQw6KD4jXqsbreVFzw8JN9g">
-                <GoogleMap 
-                    mapContainerStyle={mapStyle} 
-                    center={center}
-                    zoom={15}
-                >    
-                    <Marker position={center} />
-                </GoogleMap>
-            </LoadScript>
+                <LoadScript googleMapsApiKey="AIzaSyCDY1JcSvcRDQw6KD4jXqsbreVFzw8JN9g">
+                    <GoogleMap 
+                        mapContainerStyle={mapStyle} 
+                        center={center}
+                        zoom={15}
+                    >    
+                        <Marker position={center} />
+                    </GoogleMap>
+                </LoadScript>
             </div>
         )
     }

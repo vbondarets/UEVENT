@@ -12,6 +12,10 @@ export const CommentReducer = (comment = initialState, action) => {
 
         case 'createCom':
             return {...comment, CommentsOnEvent: action.payload}
+
+        case 'deleteComment':
+            return {...comment, CommentsOnEvent: action.payload}
+
         default:
             return comment;
     }

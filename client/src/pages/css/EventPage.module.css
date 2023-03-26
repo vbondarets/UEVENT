@@ -1,41 +1,101 @@
 @import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sono:wght@200&display=swap');
 .container {
+    margin-top: 0.5%;
     color: aliceblue;
 }
 .info_container {
     display: flex;
 }
 .info_event {
+    background-color: #272727;
     height: 10%;
-    width: 22%;
-    margin-right: 4%;
-    border-left: 1px solid white;
+    width: 29%;
+    margin-right: 2%;
     padding-left: 0.5%;
-    border-bottom: 1px solid white;
-    padding-bottom: 0.5%;
-    border-radius: 5px;
+    padding-bottom: 1%;
+    border-radius: 10px;
 }
+.info_event h1 {
+    color: rgb(19, 156, 19);
+    font-family: 'Sono', sans-serif;
+    border-bottom: 1px solid rgb(19, 156, 19);
+    width: 90%;
+}
+.NotificationsIcon {
+    margin-right: 1%;
+    cursor: pointer;
+    background-color: #272727;
+    padding: 0.5%;
+    border-radius: 10px;
+    transition: 0.5s ease-in-out;
+}
+.NotificationsIcon:hover {
+    color: rgb(19, 156, 19);
+    background-color: rgb(19, 19, 19);
+}
+.NotificationsActiveIcon {
+    margin-right: 1%;
+    cursor: pointer;
+    background-color: #272727;
+    padding: 0.5%;
+    border-radius: 10px;
+    transition: 0.5s ease-in-out;
+}
+.NotificationsActiveIcon:hover {
+    color: rgb(19, 156, 19);
+    background-color: rgb(19, 19, 19);
+}
+.info_event_p {
+    font-family: 'Sono', sans-serif;
+    font-size: 18px;
+}
+.info_event button {
+    cursor: pointer;
+    width: 98%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    border-radius: 10px;
+    font-size: 18px;
+    font-family: 'Sono', sans-serif;
+    transition: 0.5s ease-in-out;
+}
+.info_event button:hover {
+    color: rgb(19, 156, 19);
+    background-color: rgb(19, 19, 19);
+}
+.left_tickets {
+    font-size: 14px;
+    text-align: center;
+    font-family: 'Sono', sans-serif;
+}
+
 .other_info_container {
+    background-color: #272727;
+    margin-right: 1%;
     margin-left: 1%;
     width: 78%;
+    padding-left: 0.5%;
+    padding-bottom: 0.5%;
+    border-radius: 10px;
+}
+
+.other_info_container p {
+    font-family: 'Sono', sans-serif;
+    font-size: 18px;
 }
 .other_info_container h2 {
     color: rgb(19, 156, 19);
     font-family: 'Sono', sans-serif;
-    border-bottom: 1px solid white;
-    width: 50%;
+    border-bottom: 1px solid rgb(19, 156, 19);
+    width: 90%;
     padding-bottom: 0.5%;
 }
-.constainer_org_events {
-    display: flex;
-}
-.container_sim_events {
-    display: flex;
-}
 .sim_and_org_events {
+    background-color: #272727;
     margin-left: 1%;
-    margin-right: 4%;
+    margin-right: 2%;
+    padding-bottom: 1%;
 }
 .sim_and_org_events h2{
     font-family: 'Sono', sans-serif;
@@ -45,4 +105,70 @@
     text-align: center;
     border-bottom: 1px solid white;
     border-top: 1px solid white;
+}
+
+.constainer_org_events {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-left: 1%;
+}
+.org_events {
+    background-color: rgb(49, 49, 49);
+    border-radius: 10px;
+    padding-right: 10%;
+    margin-right: 10%;
+    padding-bottom: 2%;
+}
+.org_events p {
+    font-family: 'Sono', sans-serif;
+    font-size: 18px;
+    margin-left: 2%;
+}
+.org_events button {
+    font-size: 14px;
+    font-family: 'Sono', sans-serif;
+    cursor: pointer;
+    margin-left: 2%;
+    width: 108%;
+    padding-bottom: 2%;
+    padding-top: 2%;
+    border-radius: 10px;
+    transition: 0.5s ease-in-out;
+}
+.org_events button:hover {
+    color: rgb(19, 156, 19);
+    background-color: rgb(19, 19, 19);
+}
+
+.container_sim_events {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-left: 1%;
+}
+.sim_events {
+    background-color: rgb(49, 49, 49);
+    border-radius: 10px;
+    padding-right: 10%;
+    margin-right: 10%;
+    padding-bottom: 2%;
+}
+.sim_events p {
+    font-family: 'Sono', sans-serif;
+    font-size: 18px;
+    margin-left: 2%;
+}
+.sim_events button {
+    margin-left: 2%;
+    width: 108%;
+    padding-bottom: 2%;
+    padding-top: 2%;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'Sono', sans-serif;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+.sim_events button:hover {
+    color: rgb(19, 156, 19);
+    background-color: rgb(19, 19, 19);
 }

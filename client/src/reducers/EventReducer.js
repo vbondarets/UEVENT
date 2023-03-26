@@ -3,7 +3,8 @@ const initialState = {
     Event: [],
     categories:[],
     types:[],
-    map:[]
+    map:[],
+    subsriptions: []
 }
 
 export const EventReducer = (events = initialState, action) => {
@@ -16,9 +17,16 @@ export const EventReducer = (events = initialState, action) => {
             return {...events, categories: action.payload}
         case 'getTypes':
             return {...events, types: action.payload}
+        case 'getSubs':
+            return {...events, subsriptions: action.payload}
         case 'map':
             return {...events, map: action.payload}
-        
+        case 'subscribeEvent': 
+            return {...events, subsriptions: action.payload}
+        case 'deleteSub':
+            return {...events, subsriptions: action.payload}
+
+
         case 'sortCategories':
             return {...events, allEvents: action.payload}
         default:

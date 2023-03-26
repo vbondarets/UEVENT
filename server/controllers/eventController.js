@@ -1,5 +1,5 @@
 const ApiError = require("../helpers/error/ApiError");
-const {EventModel, EventCategoryModel, EventTypeModel} = require('../models/eventModel');
+const {EventModel, EventCategoryModel, EventTypeModel, EventSubModel} = require('../models/eventModel');
 const eventListing = require('../helpers/eventListing');
 const {TicketModel} = require('../models/ticketModel');
 const { json } = require("body-parser");
@@ -60,6 +60,58 @@ class EventController {
         }
     }
     
+    async SubscripeOnEvent (req, res, next) {
+        try {
+            const {event_id} = req.params
+            const {user_id} = req.body
+            console.log(user_id);
+            EventSubModel.create ( {
+                event_id, user_id
+            }).then( () => {
+                return res.json('You subscripe on event')
+            }).catch(err => {
+                return next(ApiError.internal('Unknown error: ' + err));
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error))
+        }
+    }
+
+    async DeleteSubs(req, res, next) {
+        try {
+            const {event_id} = req.params
+            const {user_id} = req.params
+            EventSubModel.destroy ( {
+                where: {
+                    event_id: event_id,
+                    user_id: user_id
+                }
+            }).then( () => {
+                return res.json('You dissubscribe on event')
+            }).catch(err => {
+                return next(ApiError.internal('Unknown error: ' + err));
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error))
+        }
+    }
+
+    async getAllSubscriptionOnEvent (req, res, next) {
+        try {
+            const {event_id} = req.params
+            EventSubModel.findAll({where: {event_id: event_id}}).then (resolve => {
+                if (resolve.length > 0 ) {
+                    return res.json(resolve)
+                }
+                else {
+                    return next(ApiError.badRequest('Not Found'));
+                }
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error))
+        }
+    }
+
     async getAllTypes (req, res, next) {
         try {
             EventTypeModel.findAll({

@@ -144,4 +144,5 @@ module.exports = {
     EventModel,
     EventTypeModel,
     EventCategoryModel,
+    EventSubModel
 };

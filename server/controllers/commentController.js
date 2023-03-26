@@ -52,6 +52,24 @@ class CommentController {
             return next(ApiError.internal('Unknown error: ' + error))
         }
     }
+
+    async deleteComment (req, res, next) {
+        try {
+            const {comment_id} = req.params
+            console.log(comment_id);
+            const {user_id} = req.params
+            CommentModel.destroy ( {where: {
+                comment_id: comment_id,
+                user_id: user_id
+            }}).then( () => {
+                return res.json('Comment was deleted')
+            }).catch(err => {
+                return next(ApiError.internal('Unknown error: ' + err));
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error))
+        }
+    }
 }
 
 module.exports = new CommentController()

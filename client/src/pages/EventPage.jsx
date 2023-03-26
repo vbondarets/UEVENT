@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { EventById, getAllCategory, getAllEventsAction } from "../actions/EventAction";
+import { DeleteSubscribe, EventById, getAllCategory, getAllEventsAction, getAllSubsOnEvent, SubscribeOnEvent } from "../actions/EventAction";
 import moment from 'moment'
 import { getAllOrg } from "../actions/OrganizationAction";
 import { getTypes } from "../actions/TypeAction";
@@ -11,7 +11,8 @@ import Geocode from "react-geocode";
 import axios from "axios";
 import { MapComponent } from "./MapComponent";
 import { CommentComponent } from "./CommentComponent";
-
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 
 Geocode.setApiKey("");
 const geocodingQuery = async (address) => {
@@ -27,12 +28,15 @@ const geocodingQuery = async (address) => {
 
 const EventPage = (props) => {
     const {id} = useParams()
+    let isSub = false
 
     const EventStore = useSelector(store => store.Events.Event)
     const CategoriesStore = useSelector(state => state.Events.categories)
     const OrganizationStore = useSelector (state => state.Organization.allOrganization)
     const ThemesStore = useSelector (state => state.Type.allTypes)
     const EventsStrore = useSelector(state => state.Events.allEvents)
+    const SubsStore = useSelector(state => state.Events.subsriptions)
+    const UserStore = useSelector( store => store.Auth)
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -42,7 +46,8 @@ const EventPage = (props) => {
         dispatch(getAllOrg())
         dispatch(getAllCategory())
         dispatch(EventById(id))
-    }, [dispatch])
+        dispatch(getAllSubsOnEvent(id))
+    }, [dispatch, id])
     
     
     let category = 'No category yet'
@@ -58,9 +63,16 @@ const EventPage = (props) => {
     let organization = OrganizationStore
     let themes = ThemesStore
     let allEvents = EventsStrore
+    let subs = SubsStore
     if (Event.length !== 0) {
+        console.log(subs);
         let adress = Event[0].region
         
+        for (let index = 0; index < subs.length; index++) {
+            if (subs[index].user_id === UserStore.user.userId) {
+                isSub = true
+            }
+        }
         for (let index = 0; index < categories.length; index++) {
             if (categories[index].category_id === Event[0].category_id) {
                 category = categories[index].name
@@ -101,16 +113,27 @@ const EventPage = (props) => {
                         <MapComponent address = {adress}></MapComponent>
                     </div>
                     <div className={style.info_event}>
-                        <h1>About Event</h1>
-                        <p><b>Name:</b> {Event[0].name}</p>
-                        <p><b>Region:</b> {Event[0].region}</p>
-                        <p><b>Category:</b> {category}</p>
-                        <p><b>Theme:</b> {theme}</p>
-                        <p><b>Organization:</b> {organization_name}</p>
-                        <p><b>Start at:</b> {moment(Event[0].startDateTime).format('MMMM Do YYYY')}</p>
-                        <p><b>End at:</b> {moment(Event[0].endDateTime).format('MMMM Do YYYY')}</p>
-                        <p>{Event[0].tickets_count} tickets left...</p>
-                        <p>Price: {Event[0].price}</p>
+                        <div style={{display:'flex', alignItems:'center'}}>
+                            <h1>About Event</h1>
+                            {isSub === false ?
+                            <NotificationsIcon
+                                onClick = { () => {dispatch(SubscribeOnEvent(id, UserStore.user.userId)); isSub = true}}
+                                className={style.NotificationsIcon} />
+                            :
+                            <NotificationsActiveIcon 
+                                onClick = { () => {dispatch(DeleteSubscribe(id, UserStore.user.userId)); isSub = false}}
+                                className={style.NotificationsActiveIcon}/>}
+                        </div>
+                        <p className={style.info_event_p}><b>Name:</b> {Event[0].name}</p>
+                        <p className={style.info_event_p}><b>Region:</b> {Event[0].region}</p>
+                        <p className={style.info_event_p}><b>Category:</b> {category}</p>
+                        <p className={style.info_event_p}><b>Theme:</b> {theme}</p>
+                        <p className={style.info_event_p}><b>Organization:</b> {organization_name}</p>
+                        <p className={style.info_event_p}><b>Start at:</b> {moment(Event[0].startDateTime).format('MMMM Do YYYY')}</p>
+                        <p className={style.info_event_p}><b>End at:</b> {moment(Event[0].endDateTime).format('MMMM Do YYYY')}</p>
+                        <p className={style.info_event_p}><b>Price:</b> {Event[0].price} uah</p>
+                        <p className={style.left_tickets}>{Event[0].tickets_count} tickets left...</p>
+                        <button>Buy</button>
                     </div>
                 </div>
                 <div className={style.sim_and_org_events}>
@@ -118,10 +141,11 @@ const EventPage = (props) => {
                     <div className={style.constainer_org_events}>
                         {organization_events.map(event => {
                             return (
-                            <div key={event.event_id}>
+                            <div key={event.event_id} className={style.org_events}>
                                     <p>{event.name}</p>
-                                    <p>Price:{event.price} uah</p>
-                                    <p>{event.tickets_count} tickets left</p>
+                                    <p><b>Price:</b> {event.price} uah</p>
+                                    <p style={{fontSize:'14px', textAlign:'center'}}>{event.tickets_count} tickets left</p>
+                                    <button> More... </button>
                                 </div> 
                             )
                             
@@ -131,10 +155,11 @@ const EventPage = (props) => {
                     <div className={style.container_sim_events}>
                         {similar_events.map(event => {
                             return (
-                            <div key={event.event_id}>
+                            <div key={event.event_id} className={style.sim_events}>
                                     <p>{event.name}</p>
-                                    <p>Price:{event.price} uah</p>
-                                    <p>{event.tickets_count} tickets left</p>
+                                    <p><b>Price:</b> {event.price} uah</p>
+                                    <p style={{fontSize:'14px', textAlign:'center'}}>{event.tickets_count} tickets left</p>
+                                    <button>More... </button>
                                 </div> 
                             )
                             
