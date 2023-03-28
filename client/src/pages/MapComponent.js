@@ -19,8 +19,9 @@ export const MapComponent = (props) => {
         height:'400px'
     }
     let coordinate = Map
-
-    if (coordinate != []) {
+    console.log(coordinate);
+    if (coordinate != null || coordinate.length != 0 ) {
+        console.log("hyu");
         lat_number = coordinate.lat
         lng_number = coordinate.lng
         const center = {
@@ -28,18 +29,30 @@ export const MapComponent = (props) => {
             lng: lng_number
         }
         console.log(center);
+        if (center.lat === undefined || center.lng === undefined) {
+            return (
+                <>Something went wrong</>
+            )
+        }
+        else {
+            return (
+                <div>
+                    <LoadScript googleMapsApiKey="ApiKey">
+                        <GoogleMap 
+                            mapContainerStyle={mapStyle} 
+                            center={center}
+                            zoom={15}
+                        >    
+                            <Marker position={center} />
+                        </GoogleMap>
+                    </LoadScript>
+                </div>
+            )
+        }
+    }
+    else {
         return (
-            <div>
-                <LoadScript googleMapsApiKey="ApiKey">
-                    <GoogleMap 
-                        mapContainerStyle={mapStyle} 
-                        center={center}
-                        zoom={15}
-                    >    
-                        <Marker position={center} />
-                    </GoogleMap>
-                </LoadScript>
-            </div>
+            <>Something went wrong</>
         )
     }
 
