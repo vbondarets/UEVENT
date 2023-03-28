@@ -49,7 +49,14 @@ export const CommentComponent = (props) => {
     }
     else {
         return (
-            <p>No comments yet</p>
+            <>
+                <h3 style={{marginLeft:'1%'}}>No comments yet</h3>
+                <div className={style.input_comment}>
+                    <input type="text" value={comment} placeholder="Enter your comment" onChange={e => setComment(e.target.value)}/>
+                    <button onClick={() => {dispatch(createComment(comment, event_id, UserStore.user.userId)); setComment('')}}>Comment</button>
+                </div>
+            </>
+            
         )
     }
 }

@@ -69,7 +69,7 @@ const EventsPage = () => {
                 <div className={style.sort_container}>
                     <h1>Sorting</h1>
                     <div onChange={e => {dispatch(sortEvents(array_category, array_types))}}>
-                        <p>Sort by category</p>
+                        <h3>Sort by category:</h3>
                         {categories.map(category => {
                             return (
                                 <div>
@@ -78,7 +78,7 @@ const EventsPage = () => {
                                 </div>
                             )
                         })}
-                        <p>Sort by theme:</p>
+                        <h3>Sort by theme:</h3>
                         {types.map(_type => {
                             return (
                                 <div>
@@ -93,9 +93,10 @@ const EventsPage = () => {
                 {AllEvents.map( events => {
                     return (
                         <div key={events.event_id} className={style.events}>
-                            <p onClick={ () => history.push(`/events/${events.event_id}`)}>{events.name}</p>
-                            <p>Price:{events.price} uah</p>
-                            <p>{events.tickets_count} tickets left</p>
+                            <p style={{marginLeft:'1%' ,fontSize:'20px', borderBottom:'1px solid rgb(19, 156, 19)', width:'90%', color:'rgb(19, 156, 19)',fontWeight:'bold'}} onClick={ () => history.push(`/events/${events.event_id}`)}>{events.name}</p>
+                            <p className={style.event_info}><b style={{borderBottom:'1px solid rgb(19, 156, 19)', width:'90%', color:'rgb(19, 156, 19)'}}>Description:</b> {events.description.substring(0,20)}...</p>
+                            <p className={style.event_info}><b style={{borderBottom:'1px solid rgb(19, 156, 19)', width:'90%', color:'rgb(19, 156, 19)'}}>Price:</b> {events.price} uah</p>
+                            <p className={style.tickets}>{events.tickets_count} tickets left</p>
                             <button className={style.buttonMore} onClick={ () => history.push(`/events/${events.event_id}`)}>More..</button>
                         </div>
                     )

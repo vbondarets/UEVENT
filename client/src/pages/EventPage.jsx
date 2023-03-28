@@ -16,7 +16,7 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 
 Geocode.setApiKey("");
 const geocodingQuery = async (address) => {
-    const res = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyCDY1JcSvcRDQw6KD4jXqsbreVFzw8JN9g`);
+    const res = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=ApiKey`);
     const json = res.data;
     if (json.results.length === 0) {
         return null;
