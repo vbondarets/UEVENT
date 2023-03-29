@@ -1,4 +1,4 @@
-import { getAllCategories, getAllEvents,getEventById, getLanLog, sort } from "../API/EventApi"
+import { DeleteSub, getAllCategories, getAllEvents,getAllSubs,getEventById, getLanLog, sort, Subscripe } from "../API/EventApi"
 
 export const getAllEventsAction = () => async(dispatch) => {
     try {
@@ -13,6 +13,49 @@ export const getAllEventsAction = () => async(dispatch) => {
         console.log(error);
     }
 }
+
+export const getAllSubsOnEvent = (event_id) => async(dispatch) => {
+    try {
+        const {data} = await getAllSubs(event_id)
+        console.log(data);
+        if (data.length > 0) {
+            return dispatch( {type:'getSubs', payload: data} )
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const SubscribeOnEvent = (event_id, user_id) => async (dispatch)=> {
+    try {
+        const {data} = await Subscripe(event_id, user_id)
+        if (data === 'You subscripe on event') {
+            const Data = await getAllSubs(event_id)
+            if (Data.data.length > 0) {
+                return dispatch({type:'subscribeEvent', payload: Data.data})
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const DeleteSubscribe = (event_id, user_id) => async(dispatch) => {
+    try {
+        const {data} = await DeleteSub(event_id, user_id)
+        console.log(data);
+        if (data === 'You dissubscribe on event') {
+            const Data = await getAllSubs(event_id)
+            if (Data.data.length > 0) {
+                return dispatch({type:'deleteSub', payload: Data.data})
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        return dispatch({type:'deleteSub', payload: []})
+    }
+}
+
 
 export const getMap = (address) => async(dispatch) => {
     try {

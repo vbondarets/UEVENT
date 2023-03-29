@@ -1,0 +1,69 @@
+.container_comment {
+    width: 98%;
+}
+.comment {
+    background-color: rgb(49, 49, 49);
+    margin-bottom: 2%;
+    margin-left: 2%;
+    padding-bottom: 0.3%;
+    padding-top: 0.3%;
+    padding-left: 0.3%;
+}
+.comment h3 {
+    color: rgb(19, 156, 19);
+    font-family: 'Sono', sans-serif;
+    font-size: 18px;
+    border-bottom: 1px solid rgb(19, 156, 19);
+    width: 98%;
+    padding-bottom: 0.5%;
+}
+.head_of_comment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.deleteIcon {
+    margin-right: 1%;
+    cursor: pointer;
+    background-color: #272727;
+    padding: 0.5%;
+    border-radius: 10px;
+    transition: 0.5s ease-in-out;
+}
+.deleteIcon:hover {
+    color: rgb(19, 156, 19);
+    background-color: rgb(19, 19, 19);
+}
+
+.comment p {
+    margin-left: 2%;
+    font-family: 'Sono', sans-serif;
+    font-size: 17px;
+}
+
+.input_comment {
+    margin-left: 2%;
+    margin-bottom: 2%;
+}
+.input_comment input {
+    width: 90%;
+    font-size: 17px;
+    padding: 0.5%;
+    background: none;
+    color: aliceblue;
+    font-family: 'Sono', sans-serif;
+    border-radius: 10px;
+}
+
+.input_comment button {
+    margin-left: 0.5%;
+    width: 6%;
+    font-size: 17px;
+    padding: 0.5%;
+    border-radius: 10px;
+    transition: 0.5s ease-in-out;
+}
+.input_comment button:hover {
+    color: rgb(19, 156, 19);
+    background-color: rgb(19, 19, 19);
+}
