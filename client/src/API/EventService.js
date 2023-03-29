@@ -13,6 +13,10 @@ export default class EventSevice {
         const response = await axios.get(`http://localhost:8080/api/event/${id}`);
         return response;
     }
+    static async getByOrg(id) {
+        const response = await axios.get(`http://localhost:8080/api/event/org/${id}`);
+        return response;
+    }
     static async update(body, id) {
         const response = await axios.patch(`http://localhost:8080/api/event/${id}`, body);
         return response;

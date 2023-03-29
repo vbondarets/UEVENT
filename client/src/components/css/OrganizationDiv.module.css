@@ -7,6 +7,7 @@
     padding-bottom: 0px;
     border: 2px solid rgb(19, 156, 19);
     border-radius: 15px;
+    cursor: pointer;
 }
 .organization_name{
     color: rgb(19, 156, 19);

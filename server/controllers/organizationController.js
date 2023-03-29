@@ -1,5 +1,7 @@
 const {OrganizationModel} = require('../models/userModel');
 const ApiError = require("../helpers/error/ApiError");
+const uuid = require('uuid');
+const path = require('path');
 
 class organizationController {
     
@@ -65,12 +67,15 @@ class organizationController {
     }
     async create(req, res, next) {
         try {
-            const {author_id, name, email, location, description,img} = req.body;
+            const {author_id, name, email, location, description} = req.body;
+            const {img} = req.files;
+            const fileName = uuid.v4()+ ".jpg";
+            img.mv(path.resolve(__dirname, "..", "static", fileName));
             OrganizationModel.create({
                 author_id, 
                 name,   
                 email, 
-                img,
+                img: fileName,
                 location, 
                 description
             }).then(() => {

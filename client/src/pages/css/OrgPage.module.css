@@ -1,0 +1,38 @@
+.org_text{
+    color: rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    letter-spacing: 2px;
+    font-size: 20px;
+}
+.org_header{
+    text-decoration: underline;
+}
+.org_name{
+    color: rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    letter-spacing: 2px;
+    font-size: 40px;
+    text-align: center;
+}
+.org_image_container{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+}
+.org_image{
+    width: 60%;
+    border: 10px solid rgb(19, 156, 19);
+    border-radius: 5px;
+}
+.events_container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.org_events{
+    color: rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    letter-spacing: 2px;
+    font-size: 20px;
+    text-align: center;
+}
