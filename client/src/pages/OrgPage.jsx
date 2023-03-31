@@ -78,15 +78,20 @@ const OrgPage = () => {
             <p className={`${classes.org_header} ${classes.org_text}`}>Contacts:</p>
             <p className={`${classes.org_email} ${classes.org_text}`}>{organization.email}</p>
             <p className={`${classes.org_events}`}>Current events:</p>
-            <div className={classes.events_container}>
-                {randomEvents.map((element, index) =>
-                    <EventPreview 
-                        event={element}
-                        key={element.event_id}
-                        goTo = {goTo}
-                    />
-                )}
-            </div>
+            {randomEvents.length > 0 
+                ?
+                <div className={classes.events_container}>
+                    {randomEvents.map((element, index) =>
+                        <EventPreview 
+                            event={element}
+                            key={element.event_id}
+                            goTo = {goTo}
+                        />
+                    )}
+                </div>
+                :
+                <p className={`${classes.org_events}`}>No events yet</p>
+            }
         </div>
 
     )
