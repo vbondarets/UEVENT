@@ -26,6 +26,8 @@ export const EventReducer = (events = initialState, action) => {
         case 'deleteSub':
             return {...events, subsriptions: action.payload}
 
+        case 'createEvent':
+            return {...events, allEvents: action.payload}
 
         case 'sortCategories':
             return {...events, allEvents: action.payload}

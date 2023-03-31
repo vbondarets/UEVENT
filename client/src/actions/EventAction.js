@@ -1,4 +1,4 @@
-import { DeleteSub, getAllCategories, getAllEvents,getAllSubs,getEventById, getLanLog, sort, Subscripe } from "../API/EventApi"
+import { createEventApi, DeleteSub, getAllCategories, getAllEvents,getAllSubs,getEventById, getLanLog, sort, Subscripe } from "../API/EventApi"
 
 export const getAllEventsAction = () => async(dispatch) => {
     try {
@@ -8,6 +8,20 @@ export const getAllEventsAction = () => async(dispatch) => {
         }
         else {
             return dispatch({type:'getAllEvents', payload:"No events yet"})
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const createEvent = (name, startDateTime, endDateTime, tickets_count, region, imgLink, category_id, price, description, type_id, organization_id) => async(dispatch) => {
+    try {
+        const {data} = await createEventApi(name, startDateTime, endDateTime, tickets_count, region, imgLink, category_id, price, description, type_id, organization_id)
+        if (data === "Event created") {
+            const Data = await getAllEvents()
+            if(Data.data.length > 0) {
+                return dispatch({type:'createEvent', payload: Data.data})
+            }
         }
     } catch (error) {
         console.log(error);

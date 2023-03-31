@@ -5,6 +5,7 @@ import loginPage from '../pages/Login';
 import mainPage from '../pages/Main';
 import EventsPage from '../pages/EventsPage';
 import EventPage from '../pages/EventPage';
+import CreateEventPage from '../pages/CreateEventPage';
 
 export const publicRoutes = [
     {path: "/login", component: loginPage, exact: true},
@@ -26,7 +27,8 @@ export const privateRoutes = [
     {path: "/organizations", component: registrationPage, exact: true},
     {path: "/organizations/:id", component: registrationPage, exact: true},
     {path: "/myaccount", component: registrationPage, exact: true},
-    {path: "/error", component: registrationPage, exact: true}
+    {path: "/error", component: registrationPage, exact: true},
+    {path: '/create_event', component: CreateEventPage, exact: true}
 ];
 
 export const adminRoutes = [

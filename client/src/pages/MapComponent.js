@@ -20,7 +20,7 @@ export const MapComponent = (props) => {
     }
     let coordinate = Map
     console.log(coordinate);
-    if (coordinate != null || coordinate.length != 0 ) {
+    if (coordinate != null ) {
         console.log("hyu");
         lat_number = coordinate.lat
         lng_number = coordinate.lng
