@@ -48,13 +48,13 @@ class EventController {
     
     async create(req, res, next) {
         try {
-            const {name, startDateTime, endDateTime, tickets_count, region, category_id, price, description, type_id} = req.body;
+            const {name, startDateTime, endDateTime, tickets_count, region, category_id, price, description, type_id, imgLink} = req.body;
             // console.log(type_id);
-            const {img} = req.files;
-            const fileName = uuid.v4()+ ".jpg";
+            // const {img} = req.files;
+            // const fileName = uuid.v4()+ ".jpg";
             img.mv(path.resolve(__dirname, "..", "static", fileName));
             EventModel.create({
-                name, startDateTime, endDateTime, tickets_count, price, region, imgLink: fileName, category_id, description,type_id
+                name, startDateTime, endDateTime, tickets_count, price, region, imgLink, category_id, description,type_id
             }).then(() => {
                 return res.json("Event created");
             }).catch(err => {
