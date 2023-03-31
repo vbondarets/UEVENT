@@ -4,6 +4,8 @@ const eventListing = require('../helpers/eventListing');
 const {TicketModel} = require('../models/ticketModel');
 const { json } = require("body-parser");
 const { Op } = require("sequelize");
+const uuid = require('uuid');
+const path = require('path');
 
 class EventController {
     async getAll(req, res, next) {
@@ -46,10 +48,14 @@ class EventController {
     
     async create(req, res, next) {
         try {
-            const {name, startDateTime, endDateTime, tickets_count, region, imgLink, category_id, price, description, type_id, organization_id} = req.body;
-            console.log(type_id);
+
+            const {name, startDateTime, endDateTime, tickets_count, region, category_id, price, description, type_id, organization_id} = req.body;
+            // console.log(type_id);
+            const {img} = req.files;
+            const fileName = uuid.v4()+ ".jpg";
+            img.mv(path.resolve(__dirname, "..", "static", fileName));
             EventModel.create({
-                name, startDateTime, endDateTime, tickets_count, price, region, imgLink, category_id, description,type_id, organization_id
+                name, startDateTime, endDateTime, tickets_count, price, region, imgLink: fileName, category_id, description,type_id,organization_id
             }).then(() => {
                 return res.json("Event created");
             }).catch(err => {
@@ -199,6 +205,25 @@ class EventController {
                 }
                 else {
                     return res.json("No events in this category")
+                }
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error));
+        }
+    }
+    async getByOrg(req, res, next){
+        try {
+            const {organizationId} = req.params;
+            EventModel.findAll ({
+                where:{
+                    organization_id: organizationId
+                }
+            }).then(resolve => {
+                if (resolve.length > 0) {
+                    return res.json(resolve)
+                }
+                else {
+                    return next(ApiError.badRequest('Not Found'));
                 }
             })
         } catch (error) {

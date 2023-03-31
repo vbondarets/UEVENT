@@ -4,6 +4,7 @@ import OrgSevice from '../API/OgrSerivce';
 import { useFetching } from '../hooks/useFetching';
 import classes from './css/EventPreview.module.css';
 import moment from 'moment';
+import { Redirect } from 'react-router-dom';
 
 const EventPreview = (props) => {
     const [org, setOrg] = useState({});

@@ -44,6 +44,7 @@ const Navbar = () => {
                             <></>
                         }
                         <Link className={classes.navbar__link} to="/create_event">create event</Link>
+                        <Link className={classes.navbar__link} to="/organizations">organizations</Link>
                         <Link className={`${classes.navbar__link__username} + ${classes.navbar__link}`} to="/myaccount">{user.login}</Link>
                     </div>
                 </div>

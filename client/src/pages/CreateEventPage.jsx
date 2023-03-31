@@ -22,6 +22,7 @@ const CreateEventPage = () => {
     let [name, setName] = useState('')
     let [description, setDescription] = useState('')
     let [address, setAddress] = useState('')
+    let [file, setFile] = useState('')
     let [num_tickets, setNum] = useState('')
     let [price, setPrice] = useState('') 
     let [startDate, setStartDate] = useState('')
@@ -53,8 +54,7 @@ const CreateEventPage = () => {
         const exact_finishTime = e_endTime.clone()
         const full_start = exact_startDate.format('YYYY-MM-DD') + 'T' + exact_startTime.format('HH:mm') + ':00Z'
         const full_end = exact_finishDate.format('YYYY-MM-DD') + 'T' + exact_finishTime.format('HH:mm') + ':00Z'
-        console.log(full_end);
-        dispatch(createEvent(name, full_start, full_end, num_tickets, address, '', category_val, price, description, type_val, org_val))
+        dispatch(createEvent(name, full_start, full_end, num_tickets, address, file, category_val, price, description, type_val, org_val))
         history.push('/events')
     }
 
@@ -77,6 +77,7 @@ const CreateEventPage = () => {
                     <input className={style.inputFields} type="text" placeholder="Enter address of your event" value={address} onChange={e => setAddress(e.target.value)}></input>
                     <input className={style.inputFields} type="number" placeholder="Enter number of tickets" value={num_tickets} onChange={e => setNum(e.target.value)}></input>
                     <input className={style.inputFields} type = "number" placeholder="Enter price of tickets" value={price} onChange={e => setPrice(e.target.value)}></input>
+                    <input className={style.inputFields} type="text" value={file} onChange={e => setFile(e.target.value)}></input>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <Stack spacing={3}>
                                 <div className={style.divDateStart}>
