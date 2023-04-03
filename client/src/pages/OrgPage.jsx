@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import EventSevice from '../API/EventService';
-import OrgSevice from '../API/OgrSerivce';
+import OrgSevice from '../API/OrgSerivce';
 import EventPreview from '../components/EventPreview';
 import { useFetching } from '../hooks/useFetching';
 import classes from './css/OrgPage.module.css'

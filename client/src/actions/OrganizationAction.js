@@ -1,4 +1,4 @@
-import { getOrganizations } from "../API/OgrSerivce";
+import { getOrganizations } from "../API/OrgSerivce";
 
 export const getAllOrg = () => async(dispatch) => {
     try {

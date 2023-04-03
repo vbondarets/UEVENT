@@ -1,5 +1,9 @@
 .organizations_container{
+    margin-top: 20px;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+}
+.organizations_createBtn{
+    margin-top: 5px;
 }

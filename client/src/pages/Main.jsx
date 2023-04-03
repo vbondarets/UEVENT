@@ -6,7 +6,7 @@ import classes from './css/Main.module.css';
 import OrganizationDiv from '../components/OrganizationDiv';
 import InfSlider from '../components/InfSlider';
 import { useFetching } from '../hooks/useFetching';
-import OrgSevice from '../API/OgrSerivce';
+import OrgSevice from '../API/OrgSerivce';
 import CategorySevice from '../API/CategoryService';
 import EventSevice from '../API/EventService';
 import EventPreview from '../components/EventPreview';
@@ -48,7 +48,7 @@ const Main = () => {
         try {
             const { data } = await OrgSevice.getAll();
             console.log(data);
-            setOrgArr(data)
+            setOrgArr([data[0],data[1],data[2]])
 
         }
         catch (err) {

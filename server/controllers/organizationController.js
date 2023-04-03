@@ -48,7 +48,7 @@ class organizationController {
             const {author_id} = req.body;
             OrganizationModel.findAll({
                 where:{
-                    author_id: author_id
+                    user_id: author_id
                 }
             }).then(resolve => {
                 if(resolve.length > 0){
@@ -67,12 +67,10 @@ class organizationController {
     }
     async create(req, res, next) {
         try {
-            const {author_id, name, email, location, description, img} = req.body;
-            // const {img} = req.files;
-            // const fileName = uuid.v4()+ ".jpg";
-            // img.mv(path.resolve(__dirname, "..", "static", fileName));
+            const {user_id, name, email, location, description, img} = req.body;
+            console.log(req.body);
             OrganizationModel.create({
-                author_id, 
+                user_id, 
                 name,   
                 email, 
                 img,
@@ -81,10 +79,14 @@ class organizationController {
             }).then(() => {
                 return res.json("Organization created");
             }).catch(error => {
+                console.log("1")
+                console.log(error)
                 return next(ApiError.internal('Unknown error: ' + error));
             }) 
             
         } catch (error) {
+            console.log("2")
+            console.log(error)
             return next(ApiError.internal('Unknown error: ' + error));
         }
     }

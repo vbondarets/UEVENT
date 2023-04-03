@@ -10,7 +10,7 @@ const path = require('path');
 class EventController {
     async getAll(req, res, next) {
         try {
-            //await eventListing();
+            // await eventListing();
             EventModel.findAll().then(resolve => {
                 if(resolve.length > 0){
                     return res.json(resolve)

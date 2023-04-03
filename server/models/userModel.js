@@ -11,21 +11,24 @@ const orgFilling = () =>{
         email: 'ticketmaster@support.com',
         location: 'en-us',
         description: "Order tickets for concerts, festivals, comedy shows, sporting events and more.",
-        img: orgLinks.TicketMaster
+        img: orgLinks.TicketMaster,
+        user_id: 1
     },
     {
         name: 'India Org',
         email: 'india-org@support.com',
         location: 'en-us',
         description: "Nimya tu kuch der pa ke rakh le\nPale vitch mukhra luiska ke rai\nNimya tu kuch der pa ke rakh le\nPale vitch mukhra luiska ke rai\nAave kari na kise de naal pyar.",
-        img: orgLinks.IndiaOrg
+        img: orgLinks.IndiaOrg,
+        user_id: 1
     },
     {
         name: 'Belgorodskoe PVO',
         email: 'belgorod-pvo@support.com',
         location: 'en-us',
         description: "Boje, bombi belgorod!",
-        img: orgLinks.belgorodskoePVO
+        img: orgLinks.belgorodskoePVO,
+        user_id: 1
     }
     ]).catch(error => {
         console.log(error)
@@ -73,6 +76,10 @@ const OrganizationModel = sequelize.define('organization', {
         primaryKey: true,
         unique: true,
         autoIncrement: true
+    },
+    user_id: {
+        type: DataTypes.INTEGER,
+        unique: false,
     },
     name: {
         type: DataTypes.STRING,
