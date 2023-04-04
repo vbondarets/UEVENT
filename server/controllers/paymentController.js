@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const PdfGenerator = require('../helpers/PdfGenerator/PdfGenerator');
 const fileMailingService = require("../services/fileMailingService");
 const fs = require("fs");
+const { UserModel } = require("../models/userModel");
+const { TicketModel } = require("../models/ticketModel");
 
 class PaymentController {
     async createPayment(req, res, next) {
@@ -23,10 +25,24 @@ class PaymentController {
             if(response_status === "success"){
                 const decoded = jwt.verify(merchant_data.seqToken, secureConfig.SECRET_KEY);
                 if(decoded){ 
-                    //add to bd
                     const path = await PdfGenerator(merchant_data.seqToken, decoded);
-                    await fileMailingService('bondaretsdirect@gmail.com', path);
-                    return res.json(decoded)
+                    const User = await UserModel.findAll({
+                        where: {
+                            user_id: merchant_data.user_id
+                        }
+                    });
+                    await fileMailingService(User[0].email, path);
+                    TicketModel.create({
+                        price: decoded.amount / 100, 
+                        path: path,
+                        user_id: User[0].user_id,
+                        event_id: merchant_data.event_id
+                    }).then(() => {
+                        return res.json({decoded, merchant_data, User});
+                    }).catch((error) => {
+                        console.log(error);
+                        return next(ApiError.internal('Unknown error: ' + error));
+                    })
                 }
             }
             

@@ -25,7 +25,7 @@ const fileMailingService = async(email, filePath) => {
           console.log(err)
         } else {
             console.log("tut srabotalo")
-          console.log(info);
+          // console.log(info);
         }
     })
 }

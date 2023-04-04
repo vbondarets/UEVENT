@@ -14,7 +14,12 @@ const TicketModel = sequelize.define( 'ticket', {
         type: DataTypes.FLOAT, 
         unique: false, 
         allowNull: false
-    }
+    },
+    path: {
+        type: DataTypes.TEXT, 
+        unique: false, 
+        allowNull: false
+    },
 });
 
 EventModel.hasMany(TicketModel, {
