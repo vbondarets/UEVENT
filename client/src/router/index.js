@@ -8,6 +8,7 @@ import EventPage from '../pages/EventPage';
 import CreateEventPage from '../pages/CreateEventPage';
 import OrgPage from '../pages/OrgPage';
 import Organizations from '../pages/Organizations';
+import ListOfUsersPage from '../pages/ListOfUsersPage';
 
 export const publicRoutes = [
     {path: "/login", component: loginPage, exact: true},
@@ -30,7 +31,8 @@ export const privateRoutes = [
     {path: "/organizations/:id", component: OrgPage, exact: true},
     {path: "/myaccount", component: registrationPage, exact: true},
     {path: "/error", component: registrationPage, exact: true},
-    {path: '/create_event', component: CreateEventPage, exact: true}
+    {path: '/create_event', component: CreateEventPage, exact: true},
+    {path: '/list/:event_id', component: ListOfUsersPage, exact:true}
 ];
 
 export const adminRoutes = [
