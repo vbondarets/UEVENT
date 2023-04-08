@@ -30,7 +30,7 @@ const eventListing = async () => {
                         name: element.name,
                         startDateTime: element.dates.start.dateTime,
                         endDateTime: moment(element.dates.start.dateTime).add(3, 'hours'),
-                        tickets: Math.floor(Math.random() * 600),
+                        tickets_count: Math.floor(Math.random() * 400),
                         region: element.locale,
                         imgLink: element.images[1].url,
                         category_id: categoryParsing(element.name),

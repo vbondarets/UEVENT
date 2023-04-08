@@ -21,6 +21,29 @@ const TicketModel = sequelize.define( 'ticket', {
         allowNull: false
     },
 });
+const PromoModel = sequelize.define( 'ticket', {
+    promo_id: {
+        type: DataTypes.INTEGER, 
+        primaryKey: true, 
+        unique: true, 
+        autoIncrement: true
+    },
+    discount: {
+        type: DataTypes.INTEGER, 
+        unique: false, 
+        allowNull: false
+    },
+    code: {
+        type: DataTypes.TEXT, 
+        unique: true, 
+        allowNull: false
+    },
+    count: {
+        type: DataTypes.INTEGER, 
+        unique: false, 
+        allowNull: false
+    },
+});
 
 EventModel.hasMany(TicketModel, {
     foreignKey: {
@@ -35,9 +58,34 @@ UserModel.hasMany(TicketModel, {
     }
 });
 TicketModel.belongsTo(UserModel);
+try {
+    PromoModel.findAll({
+        where: {
+            code: "ABOBA"
+        }
+    }).then((res) => {
+        if(res.length <= 0){
+            PromoModel.create({
+                discount: 25, 
+                code: "ABOBA",
+                count: 50
+            });
+        }
+    }).catch((error) => {
+        console.log(error);
+        PromoModel.create({
+            discount: 25, 
+            code: "ABOBA",
+            count: 50
+        });
+    })
+} catch (error) {
+    console.log(error)
+}
 
 
 module.exports = {
-    TicketModel
+    TicketModel,
+    PromoModel
 };
 

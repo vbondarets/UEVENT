@@ -4,9 +4,10 @@ var path = require("path");
 const uuid = require('uuid');
 const QRCode = require('qrcode');
 const HTMLParser = require('node-html-parser');
+const moment = require('moment');
 
 
-const PdfGenerator = async (token) => {
+const PdfGenerator = async (token, Event, User) => {
     // Read HTML Template
     const templatePath = path.resolve(__dirname, './assets/template.html');
     const html = fs.readFileSync(templatePath, "utf8");
@@ -22,25 +23,18 @@ const PdfGenerator = async (token) => {
         format: "A4",
         orientation: "portrait",
         border: "5mm",
-        // header: {
-        //     height: "45mm",
-        //     contents: '<div id="author" style="text-align: center;">Author:</div>'
-        // },
-        // footer: {
-        //     height: "5mm",
-        //     contents: {
-        //         first: 'Cover page',
-        //         default: '<span style="color: #444;">{{page}}</span>/<span>{{pages}}</span>', // fallback value
-        //         last: 'Last Page'
-        //     }
-        // }
+        childProcessOptions: {
+            env: {
+              OPENSSL_CONF: '/dev/null',
+            },
+        }
     };
     const data = [{
-        name: "Vladimir Bondarets",
-        event: "Genocid rusni",
-        date: "as soon as possible",
-        time: "4:20",
-        location: "belgorodskaya narodnaya respublika"
+        name: User.fullname,
+        event: Event.name,
+        date: moment(Event.startDateTime).format('MMMM Do YYYY'),
+        time: moment(Event.startDateTime).format('h:mm a'),
+        location: Event.region
     }];
     const document = {
         html: root.toString(),
