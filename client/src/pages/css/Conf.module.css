@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Sono:wght@200&display=swap');
+
+.container {
+    
+    height: auto;
+    font-family: 'Sono', sans-serif;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 0.5%;
+    padding: 1%;
+    background-color: rgb(49, 49, 49);
+    border-radius: 4%;
+}
+.container h1 {
+    text-align: center;
+    color: rgb(19, 156, 19);
+    border-bottom: 1px solid rgb(19, 156, 19);
+}
+.container p {
+    font-size:20px;
+}
+.container input {
+    font-family: 'Sono', sans-serif;
+    font-weight: bold;
+    color: black;
+    width: 12%;
+    padding: 1%;
+}
+.container button {
+    padding: 1%;
+    width: 100%;
+    font-size: 18px;
+    font-family: 'Sono', sans-serif;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+.container button:hover {
+    color: rgb(19, 156, 19);
+    background-color: rgb(19, 19, 19);
+}

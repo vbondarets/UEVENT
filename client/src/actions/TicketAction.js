@@ -1,4 +1,6 @@
 import { getTicketOnEv } from "../API/TicketApi";
+import { buyTicket } from "../API/TicketApi";
+
 
 export const getAllTicketsOnEvent = (event_id) => async(dispatch) => {
     try {
@@ -9,6 +11,16 @@ export const getAllTicketsOnEvent = (event_id) => async(dispatch) => {
         else {
             return dispatch({type:`getTicketsOnEvent`, payload: []})
         }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+export const buyTickets = (order_id, order_desc, currency, merchant_data, promoCode, amount) => async(dispatch) => {
+    try {
+        const data = await buyTicket(order_id, order_desc, currency, merchant_data, promoCode, amount)
+        return dispatch({type:"buy_ticket", payload: data})
     } catch (error) {
         console.log(error);
     }

@@ -17,7 +17,7 @@ class PaymentController {
             if(promoCode){
                 PromoModel.findAll({
                     where: {
-                        code: promoCode
+                        promo_code: promoCode
                     }
                 }).then((promo) => {
                     if(promo.count > 0){

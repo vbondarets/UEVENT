@@ -21,7 +21,7 @@ const TicketModel = sequelize.define( 'ticket', {
         allowNull: false
     },
 });
-const PromoModel = sequelize.define( 'ticket', {
+const PromoModel = sequelize.define( 'promo', {
     promo_id: {
         type: DataTypes.INTEGER, 
         primaryKey: true, 
@@ -33,8 +33,8 @@ const PromoModel = sequelize.define( 'ticket', {
         unique: false, 
         allowNull: false
     },
-    code: {
-        type: DataTypes.TEXT, 
+    promo_code: {
+        type: DataTypes.STRING, 
         unique: true, 
         allowNull: false
     },
@@ -61,13 +61,13 @@ TicketModel.belongsTo(UserModel);
 try {
     PromoModel.findAll({
         where: {
-            code: "ABOBA"
+            promo_code: "ABOBA"
         }
     }).then((res) => {
         if(res.length <= 0){
             PromoModel.create({
                 discount: 25, 
-                code: "ABOBA",
+                promo_code: "ABOBA",
                 count: 50
             });
         }
@@ -75,7 +75,7 @@ try {
         console.log(error);
         PromoModel.create({
             discount: 25, 
-            code: "ABOBA",
+            promo_code: "ABOBA",
             count: 50
         });
     })

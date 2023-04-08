@@ -39,7 +39,7 @@ const Navbar = () => {
                         <Link className={`${classes.navbar__title} + ${classes.navbar__link}`} to="/">UEVENT</Link>
                         <Link className={classes.navbar__link} to="/events">events</Link>
                         {isOrg === true ?
-                            <Link className={classes.navbar__link} to="/create_event">organizations</Link>
+                            <Link className={classes.navbar__link} to="/create_event">create event</Link>
                             :
                             <></>
                         }

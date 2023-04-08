@@ -77,7 +77,7 @@ const OrganizationModel = sequelize.define('organization', {
         unique: true,
         autoIncrement: true
     },
-    user_id: {
+    author_id: {
         type: DataTypes.INTEGER,
         unique: false,
     },

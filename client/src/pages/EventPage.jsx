@@ -13,6 +13,10 @@ import { MapComponent } from "./MapComponent";
 import { CommentComponent } from "./CommentComponent";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import MyModal from '../components/UI/MyModal/MyModal';
+import OrgForm from "../components/OrgForm";
+import { ConfirmationForm } from "./ConfirmationForm";
+
 
 Geocode.setApiKey("");
 const geocodingQuery = async (address) => {
@@ -37,6 +41,7 @@ const EventPage = (props) => {
     const EventsStrore = useSelector(state => state.Events.allEvents)
     const SubsStore = useSelector(state => state.Events.subsriptions)
     const UserStore = useSelector( store => store.Auth)
+    let [modal, setModal] = useState(false)
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -103,6 +108,15 @@ const EventPage = (props) => {
 
         return (
             <div className={style.container}>
+                <MyModal visible={modal} setVisible={setModal}>
+                    <ConfirmationForm 
+                        event_id= {id}
+                        event_description= {Event[0].description}
+                        amount = {Event[0].price}
+                        user_id= {UserStore.user.userId}
+                        login = {UserStore.user.login}
+                    />
+                </MyModal>
                 <div className={style.info_container}>
                     <div className={style.other_info_container}>
                         <h2>Description</h2>
@@ -134,7 +148,7 @@ const EventPage = (props) => {
                         <p className={style.info_event_p}><b>End at:</b> {moment(Event[0].endDateTime).format('MMMM Do YYYY')}</p>
                         <p className={style.info_event_p}><b>Price:</b> {Event[0].price} uah</p>
                         <p className={style.left_tickets}>{Event[0].tickets_count} tickets left...</p>
-                        <button>Buy</button>
+                        <button onClick={() => setModal(true)}>Buy</button>
                     </div>
                 </div>
                 <div className={style.sim_and_org_events}>
