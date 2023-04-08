@@ -7,6 +7,21 @@
 .info_container {
     display: flex;
 }
+.ListButton {
+    
+    width: 40%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'Sono', sans-serif;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+.ListButton:hover {
+    color: rgb(19, 156, 19);
+    background-color: rgb(19, 19, 19);
+}
 .info_event {
     background-color: #272727;
     height: 10%;

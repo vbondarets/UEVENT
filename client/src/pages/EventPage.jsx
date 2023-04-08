@@ -111,6 +111,7 @@ const EventPage = (props) => {
                         <p>{description_organization}</p>
                         <h2>Map:</h2>
                         <MapComponent address = {adress}></MapComponent>
+                        <p><button className={style.ListButton} onClick={() => history.push(`/list/${id}`)}>List of users</button></p>
                     </div>
                     <div className={style.info_event}>
                         <div style={{display:'flex', alignItems:'center'}}>
