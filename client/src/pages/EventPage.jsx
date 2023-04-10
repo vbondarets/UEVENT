@@ -98,12 +98,12 @@ const EventPage = (props) => {
                 theme = themes[index].name
             }
         }
-        for (let index = 0; index < allEvents.length; index++) {
+        for (let index = 0; index < 8; index++) {
             if (allEvents[index].event_id === organization_id && allEvents[index].event_id != id) {
                 organization_events.push(allEvents[index])
             }
         }
-        for (let index = 0; index < allEvents.length; index++) {
+        for (let index = 0; index < 8; index++) {
             if ((allEvents[index].category_id === Event[0].category_id || allEvents[index].type_id === Event[0].type_id) && allEvents[index].name != Event[0].name) {
                 similar_events.push(allEvents[index])
             }
