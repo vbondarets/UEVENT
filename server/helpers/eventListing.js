@@ -19,6 +19,20 @@ const categoryParsing = (eventName) => {
         return 2
     }
 }
+const descriptionParsing = (eventName) => {
+    const result = eventName.split('vs.');
+    if(result.length >= 2){
+        if(result[0].length > 0 && result[1].length > 0){
+            return "Amazing sport event"
+        }
+        else {
+            return "Amazing music show"
+        }
+    }
+    else {
+        return "Amazing music show"
+    }
+}
 
 const eventListing = async () => {
     let eventList = []
@@ -35,7 +49,8 @@ const eventListing = async () => {
                         imgLink: element.images[1].url,
                         category_id: categoryParsing(element.name),
                         organization_id: 1,
-                        price: 20
+                        price: 20,
+                        description: descriptionParsing(element.name),
                     }
                     eventList.push(Event);
                 }

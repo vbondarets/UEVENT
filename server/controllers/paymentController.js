@@ -19,26 +19,38 @@ class PaymentController {
                     where: {
                         promo_code: promoCode
                     }
-                }).then((promo) => {
-                    if(promo.count > 0){
-                        amount = amount - (amount / 100 * promo.discount);
+                }).then(async (promo) => {
+                    console.log(promo[0]);
+                    if(promo[0].count > 0){
+                        amount = parseFloat(amount);
+                        // console.log(amount);
+                        // console.log(typeof(amount));
+                        // console.log(promo.discount);
+                        // console.log(amount - ((parseFloat(amount) / 100) * parseFloat(promo[0].discount)));
+                        amount = amount - ((parseFloat(amount) / 100) * parseFloat(promo[0].discount));
+                        console.log(amount);
                         PromoModel.update(
                             {
-                                count: promo.count - 1 
+                                count: promo[0].count - 1 
                             },
                             {
                                 where: {
-                                    promo_id: promo.promo_id
+                                    promo_id: promo[0].promo_id
                                 }
                             }
-                        )
+                        );
+                        const result = await paymentService(order_id, order_desc, amount, currency, merchant_data);
+                        return res.json(result);
                     }
                 }).catch((error) => {
+                    console.log(error);
                     console.log('Wrong promo-code')
                 })
             }
-            const result = await paymentService(order_id, order_desc, amount, currency, merchant_data);
-            return res.json(result);
+            else{
+                const result = await paymentService(order_id, order_desc, amount, currency, merchant_data);
+                return res.json(result);
+            }
         } catch (error) {
             return next(ApiError.internal('Unknown error: ' + error));
         }
