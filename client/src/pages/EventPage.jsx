@@ -16,6 +16,7 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import MyModal from '../components/UI/MyModal/MyModal';
 import OrgForm from "../components/OrgForm";
 import { ConfirmationForm } from "./ConfirmationForm";
+import { getAllTicketsOnEvent } from "../actions/TicketAction";
 
 
 Geocode.setApiKey("");
@@ -41,8 +42,9 @@ const EventPage = (props) => {
     const EventsStrore = useSelector(state => state.Events.allEvents)
     const SubsStore = useSelector(state => state.Events.subsriptions)
     const UserStore = useSelector( store => store.Auth)
+    const TicketStore = useSelector( store => store.Ticket.tickets_On_Event)
     let [modal, setModal] = useState(false)
-
+    
     const dispatch = useDispatch()
     const history = useHistory()
     useEffect ( ()=> {
@@ -52,6 +54,7 @@ const EventPage = (props) => {
         dispatch(getAllCategory())
         dispatch(EventById(id))
         dispatch(getAllSubsOnEvent(id))
+        dispatch(getAllTicketsOnEvent(id))
     }, [dispatch, id])
     
     
@@ -70,8 +73,8 @@ const EventPage = (props) => {
     let allEvents = EventsStrore
     let subs = SubsStore
     if (Event.length !== 0) {
-        console.log(subs);
         let adress = Event[0].region
+        let bought = false
         
         for (let index = 0; index < subs.length; index++) {
             if (subs[index].user_id === UserStore.user.userId) {
@@ -106,6 +109,12 @@ const EventPage = (props) => {
             }
         }
 
+        for (let index = 0; index < TicketStore.length; index++) {
+            if (TicketStore[index].user_id === UserStore.user.userId) {
+                bought = true
+            }
+        }
+
         return (
             <div className={style.container}>
                 <MyModal visible={modal} setVisible={setModal}>
@@ -125,7 +134,12 @@ const EventPage = (props) => {
                         <p>{description_organization}</p>
                         <h2>Map:</h2>
                         <MapComponent address = {adress}></MapComponent>
-                        <p><button className={style.ListButton} onClick={() => history.push(`/list/${id}`)}>List of users</button></p>
+                        {bought === true ?
+                            <p><button className={style.ListButton} onClick={() => history.push(`/list/${id}`)}>List of users</button></p>
+                            :
+                            <></>
+                        }
+                        
                     </div>
                     <div className={style.info_event}>
                         <div style={{display:'flex', alignItems:'center'}}>
