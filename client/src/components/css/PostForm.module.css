@@ -1,0 +1,8 @@
+.error_message{
+    margin-top: 15px;
+    font-weight: 100;
+    color: rgb(201, 41, 17);
+    font-family: 'Climate Crisis', cursive;
+    letter-spacing: 3px;
+    margin: 10px auto;
+}

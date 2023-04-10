@@ -78,7 +78,7 @@ class categoryController {
             const {id} = req.body;
             EventCategoryModel.destroy({
                 where:{
-                    cattegory_id: id
+                    category_id: id
                 }
             }).then(() => {
                 return res.json("Category delited");

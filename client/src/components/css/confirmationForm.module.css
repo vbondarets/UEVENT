@@ -1,0 +1,10 @@
+.button_container{
+    display: flex;
+    justify-content: space-around;
+}
+.text{
+    color: rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    text-align: center;
+    font-size: 45px;
+}

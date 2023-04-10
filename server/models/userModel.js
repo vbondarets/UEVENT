@@ -12,7 +12,7 @@ const orgFilling = () =>{
         location: 'en-us',
         description: "Order tickets for concerts, festivals, comedy shows, sporting events and more.",
         img: orgLinks.TicketMaster,
-        user_id: 1
+        author_id: 1
     },
     {
         name: 'India Org',
@@ -20,7 +20,7 @@ const orgFilling = () =>{
         location: 'en-us',
         description: "Nimya tu kuch der pa ke rakh le\nPale vitch mukhra luiska ke rai\nNimya tu kuch der pa ke rakh le\nPale vitch mukhra luiska ke rai\nAave kari na kise de naal pyar.",
         img: orgLinks.IndiaOrg,
-        user_id: 1
+        author_id: 1
     },
     {
         name: 'Belgorodskoe PVO',
@@ -28,11 +28,33 @@ const orgFilling = () =>{
         location: 'en-us',
         description: "Boje, bombi belgorod!",
         img: orgLinks.belgorodskoePVO,
-        user_id: 1
+        author_id: 1
     }
     ]).catch(error => {
         console.log(error)
     })
+}
+const orgPostFilling = () => {
+    OrganizationPostModel.bulkCreate([{
+        organization_id:1,
+        header:"Here we go",
+        text:"Welcome to our org page"
+    },
+    {
+        organization_id:1,
+        header:"Something new...",
+        text:"Check out our upcomming events"
+    },
+    {
+        organization_id:2,
+        header:"Glory to Buddha",
+        text:"Nimya tu kuch der pa ke rakh le\nPale vitch mukhra luiska ke rai\nNimya tu kuch der pa ke rakh le"
+    },
+    {
+        organization_id:3,
+        header:"Rusnya mae strajdati",
+        text:"Boje bombi belgorod"
+    }])
 }
 
 const UserModel = sequelize.define('user', {
@@ -107,12 +129,35 @@ const OrganizationModel = sequelize.define('organization', {
         allowNull: false
     }
 });
-UserModel.hasMany(OrganizationModel, {
-    foreignKey: {
-        name: 'author_id'
+const OrganizationPostModel = sequelize.define('organization_post', {
+    post_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        unique: true,
+        autoIncrement: true
+    },
+    text: {
+        type: DataTypes.TEXT('long'),
+        unique: false,
+        allowNull: false
+    },
+    header: {
+        type: DataTypes.STRING,
+        unique: false,
+        allowNull: false
     }
 });
+
+UserModel.hasMany(OrganizationModel, {
+});
 OrganizationModel.belongsTo(UserModel);
+
+OrganizationModel.hasMany(OrganizationPostModel, {
+    foreignKey: {
+        name: 'organization_id'
+    }
+});
+OrganizationPostModel.belongsTo(OrganizationModel);
 
 
 try {
@@ -123,12 +168,21 @@ try {
     }).catch((error) => {
         console.log(error)
     })
+    OrganizationPostModel.findAll().then((resolve) => {
+        if (resolve.length <= 0) {
+            orgPostFilling()
+        }
+    }).catch((error) => {
+        console.log(error)
+    })
 } catch (error) {
+    orgPostFilling()
     orgFilling();
     console.log(error)
 }
 
 module.exports = {
     OrganizationModel,
-    UserModel
+    UserModel,
+    OrganizationPostModel
 };
