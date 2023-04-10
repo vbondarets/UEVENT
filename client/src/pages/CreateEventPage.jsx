@@ -12,6 +12,7 @@ import { getAllOrg } from "../actions/OrganizationAction";
 import moment from 'moment'
 import { useHistory } from "react-router-dom";
 import style from "./css/createEvent.module.css"
+import MyInput from "../components/UI/input/MyInput";
 
 const CreateEventPage = () => {
     const CategoriesStore = useSelector(state => state.Events.categories)
@@ -72,22 +73,24 @@ const CreateEventPage = () => {
             <>
                 <div className={style.container}>
                     <h1>Create Event</h1>
-                    <input className={style.inputFields} type="text" placeholder="Enter name of your event" value={name} onChange={e => setName(e.target.value)}></input>
+                    <MyInput type="text" placeholder="Enter name of your event" value={name} onChange={e => setName(e.target.value)}></MyInput>
                     <textarea className={style.inputFields} maxLength="255" rows="10" cols="50" placeholder="Enter description of your event" value={description} onChange={e => setDescription(e.target.value)}></textarea>
-                    <input className={style.inputFields} type="text" placeholder="Enter address of your event" value={address} onChange={e => setAddress(e.target.value)}></input>
-                    <input className={style.inputFields} type="number" placeholder="Enter number of tickets" value={num_tickets} onChange={e => setNum(e.target.value)}></input>
-                    <input className={style.inputFields} type = "number" placeholder="Enter price of tickets" value={price} onChange={e => setPrice(e.target.value)}></input>
-                    <input className={style.inputFields} type="text" value={file} onChange={e => setFile(e.target.value)}></input>
+                    <MyInput type="text" placeholder="Enter address of your event" value={address} onChange={e => setAddress(e.target.value)}></MyInput>
+                    <MyInput type="number" placeholder="Enter number of tickets" value={num_tickets} onChange={e => setNum(e.target.value)}></MyInput>
+                    <MyInput type = "number" placeholder="Enter price of tickets" value={price} onChange={e => setPrice(e.target.value)}></MyInput>
+                    <MyInput type="text" placeholder = "Enter link for image" value={file} onChange={e => setFile(e.target.value)}></MyInput>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <Stack spacing={3}>
                                 <div className={style.divDateStart}>
                                     <DatePicker 
+                                        sx={{svg:{color: 'rgb(19, 156, 19)'}, input:{color:'rgb(19, 156, 19)'} , label:{color:'rgb(19, 156, 19)'}}}
                                         label = 'Date start'
                                         value={startDate}
                                         onChange={setStartDate}
                                     />
                                     <TimePicker
                                         label = 'Event start'
+                                        sx={{svg:{color: 'rgb(19, 156, 19)'}, input:{color:'rgb(19, 156, 19)'} , label:{color:'rgb(19, 156, 19)'}}}
                                         ampm={false}
                                         minutesStep={5}
                                         value={start}
@@ -97,11 +100,13 @@ const CreateEventPage = () => {
                                 <div className={style.divDateEnd}>
                                     <DatePicker 
                                         label = 'Date end'
+                                        sx={{svg:{color: 'rgb(19, 156, 19)'}, input:{color:'rgb(19, 156, 19)'} , label:{color:'rgb(19, 156, 19)'}}}
                                         value={endDate}
                                         onChange={setEndDate}
                                     />
                                     <TimePicker
                                         label = 'Event end'
+                                        sx={{svg:{color: 'rgb(19, 156, 19)'}, input:{color:'rgb(19, 156, 19)'} , label:{color:'rgb(19, 156, 19)'}}}
                                         ampm={false}
                                         minutesStep={5}
                                         value={finish}
@@ -112,8 +117,11 @@ const CreateEventPage = () => {
                     </LocalizationProvider>
                     <div className={style.containerChoose}>
                         <FormControl fullWidth margin="normal">
-                            <InputLabel id="label_type">Type</InputLabel>
+                            <InputLabel id="label_type"
+                            style={{color:'rgb(19, 156, 19)'}}
+                            >Type</InputLabel>
                             <Select
+                                sx={{svg:{color: 'rgb(19, 156, 19)'}}}
                                 labelId="label_type"
                                 id="labelselect_type"
                                 value={type_val}
@@ -129,8 +137,9 @@ const CreateEventPage = () => {
                         </FormControl>
 
                         <FormControl fullWidth margin="normal">
-                            <InputLabel id="label">Category</InputLabel>
+                            <InputLabel style={{color:'rgb(19, 156, 19)'}} id="label">Category</InputLabel>
                             <Select
+                                sx={{svg:{color: 'rgb(19, 156, 19)'}}}
                                 labelId="label"
                                 id="labelselect"
                                 value={category_val}
@@ -146,8 +155,9 @@ const CreateEventPage = () => {
                         </FormControl>
 
                         <FormControl fullWidth="true" margin="normal">
-                            <InputLabel id="label_orgs">Organization</InputLabel>
+                            <InputLabel style={{color:'rgb(19, 156, 19)'}} id="label_orgs">Organization</InputLabel>
                             <Select
+                                sx={{svg:{color: 'rgb(19, 156, 19)'}}}
                                 labelId="label_orgs"
                                 id="labelselect_orgs"
                                 value={org_val}

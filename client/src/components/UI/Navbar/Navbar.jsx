@@ -12,27 +12,30 @@ const Navbar = () => {
     const isAuth = useSelector(state => state.Auth.status);
     const Organizations = useSelector (state => state.Organization.allOrganization)
     const user = useSelector(state => state.Auth.user);
-    let [isOrg, setOrg] = useState(false)
-
+    
     const dispatch = useDispatch()
     useEffect( () => {
         dispatch(getAllOrg())
     }, [dispatch] )
+    console.log(Organizations);
     // const user = {
-    //     login: "test",
-    //     role: "USER"
-    // }
-    // const [check, setCheck] = useState(isAuth);
-    // useEffect(() => {
-    //     setCheck(isAuth);
-    // }, [isAuth]);
+        //     login: "test",
+        //     role: "USER"
+        // }
+        // const [check, setCheck] = useState(isAuth);
+        // useEffect(() => {
+            //     setCheck(isAuth);
+            // }, [isAuth]);
+            
     {
+        let isOrg = false
         if (isAuth && user.role !== "ADMIN") {
             for (let index = 0; index < Organizations.length; index++) {
                 if (Organizations[index].author_id === user.userId) {
                     isOrg = true
                 }
             }
+            console.log(isOrg);
             return (
                 <div className={classes.navbar}>
                     <div className={classes.navbar__links}>
