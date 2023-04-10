@@ -67,10 +67,10 @@ class organizationController {
     }
     async create(req, res, next) {
         try {
-            const {user_id, name, email, location, description, img} = req.body;
+            const {author_id, name, email, location, description, img} = req.body;
             console.log(req.body);
             OrganizationModel.create({
-                user_id, 
+                author_id, 
                 name,   
                 email, 
                 img,
@@ -112,7 +112,7 @@ class organizationController {
     }
     async delete(req, res, next) {
         try {
-            const {id} = req.body;
+            const {id} = req.params;
             OrganizationModel.destroy({
                 where:{
                     organization_id: id
@@ -187,7 +187,7 @@ class organizationController {
     }
     async deletePost(req, res, next) {
         try {
-            const {id} = req.body;
+            const {id} = req.params;
             OrganizationPostModel.destroy({
                 where:{
                     post_id: id

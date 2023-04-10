@@ -41,7 +41,7 @@ const OrgForm = ({setModal, fetchOrg}) => {
         e.preventDefault();
         if (Name, Email, Description, Location, Img) {
             const body = {
-                user_id: User.userId,
+                author_id: User.userId,
                 name: Name,
                 email: Email,
                 location: Location,

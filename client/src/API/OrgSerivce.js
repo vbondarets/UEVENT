@@ -41,8 +41,8 @@ export default class OrgSevice {
         const response = await axios.patch(`http://localhost:8080/api/organization/post`, body);
         return response;
     }
-    static async deletePost() {
-        const response = await axios.delete(`http://localhost:8080/api/organization/post`);
+    static async deletePost(id) {
+        const response = await axios.delete(`http://localhost:8080/api/organization/post/${id}`);
         return response;
     }
 }

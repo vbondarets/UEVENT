@@ -11,7 +11,7 @@ router.delete('/:id', organizationController.delete);
 router.get('/:id/post', organizationController.getByOrganization);
 router.post('/post', organizationController.createPost);
 router.patch('/post', organizationController.updatePost);
-router.delete('/post', organizationController.deletePost);
+router.delete('/post/:id', organizationController.deletePost);
 
 
 module.exports = router;

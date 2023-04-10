@@ -12,7 +12,7 @@ const orgFilling = () =>{
         location: 'en-us',
         description: "Order tickets for concerts, festivals, comedy shows, sporting events and more.",
         img: orgLinks.TicketMaster,
-        user_id: 1
+        author_id: 1
     },
     {
         name: 'India Org',
@@ -20,7 +20,7 @@ const orgFilling = () =>{
         location: 'en-us',
         description: "Nimya tu kuch der pa ke rakh le\nPale vitch mukhra luiska ke rai\nNimya tu kuch der pa ke rakh le\nPale vitch mukhra luiska ke rai\nAave kari na kise de naal pyar.",
         img: orgLinks.IndiaOrg,
-        user_id: 1
+        author_id: 1
     },
     {
         name: 'Belgorodskoe PVO',
@@ -28,7 +28,7 @@ const orgFilling = () =>{
         location: 'en-us',
         description: "Boje, bombi belgorod!",
         img: orgLinks.belgorodskoePVO,
-        user_id: 1
+        author_id: 1
     }
     ]).catch(error => {
         console.log(error)
@@ -149,9 +149,6 @@ const OrganizationPostModel = sequelize.define('organization_post', {
 });
 
 UserModel.hasMany(OrganizationModel, {
-    foreignKey: {
-        name: 'author_id'
-    }
 });
 OrganizationModel.belongsTo(UserModel);
 

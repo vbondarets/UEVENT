@@ -36,3 +36,15 @@
     font-size: 20px;
     text-align: center;
 }
+.org_posts{
+    color: rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    letter-spacing: 2px;
+    font-size: 20px;
+    text-align: center;
+}
+.posts_container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}

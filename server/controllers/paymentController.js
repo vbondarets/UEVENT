@@ -20,15 +20,9 @@ class PaymentController {
                         promo_code: promoCode
                     }
                 }).then(async (promo) => {
-                    console.log(promo[0]);
                     if(promo[0].count > 0){
                         amount = parseFloat(amount);
-                        // console.log(amount);
-                        // console.log(typeof(amount));
-                        // console.log(promo.discount);
-                        // console.log(amount - ((parseFloat(amount) / 100) * parseFloat(promo[0].discount)));
                         amount = amount - ((parseFloat(amount) / 100) * parseFloat(promo[0].discount));
-                        console.log(amount);
                         PromoModel.update(
                             {
                                 count: promo[0].count - 1 

@@ -1,0 +1,56 @@
+.post_wrapper{
+    margin: 0 auto;
+    margin-top: 5px;
+    width: 80%;
+    min-height: 20px;
+    height: fit-content;
+    background-color: transparent;
+    border: 2px solid rgb(19, 156, 19);
+    border-radius: 15px;
+    padding: 5px 20px;
+}
+.post_header{
+    letter-spacing: 1px;
+    color:rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+}
+.post_text{
+    letter-spacing: 1px;
+    color:rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    font-weight: 100;
+}
+.date{
+    padding: 0;
+    margin: 0;
+    color:rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    letter-spacing: 1px;
+}
+.time{
+    margin: 0;
+    padding: 0;
+    color:rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    letter-spacing: 1px;
+    text-align: right;
+}
+.date_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.delete_container{
+    display: flex;
+    justify-content: right;
+}
+.delete{
+    color:rgb(19, 156, 19);
+    cursor: pointer;
+    /* background-color: rgb(19, 156, 19); */
+}
+.delete:hover{
+    border-radius: 5px;
+    color: rgb(31, 31, 31);
+    background-color: rgb(19, 156, 19);
+}
