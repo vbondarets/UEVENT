@@ -74,6 +74,7 @@ class EventController {
             }).then( () => {
                 return res.json('You subscripe on event')
             }).catch(err => {
+                console.log(err);
                 return next(ApiError.internal('Unknown error: ' + err));
             })
         } catch (error) {

@@ -39,7 +39,7 @@ const EventPreview = (props) => {
     }, []);
 
     return (
-        <div onClick={() => props.goTo(`events/${props.event.event_id}`)} className={classes.event_prew_wrapper}>
+        <div onClick={() => props.goTo(`http://localhost:3000/events/${props.event.event_id}`)} className={classes.event_prew_wrapper}>
             <p className={`${classes.event_prew_text} ${classes.event_prew_name}`}>{props.event.name}</p>
             <p className={`${classes.event_prew_text} ${classes.event_prew_date}`}>{moment(props.event.startDateTime).format('MMMM Do YYYY')}</p>
             <p className={`${classes.event_prew_text} ${classes.event_prew_time}`}>{moment(props.event.startDateTime).format('h:mm a')}</p>

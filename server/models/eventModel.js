@@ -78,7 +78,16 @@ const EventCategoryModel = sequelize.define( 'event_category', {
     }
 });
 const EventSubModel = sequelize.define( 'event_sub', {
-
+    sub_id: {
+        type: DataTypes.INTEGER, 
+        primaryKey: true, 
+        unique: true, 
+        autoIncrement: true
+    },
+    user_id: {
+        type: DataTypes.INTEGER,  
+        unique: false, 
+    }
 });
 
 
@@ -110,9 +119,9 @@ EventModel.hasMany(EventSubModel, {
 EventSubModel.belongsTo(EventModel);
 
 UserModel.hasMany(EventSubModel, {
-    foreignKey: {
-        name: 'user_id'
-    }
+    // foreignKey: {
+    //     name: 'user_id'
+    // }
 });
 EventSubModel.belongsTo(UserModel);
 

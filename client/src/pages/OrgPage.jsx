@@ -55,7 +55,10 @@ const OrgPage = () => {
         // router.replace(link)
         // router.push("events")
         // router.go("/")
+        //http://localhost:3000/events/${id}
+        window.location.replace(link)
         console.log(router);
+        console.log(window.location);
     }
 
     useEffect(() => {
