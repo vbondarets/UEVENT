@@ -72,6 +72,7 @@ const EventPage = (props) => {
     let themes = ThemesStore
     let allEvents = EventsStrore
     let subs = SubsStore
+    
     if (Event.length !== 0) {
         let adress = Event[0].region
         let bought = false
@@ -171,7 +172,15 @@ const EventPage = (props) => {
                         <p className={style.info_event_p}><b>End at:</b> {moment(Event[0].endDateTime).format('MMMM Do YYYY')}</p>
                         <p className={style.info_event_p}><b>Price:</b> {Event[0].price} uah</p>
                         <p className={style.left_tickets}>{Event[0].tickets_count} tickets left...</p>
-                        <button onClick={() => setModal(true)}>Buy</button>
+                        <button onClick={() => {
+                            if(UserStore.status === true) {
+                                setModal(true)
+                            }
+                            else {
+                                history.push('/login')
+                            }
+                            }}>
+                        Buy</button>
                     </div>
                 </div>
                 <div className={style.sim_and_org_events}>
