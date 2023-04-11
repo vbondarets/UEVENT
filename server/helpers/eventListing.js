@@ -37,7 +37,7 @@ const typeParsing = (eventName) => {
     const result = eventName.split('vs.');
     if(result.length >= 2){
         if(result[0].length > 0 && result[1].length > 0){
-            return 6
+            return 7
         }
         else {
             return 1
