@@ -33,6 +33,20 @@ const descriptionParsing = (eventName) => {
         return "Amazing music show"
     }
 }
+const typeParsing = (eventName) => {
+    const result = eventName.split('vs.');
+    if(result.length >= 2){
+        if(result[0].length > 0 && result[1].length > 0){
+            return 6
+        }
+        else {
+            return 1
+        }
+    }
+    else {
+        return 1
+    }
+}
 
 const eventListing = async () => {
     let eventList = []
@@ -51,6 +65,7 @@ const eventListing = async () => {
                         organization_id: 1,
                         price: Math.floor(Math.random() * 50),
                         description: descriptionParsing(element.name),
+                        type_id: typeParsing(element.name),
                     }
                     eventList.push(Event);
                 }

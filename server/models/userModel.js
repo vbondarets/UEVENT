@@ -180,6 +180,30 @@ try {
     orgFilling();
     console.log(error)
 }
+try {
+    UserModel.findAll({
+        where: {
+            user_id: 1
+        }
+    }).then(async (resolve) => {
+        if(resolve.length <= 0){
+            const hashedPassword = await bcrypt.hash("admin", 10);
+            UserModel.create({
+                login: "admin",
+                email: "admin@admin.com",
+                fullName: "Admin Admin",
+                password: hashedPassword,
+                role: "ADMIN"
+            }).catch((error) => {
+                console.log(error)
+            })
+        }
+    }).catch((error) =>{
+        console.log(error)
+    })
+} catch (error) {
+    console.log(error)
+}
 
 module.exports = {
     OrganizationModel,

@@ -45,10 +45,10 @@ class organizationController {
     }
     async getByCreator(req, res, next) {
         try {
-            const {author_id} = req.body;
+            const {id} = req.params;
             OrganizationModel.findAll({
                 where:{
-                    user_id: author_id
+                    author_id: id
                 }
             }).then(resolve => {
                 if(resolve.length > 0){

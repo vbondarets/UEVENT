@@ -107,6 +107,7 @@
     padding-bottom: 0.5%;
 }
 .sim_and_org_events {
+    margin-top: 10px;
     background-color: #272727;
     margin-left: 1%;
     margin-right: 2%;
@@ -125,13 +126,16 @@
 .constainer_org_events {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    margin-left: 1%;
+    /* margin: 0 auto; */
+    /* margin: auto; */
 }
 .org_events {
     background-color: rgb(49, 49, 49);
     border-radius: 10px;
     padding-right: 10%;
-    margin-right: 10%;
+    margin: auto;
+    margin-top: 10px;
+    width: 80%;
     padding-bottom: 2%;
 }
 .org_events p {
@@ -164,7 +168,10 @@
     background-color: rgb(49, 49, 49);
     border-radius: 10px;
     padding-right: 10%;
-    margin-right: 10%;
+    /* margin-right: 10%; */
+    margin: auto;
+    margin-top: 10px;
+    width: 80%;
     padding-bottom: 2%;
 }
 .sim_events p {

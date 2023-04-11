@@ -98,14 +98,21 @@ const EventPage = (props) => {
                 theme = themes[index].name
             }
         }
-        for (let index = 0; index < 8; index++) {
-            if (allEvents[index].event_id === organization_id && allEvents[index].event_id != id) {
+        for (let index = 0; index < allEvents.length; index++) {
+            // console.log(allEvents[index].category_id, Event[0].category_id, allEvents[index].category_id === Event[0].category_id)
+            if (allEvents[index].organization_id === organization_id && allEvents[index].event_id != id) {
                 organization_events.push(allEvents[index])
             }
+            if(organization_events.length >= 8){
+                break;
+            }
         }
-        for (let index = 0; index < 8; index++) {
+        for (let index = 0; index < allEvents.length; index++) {
             if ((allEvents[index].category_id === Event[0].category_id || allEvents[index].type_id === Event[0].type_id) && allEvents[index].name != Event[0].name) {
                 similar_events.push(allEvents[index])
+            }
+            if(similar_events.length >= 8){
+                break;
             }
         }
 

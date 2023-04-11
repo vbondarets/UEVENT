@@ -119,13 +119,10 @@ EventModel.hasMany(EventSubModel, {
 EventSubModel.belongsTo(EventModel);
 
 UserModel.hasMany(EventSubModel, {
-    // foreignKey: {
-    //     name: 'user_id'
-    // }
 });
 EventSubModel.belongsTo(UserModel);
 
-const BasicCategories = ["Sport", "Music", "Education", "Party", "Meetings"];
+const BasicCategories = ["Sport", "Music", "Education", "Entartaining", "Psyhology"];
 try {
     EventCategoryModel.findAll({
         where: {
@@ -147,7 +144,28 @@ try {
 } catch (error) {
     console.log(error)
 }
-
+const BasicTypes = ["Conference", "Lecture", "Performance", "Party", "Meeting", "Fest", "Match"];
+try {
+    EventTypeModel.findAll({
+        where: {
+            type_id: 1
+        }
+    }).then((resolve) => {
+        if(resolve.length <= 0){
+            BasicTypes.forEach((type) => {
+                EventTypeModel.create({
+                    name: type,
+                }).catch(error => {
+                    console.log(error)
+                });
+            })
+        }
+    }).catch((error) =>{
+        console.log(error)
+    })
+} catch (error) {
+    console.log(error)
+}
 
 module.exports = {
     EventModel,
