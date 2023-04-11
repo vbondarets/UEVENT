@@ -54,7 +54,7 @@ const EventsPage = () => {
     const AllEvents = EventsStrore
     const categories = CategoriesStore
     const types = TypesStore
-
+    console.log(AllEvents);
     if (AllEvents==='No events yet') {
         return (
             <div>
@@ -92,7 +92,8 @@ const EventsPage = () => {
                 <div className={style.events_container}>
                 {AllEvents.map( events => {
                     return (
-                        <div key={events.event_id} className={style.events}>
+                        <div key={events.event_id} className={style.events} >
+                            <img src={events.imgLink} style={{width:"100%", height:'300px'}}></img>
                             <p style={{marginLeft:'1%' ,fontSize:'20px', borderBottom:'1px solid rgb(19, 156, 19)', width:'90%', color:'rgb(19, 156, 19)',fontWeight:'bold'}} onClick={ () => history.push(`/events/${events.event_id}`)}>{events.name}</p>
                             <p className={style.event_info}><b style={{borderBottom:'1px solid rgb(19, 156, 19)', width:'90%', color:'rgb(19, 156, 19)'}}>Description:</b> {events.description.substring(0,20)}...</p>
                             <p className={style.event_info}><b style={{borderBottom:'1px solid rgb(19, 156, 19)', width:'90%', color:'rgb(19, 156, 19)'}}>Price:</b> {events.price} uah</p>

@@ -135,6 +135,9 @@ const EventPage = (props) => {
                 </MyModal>
                 <div className={style.info_container}>
                     <div className={style.other_info_container}>
+                        <img src={Event[0].imgLink} alt= "event image" style={{width:"90%", height:'50%'}}></img>
+                        <h2>Name</h2>
+                        <p>{Event[0].name}</p>
                         <h2>Description</h2>
                         <p>{Event[0].description}</p>
                         <h2>About Organization:</h2>
@@ -160,10 +163,9 @@ const EventPage = (props) => {
                                 onClick = { () => {dispatch(DeleteSubscribe(id, UserStore.user.userId)); isSub = false}}
                                 className={style.NotificationsActiveIcon}/>}
                         </div>
-                        <p className={style.info_event_p}><b>Name:</b> {Event[0].name}</p>
                         <p className={style.info_event_p}><b>Region:</b> {Event[0].region}</p>
                         <p className={style.info_event_p}><b>Category:</b> {category}</p>
-                        <p className={style.info_event_p}><b>Theme:</b> {theme}</p>
+                        <p className={style.info_event_p}><b>Type:</b> {theme}</p>
                         <p className={style.info_event_p}><b>Organization:</b> {organization_name}</p>
                         <p className={style.info_event_p}><b>Start at:</b> {moment(Event[0].startDateTime).format('MMMM Do YYYY')}</p>
                         <p className={style.info_event_p}><b>End at:</b> {moment(Event[0].endDateTime).format('MMMM Do YYYY')}</p>
@@ -181,7 +183,7 @@ const EventPage = (props) => {
                                     <p>{event.name}</p>
                                     <p><b>Price:</b> {event.price} uah</p>
                                     <p style={{fontSize:'14px', textAlign:'center'}}>{event.tickets_count} tickets left</p>
-                                    <button> More... </button>
+                                    <button onClick={() => {history.push(`/events/${event.event_id}`)}}> More... </button>
                                 </div> 
                             )
                             
@@ -195,7 +197,7 @@ const EventPage = (props) => {
                                     <p>{event.name}</p>
                                     <p><b>Price:</b> {event.price} uah</p>
                                     <p style={{fontSize:'14px', textAlign:'center'}}>{event.tickets_count} tickets left</p>
-                                    <button>More... </button>
+                                    <button onClick={() => {history.push(`/events/${event.event_id}`)}}>More... </button>
                                 </div> 
                             )
                             
