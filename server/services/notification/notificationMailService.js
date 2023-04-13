@@ -3,6 +3,7 @@ const ejs = require('ejs');
 const path = require('path')
 
 const notificationMailingService = async (template, email) => {
+  console.log(template, "to", email)
   const transporter = nodemailer.createTransport({
     host: "sandbox.smtp.mailtrap.io",
     port: 2525,
@@ -11,7 +12,7 @@ const notificationMailingService = async (template, email) => {
       pass: "51b8e5c4ea9fc4"
     }
   });
-  ejs.renderFile(path.resolve(__dirname, './'), template, (err, html) => {
+  ejs.renderFile(path.resolve(__dirname, './template.ejs'), template, (err, html) => {
     if (err){
       console.log(err)
     }

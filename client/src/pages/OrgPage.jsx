@@ -96,17 +96,21 @@ const OrgPage = () => {
         try {
             const { data } = await EventSevice.getByOrg(organization.organization_id);
             let randomEventIdexsArr = [];
-            for(let i = 0; i < 8; i++){
-                randomEventIdexsArr.push(randomIntFromInterval(1, data.length));
+            if(data.length >= 8){
+                for(let i = 0; i < data.length; i++){
+                    randomEventIdexsArr.push(randomIntFromInterval(1, data.length));
+                }
+                // console.log(randomEventIdexsArr)
+                let eventArr = [];
+                for(let i = 0; i < randomEventIdexsArr.length; i++){
+                    eventArr.push(data[randomEventIdexsArr[i]])
+                }
+                setRandomEvents(eventArr);
+                // setRandomEvents(eventArr);
             }
-            // console.log(randomEventIdexsArr)
-            let eventArr = [];
-            for(let i = 0; i < randomEventIdexsArr.length; i++){
-                eventArr.push(data[randomEventIdexsArr[i]])
+            else {
+                setRandomEvents(data);
             }
-            // console.log(eventArr);
-            setRandomEvents(eventArr);
-            // setRandomEvents(eventArr);
         }
         catch (err) {
             console.log(err.response.data);
