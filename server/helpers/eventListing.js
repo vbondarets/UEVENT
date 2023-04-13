@@ -40,11 +40,11 @@ const typeParsing = (eventName) => {
             return 7
         }
         else {
-            return 1
+            return 4
         }
     }
     else {
-        return 1
+        return 4
     }
 }
 

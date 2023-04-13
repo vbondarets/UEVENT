@@ -26,7 +26,7 @@ export default class OrgSevice {
         return response;
     }
     static async delete(id) {
-        const response = await axios.delete(`http://localhost:8080/api/organization/${id}`);
+        const response = await axios.delete(`http://localhost:8080/api/organization/delete/${id}`);
         return response;
     }
     static async createPost(body) {
@@ -43,6 +43,18 @@ export default class OrgSevice {
     }
     static async deletePost(id) {
         const response = await axios.delete(`http://localhost:8080/api/organization/post/${id}`);
+        return response;
+    }
+    static async getSub(body) {
+        const response = await axios.post(`http://localhost:8080/api/organization/get-sub`, body);
+        return response;
+    }
+    static async createSub(body) {
+        const response = await axios.post(`http://localhost:8080/api/organization/sub`, body);
+        return response;
+    }
+    static async deleteSub(body) {
+        const response = await axios.delete(`http://localhost:8080/api/organization/sub`, {data: body});
         return response;
     }
 }
