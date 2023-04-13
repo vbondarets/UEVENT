@@ -31,6 +31,8 @@ export const EventReducer = (events = initialState, action) => {
 
         case 'sortCategories':
             return {...events, allEvents: action.payload}
+        case 'sortBytime':
+            return {...events, allEvents: action.payload}
         default:
             return events;
     }
