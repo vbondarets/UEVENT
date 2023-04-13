@@ -20,7 +20,7 @@ const subQueue = async() =>{
                                     UserModel.findOne({where:{user_id: sub.user_id}}).then(User => {
                                         notificationMailingService({
                                             link: `http://localhost:3000/events/${e_event.event_id}`,
-                                            text: `Hello dear ${User.fullna}\n\nEvent:\n ${e_event.name}\n will start in one hour`,
+                                            text: `Hello dear ${User.fullname}\n\nEvent:\n ${e_event.name}\n will start ${string}`,
                                             header: `Event is comming`
                                         }, User.email);
                                         eventArr.splice(event_index, 1);
