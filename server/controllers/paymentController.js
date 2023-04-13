@@ -51,7 +51,8 @@ class PaymentController {
     }
     async checkPayment(req, res, next) {
         try {
-            const { merchant_data, response_status, currency, amount, masked_card } = req.body;
+            const {response_status, currency, amount, masked_card } = req.body;
+            const merchant_data = JSON.parse(req.body.merchant_data);
             if (response_status === "success") {
                 console.log(merchant_data.seqToken);
                 const decoded = jwt.verify(merchant_data.seqToken, secureConfig.SECRET_KEY);
