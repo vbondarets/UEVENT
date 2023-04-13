@@ -2,8 +2,8 @@ const {Sequelize} = require('sequelize');
 
 module.exports = new Sequelize(
     'uevent', 
-    'root',
-    'root',
+    'vbondarets',
+    'securepass',
     {
         host: '127.0.0.1',
         port: '3306',
