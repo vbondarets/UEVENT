@@ -1,3 +1,4 @@
+import moment from "moment"
 import { createEventApi, DeleteSub, getAllCategories, getAllEvents,getAllSubs,getEventById, getLanLog, sort, Subscripe } from "../API/EventApi"
 
 export const getAllEventsAction = () => async(dispatch) => {
@@ -166,6 +167,32 @@ export const sortEvents = (category_id, type_id) => async(dispatch) => {
             // if (arrEvents === 'No events in this category'){
             //     return dispatch({type:'sortCategories', payload:arrEvents})
             // }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const SortByTime = (type) => async(dispatch) => {
+    try {
+        console.log(type);
+        const {data} = await getAllEvents()
+        if (data.length > 0) {
+            if (type === 'new') {
+                console.log(10);
+                data.sort((a,b)=> moment(b.startDateTime) - moment(a.startDateTime) )
+                console.log(data);
+                return dispatch({type:"sortBytime", payload:data})
+            }
+            if (type === 'old') {
+                console.log(20);
+                data.sort((a,b)=> moment(a.startDateTime) - moment(b.startDateTime))
+                console.log(data);
+                return dispatch({type:"sortBytime", payload:data})
+            }
+            if (type === '') {
+                return dispatch({type:"sortBytime", payload:data})
+            }
         }
     } catch (error) {
         console.log(error);
