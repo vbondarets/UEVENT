@@ -60,11 +60,7 @@ UserModel.hasMany(TicketModel, {
 TicketModel.belongsTo(UserModel);
 
 try {
-    PromoModel.findAll({
-        where: {
-            promo_code: "ABOBA"
-        }
-    }).then((res) => {
+    PromoModel.findAll().then((res) => {
         if(res.length <= 1){
             PromoModel.create({
                 discount: 25, 
