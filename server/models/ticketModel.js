@@ -58,30 +58,30 @@ UserModel.hasMany(TicketModel, {
     }
 });
 TicketModel.belongsTo(UserModel);
-try {
-    PromoModel.findAll({
-        where: {
-            promo_code: "ABOBA"
-        }
-    }).then((res) => {
-        if(res.length <= 0){
-            PromoModel.create({
-                discount: 25, 
-                promo_code: "ABOBA",
-                count: 50
-            });
-        }
-    }).catch((error) => {
-        console.log(error);
-        PromoModel.create({
-            discount: 25, 
-            promo_code: "ABOBA",
-            count: 50
-        });
-    })
-} catch (error) {
-    console.log(error)
-}
+// try {
+//     PromoModel.findAll({
+//         where: {
+//             promo_code: "ABOBA"
+//         }
+//     }).then((res) => {
+//         if(res.length <= 0){
+//             PromoModel.create({
+//                 discount: 25, 
+//                 promo_code: "ABOBA",
+//                 count: 50
+//             });
+//         }
+//     }).catch((error) => {
+//         console.log(error);
+//         PromoModel.create({
+//             discount: 25, 
+//             promo_code: "ABOBA",
+//             count: 50
+//         });
+//     })
+// } catch (error) {
+//     console.log(error)
+// }
 
 
 module.exports = {
