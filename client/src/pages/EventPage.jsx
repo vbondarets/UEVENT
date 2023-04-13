@@ -19,7 +19,7 @@ import { ConfirmationForm } from "./ConfirmationForm";
 import { getAllTicketsOnEvent } from "../actions/TicketAction";
 
 
-Geocode.setApiKey("");
+Geocode.setApiKey("AIzaSyBabtxg-u839rG6tmVUIZXD1DoOVcNhyIk");
 const geocodingQuery = async (address) => {
     const res = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=ApiKey`);
     const json = res.data;

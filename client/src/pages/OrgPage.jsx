@@ -97,7 +97,7 @@ const OrgPage = () => {
             const { data } = await EventSevice.getByOrg(organization.organization_id);
             let randomEventIdexsArr = [];
             if(data.length >= 8){
-                for(let i = 0; i < data.length; i++){
+                for(let i = 0; i < 8; i++){
                     randomEventIdexsArr.push(randomIntFromInterval(1, data.length));
                 }
                 // console.log(randomEventIdexsArr)
@@ -220,7 +220,9 @@ const OrgPage = () => {
             {randomEvents.length > 0 
                 ?
                 <div className={classes.events_container}>
+                    {console.log(randomEvents)}
                     {randomEvents.map((element, index) =>
+                        // console.log()
                         <EventPreview 
                             adress={`http://localhost:3000/events/${element.event_id}`}
                             event={element}

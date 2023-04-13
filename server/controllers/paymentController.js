@@ -54,6 +54,7 @@ class PaymentController {
             const { merchant_data, response_status, currency, amount, masked_card } = req.body;
             if (response_status === "success") {
                 const decoded = jwt.verify(merchant_data.seqToken, secureConfig.SECRET_KEY);
+                console.log(decoded);
                 if (decoded) {
                     const User = await UserModel.findAll({
                         where: {

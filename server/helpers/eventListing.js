@@ -19,6 +19,10 @@ const categoryParsing = (eventName) => {
         return 2
     }
 }
+const getRandomLocation = () => {
+    const cityArr = ["Kiyv", "Kharkiv", "New York", "Los Angeles", "London", "Berlin", "Paris", "Madrid", "Lviv"];
+    return cityArr[Math.floor(Math.random() * cityArr.length)]
+}
 const descriptionParsing = (eventName) => {
     const result = eventName.split('vs.');
     if(result.length >= 2){
@@ -59,7 +63,7 @@ const eventListing = async () => {
                         startDateTime: element.dates.start.dateTime,
                         endDateTime: moment(element.dates.start.dateTime).add(3, 'hours'),
                         tickets_count: Math.floor(Math.random() * 400),
-                        region: element.locale,
+                        region: getRandomLocation(),
                         imgLink: element.images[1].url,
                         category_id: categoryParsing(element.name),
                         organization_id: 1,
