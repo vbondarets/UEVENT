@@ -71,7 +71,7 @@ class PaymentController {
                         }
                     });
                     if (Event[0].tickets_count > 0) {
-                        const seqToken = JwtGenerator(JSON.parse(req.body.merchant_data));
+                        const seqToken = JwtGenerator(merchant_data);
                         const path = await PdfGenerator(seqToken, Event[0], User[0]);
                         await fileMailingService(User[0].email, path);
                         EventModel.update(
