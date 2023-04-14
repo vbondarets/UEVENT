@@ -34,7 +34,7 @@ export const privateRoutes = [
     {path: "/error", component: registrationPage, exact: true},
     {path: '/create_event', component: CreateEventPage, exact: true},
     {path: '/list/:event_id', component: ListOfUsersPage, exact:true},
-    {path: '/ticket/check/:token', component: ListOfUsersPage, exact:true},
+    {path: '/ticket/check/:token', component: TicketCheck, exact:true},
     {path: '/payment', component: ListOfUsersPage, exact:true}
 ];
 
