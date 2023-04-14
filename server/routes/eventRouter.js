@@ -14,5 +14,6 @@ router.get(`/subscribe/:event_id`, eventController.getAllSubscriptionOnEvent)
 router.post('/', eventController.create);
 router.post('/subscripe/:event_id', eventController.SubscripeOnEvent)
 router.delete(`/subscripe/:event_id/user/:user_id`, eventController.DeleteSubs)
+router.delete('/delete/:event_id', eventController.DeleteEvent)
 
 module.exports = router;

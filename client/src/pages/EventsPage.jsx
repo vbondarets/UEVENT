@@ -84,10 +84,11 @@ const EventsPage = () => {
         )
     }
     else {
+        AllEvents.sort((a,b)=> moment(b.startDateTime) -moment(a.startDateTime))
         const callback= () => {
             let jopa = AllEvents
             if (sortE=== 'new') {
-                jopa.sort((a,b)=> moment(b.startDateTime) - moment(a.startDateTime) )
+                jopa.sort((a,b)=> moment(b.startDateTime) - moment(a.startDateTime))
             }
             if (sortE === 'old') {
                 jopa.sort((a,b)=> moment(a.startDateTime) - moment(b.startDateTime))
