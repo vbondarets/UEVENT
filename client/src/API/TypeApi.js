@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL:"https://uevent-vbondarets.pp.ua/api"
+    baseURL:"http://localhost:8080/api"
 })
 
-export const getAllTypes = () => api.get('https://uevent-vbondarets.pp.ua/api/event/types')
+export const getAllTypes = () => api.get('http://localhost:8080/api/event/types')

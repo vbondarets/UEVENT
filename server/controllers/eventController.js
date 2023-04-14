@@ -253,6 +253,23 @@ class EventController {
             return next(ApiError.internal('Unknown error: ' + error));
         }
     }
+
+    async DeleteEvent ( req, res, next) {
+        try {
+            const {event_id} = req.params
+            console.log(event_id);
+            EventModel.destroy({
+                where:{
+                    event_id:event_id
+                }
+            }).then(resp => {
+                return res.json(resp)
+            })
+            
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error));
+        }
+    }
     
 }
 

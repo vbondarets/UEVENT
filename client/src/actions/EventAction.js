@@ -1,5 +1,5 @@
 import moment from "moment"
-import { createEventApi, DeleteSub, getAllCategories, getAllEvents,getAllSubs,getEventById, getLanLog, sort, Subscripe } from "../API/EventApi"
+import { createEventApi, deleteE, DeleteSub, getAllCategories, getAllEvents,getAllSubs,getEventById, getLanLog, sort, Subscripe } from "../API/EventApi"
 
 export const getAllEventsAction = () => async(dispatch) => {
     try {
@@ -167,6 +167,18 @@ export const sortEvents = (category_id, type_id) => async(dispatch) => {
             // if (arrEvents === 'No events in this category'){
             //     return dispatch({type:'sortCategories', payload:arrEvents})
             // }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const DeleteEvent = (event_id) => async(dispatch) => {
+    try {
+        const {data} = await deleteE(event_id)
+        const Data = await getAllEvents()
+        if (Data.data.length > 0) {
+            return dispatch({type:'deleteEvent', payload:Data.data})
         }
     } catch (error) {
         console.log(error);
