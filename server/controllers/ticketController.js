@@ -47,7 +47,8 @@ class ticketController {
             }
             
         } catch (error) {
-            if(error === "JsonWebTokenError: invalid signature"){
+            console.log(error);
+            if(error.message === "JsonWebTokenError: invalid signature"){
                 return next(ApiError.forbiden('Acces deny'));
             }
             return next(ApiError.internal('Unknown error: ' + error));
