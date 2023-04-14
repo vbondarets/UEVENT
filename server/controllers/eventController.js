@@ -60,8 +60,10 @@ class EventController {
                 }).then(async (subs) => {
                     if(subs.length > 0){
                         subs.forEach(async (sub) => {
-                            const Org = await OrganizationModel.findOne({where: {organization_id}}).catch(error => {
+                            const Org = await OrganizationModel.findOne({where: {organization_id, user_id: sub.user_id}}).catch(error => {
                                 console.log(error)
+                            }).catch((error) => {
+                                console.log(error);
                             })
                             UserModel.findOne({
                                 where: {

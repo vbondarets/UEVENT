@@ -14,7 +14,7 @@ const PdfGenerator = async (token, Event, User) => {
     let fileName = uuid.v4() + ".pdf";
     const root = HTMLParser.parse(html);
     
-    QRCode.toString(`https://localhost:8080/api/ticket/check/${token}`,{type:'svg'}, function (err, url) {
+    QRCode.toString(`https://localhost:3000/ticket/check/${token}`,{type:'svg'}, function (err, url) {
         const div = root.getElementById('qrcode');
         div.set_content(url)
     })

@@ -9,6 +9,7 @@ import CreateEventPage from '../pages/CreateEventPage';
 import OrgPage from '../pages/OrgPage';
 import Organizations from '../pages/Organizations';
 import ListOfUsersPage from '../pages/ListOfUsersPage';
+import TicketCheck from '../pages/TicketCheck';
 
 export const publicRoutes = [
     {path: "/login", component: loginPage, exact: true},
@@ -32,7 +33,9 @@ export const privateRoutes = [
     {path: "/myaccount", component: registrationPage, exact: true},
     {path: "/error", component: registrationPage, exact: true},
     {path: '/create_event', component: CreateEventPage, exact: true},
-    {path: '/list/:event_id', component: ListOfUsersPage, exact:true}
+    {path: '/list/:event_id', component: ListOfUsersPage, exact:true},
+    {path: '/ticket/check/:token', component: ListOfUsersPage, exact:true},
+    {path: '/payment', component: ListOfUsersPage, exact:true}
 ];
 
 export const adminRoutes = [
