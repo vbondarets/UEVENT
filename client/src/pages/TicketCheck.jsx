@@ -15,7 +15,7 @@ const TicketCheck = () => {
             // const res  = await TicketSevice.check(token);
             console.log(data);
             setEvent(data);
-            console.log(JSON.parse(data.merchant_data));
+            console.log(data.merchant_data);
         }
         catch (err) {
             console.log(err.response.data);

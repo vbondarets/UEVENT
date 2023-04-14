@@ -29,7 +29,7 @@ class ticketController {
     async check(req, res, next) {
         try {
             const {token} = req.params;
-            console.log(token);
+            // console.log(token);
             if(token){
                 const decoded = jwt.verify(token, secureConfig.SECRET_KEY);
                 if(decoded){
