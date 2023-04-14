@@ -8,6 +8,7 @@ const fs = require("fs");
 const { UserModel } = require("../models/userModel");
 const { TicketModel, PromoModel } = require("../models/ticketModel");
 const { EventModel } = require("../models/eventModel");
+const JwtGenerator = require("../helpers/jwtGenerators/jwtGenerator");
 
 class PaymentController {
     async createPayment(req, res, next) {
