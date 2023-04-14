@@ -20,6 +20,16 @@ class AuthController {
             return next(ApiError.internal('Unknown error: ' + error));
         }
     }
+    async getUserById (req, res, next) {
+        const {id} = req.params
+        try {
+            UserModel.findOne({where:{user_id: id}}).then(resolve => {
+                return res.json(resolve)
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error));
+        }
+    }
 
     async registration(req, res, next) {
         try {

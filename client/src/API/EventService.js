@@ -10,7 +10,7 @@ export default class EventSevice {
         return response;
     }
     static async getById(id) {
-        const response = await axios.get(`https://uevent-vbondarets.pp.ua/api/event/${id}`);
+        const response = await axios.get(`https://uevent-vbondarets.pp.ua/api/event/event/${id}`);
         return response;
     }
     static async getByOrg(id) {

@@ -1,31 +1,51 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom';
+import EventSevice from '../API/EventService';
 import TicketSevice from '../API/TicketService';
+import UserSevice from '../API/UserService';
 import { useFetching } from '../hooks/useFetching';
 import classes from './css/TicketCheck.module.css';
 
 const TicketCheck = () => {
+    const [merchatData, setMerchatData] = useState();
+    const [user, setUser] = useState();
     const [event, setEvent] = useState();
     const {token} = useParams();
     const history = useHistory();
-    const [fetchEvent] = useFetching(async () => {
+    const [fetchTicket] = useFetching(async () => {
         try {
             const { data } = await TicketSevice.check(token);
-            // console.log(JSON.parse(data.merchant_data));
-            // const res  = await TicketSevice.check(token);
-            console.log(data);
-            setEvent(data);
-            console.log(data.merchant_data);
+            setMerchatData(data.data);
         }
         catch (err) {
             console.log(err.response.data);
         }
     });
-    // useEffect(() => {
-    //     // fetchEvent();
-    // }, [event]);
+    const [fetchUser] = useFetching(async () => {
+        try {
+            const { data } = await UserSevice.getUserById(merchatData.user_id);
+            setUser(data);
+        }
+        catch (err) {
+            console.log(err.response.data);
+        }
+    });
+    const [fetchEvent] = useFetching(async () => {
+        try {
+            // console.log(merchatData)
+            const { data } = await EventSevice.getById(parseInt(merchatData.event_id));
+            setEvent(data);
+        }
+        catch (err) {
+            console.log(err.response.data);
+        }
+    });
     useEffect(() => {
         fetchEvent();
+        fetchUser()
+    }, [merchatData]);
+    useEffect(() => {
+        fetchTicket();
     }, []);
 
     return (
