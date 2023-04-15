@@ -19,8 +19,13 @@ const categoryParsing = (eventName) => {
         return 2
     }
 }
+const getRandomLocation = () => {
+    const cityArr = ["Kiyv", "Kharkiv", "New York", "Los Angeles", "London", "Berlin", "Paris", "Madrid", "Lviv"];
+    return cityArr[Math.floor(Math.random() * cityArr.length)]
+}
 const descriptionParsing = (eventName) => {
     const result = eventName.split('vs.');
+    const sec_result = eventName.split('v.');
     if(result.length >= 2){
         if(result[0].length > 0 && result[1].length > 0){
             return "Amazing sport event"
@@ -30,21 +35,38 @@ const descriptionParsing = (eventName) => {
         }
     }
     else {
+        if(sec_result >= 2){
+            if(result[0].length > 0 && result[1].length > 0){
+                return "Amazing sport event"
+            }
+            else {
+                return "Amazing music show"
+            }
+        }
         return "Amazing music show"
     }
 }
 const typeParsing = (eventName) => {
     const result = eventName.split('vs.');
+    const sec_result = eventName.split('v.');
     if(result.length >= 2){
         if(result[0].length > 0 && result[1].length > 0){
             return 7
         }
         else {
-            return 1
+            return 3
         }
     }
     else {
-        return 1
+        if(sec_result >= 2){
+            if(result[0].length > 0 && result[1].length > 0){
+                return 7
+            }
+            else {
+                return 3
+            }
+        }
+        return 3
     }
 }
 
@@ -59,7 +81,7 @@ const eventListing = async () => {
                         startDateTime: element.dates.start.dateTime,
                         endDateTime: moment(element.dates.start.dateTime).add(3, 'hours'),
                         tickets_count: Math.floor(Math.random() * 400),
-                        region: element.locale,
+                        region: getRandomLocation(),
                         imgLink: element.images[1].url,
                         category_id: categoryParsing(element.name),
                         organization_id: 1,

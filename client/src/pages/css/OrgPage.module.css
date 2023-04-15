@@ -48,3 +48,19 @@
     display: flex;
     flex-direction: column;
 }
+.notifications{
+    margin-top: 15px;
+    scale: 200%;
+    color:rgb(19, 156, 19);
+    margin-left: 20px;
+    cursor: pointer;
+}
+.notifications:hover{
+    background-color:rgb(19, 156, 19);
+    border-radius: 5px;
+    color: rgb(31, 31, 31);
+}
+/* .notification_contaner{
+    display: flex;
+    justify-content: right;
+} */

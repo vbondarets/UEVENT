@@ -15,7 +15,7 @@ const Organizations = () => {
     const [modal, setModal] = useState(false);
     const isAuth = useSelector(state => state.Auth.status);
 
-    const [fetchOrg, isOrgLoading, OrgError] = useFetching(async () => {
+    const [fetchOrg] = useFetching(async () => {
         try {
             const { data } = await OrgSevice.getAll();
             console.log(data);
@@ -28,7 +28,7 @@ const Organizations = () => {
 
     useEffect(() => {
         fetchOrg();
-        console.log(isAuth)
+        // console.log(isAuth)
     }, []);
 
     const goTo = (link) => {

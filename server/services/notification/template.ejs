@@ -12,8 +12,20 @@
       color: rgb(19, 156, 19);
       font-family: 'Climate Crisis', cursive;
       letter-spacing: 1px;
+      text-align: center;
     }
-    p {
+    h2   {
+      color: rgb(19, 156, 19);
+      font-family: 'Climate Crisis', cursive;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    pre {
+      color: rgb(19, 156, 19);
+      font-family: 'Climate Crisis', cursive;
+      letter-spacing: 1px;
+    }
+    a {
       color: rgb(19, 156, 19);
       font-family: 'Climate Crisis', cursive;
       letter-spacing: 1px;
@@ -21,24 +33,19 @@
     .content{
       min-width: 10mm;
       min-height: 10mm;
-      /* border: 1px solid black; */
     }
   </style>
 </head>
 
 <body>
-  <h1>Event ticket</h1>
+  <h1>Uevent</h1>
+  <h2><%=header%></h2>
   <div class="content">
-    {{#each data}}
-    <p>Name: {{this.name}}</p>
-    <p>Event: {{this.event}}</p>
-    <p>Date: {{this.date}}</p>
-    <p>Time: {{this.time}}</p>
-    <p>Location: {{this.location}}</p>
-    {{/each}}
+    <pre><%=text%></pre>
+    <a href="<%=link%>">Clik here</a>
   </div>
-  <div id="qrcode"></div>
 
+  
 </body>
 
 </html>

@@ -12,6 +12,8 @@ import MyModal from '../components/UI/MyModal/MyModal';
 import PostForm from '../components/PostForm';
 import ConfirmationForm  from '../components/ConfirmationForm';
 // import { redirect } from "react-router-dom";
+import NotificationsOffRoundedIcon from '@mui/icons-material/NotificationsOffRounded';
+import NotificationsActiveRoundedIcon from '@mui/icons-material/NotificationsActiveRounded';
 
 const OrgPage = () => {
 
@@ -24,12 +26,53 @@ const OrgPage = () => {
     const [modal, setModal] = useState(false);
     const [confirmModal, setConfirmModal] = useState(false);
     const [postModal, setPostModal] = useState(false);
+    const [isSub, setIsSub] = useState(false);
 
     const [fetchOrg, isOrgLoading, OrgError] = useFetching(async () => {
         try {
             const { data } = await OrgSevice.getById(id);
             setOrganization(data[0])
 
+        }
+        catch (err) {
+            console.log(err.response.data);
+        }
+    });
+    const [fetchGetSub, isGetSubLoading, getSubError] = useFetching(async () => {
+        try {
+            const { data } = await OrgSevice.getSub({
+                user_id: User.userId,
+                organization_id: organization.organization_id
+            });
+            console.log(window.location)
+            if(data.user_id && data.organization_id){
+                setIsSub(true);
+            }
+        }
+        catch (err) {
+            console.log(err.response.data);
+        }
+    });
+    const [fetchSub, isSubLoading, SubError] = useFetching(async () => {
+        try {
+            if(isSub){
+                const { data } = await OrgSevice.deleteSub({
+                    user_id: User.userId,
+                    organization_id: organization.organization_id
+                });
+                if(data === "Sub deleted"){
+                    setIsSub(false);
+                }
+            }
+            else {
+                const { data } = await OrgSevice.createSub({
+                    user_id: User.userId,
+                    organization_id: organization.organization_id
+                });
+                if(data === "Sub created"){
+                    setIsSub(true);
+                }
+            }
         }
         catch (err) {
             console.log(err.response.data);
@@ -53,17 +96,21 @@ const OrgPage = () => {
         try {
             const { data } = await EventSevice.getByOrg(organization.organization_id);
             let randomEventIdexsArr = [];
-            for(let i = 0; i < 8; i++){
-                randomEventIdexsArr.push(randomIntFromInterval(1, data.length));
+            if(data.length >= 8){
+                for(let i = 0; i < 8; i++){
+                    randomEventIdexsArr.push(randomIntFromInterval(1, data.length));
+                }
+                // console.log(randomEventIdexsArr)
+                let eventArr = [];
+                for(let i = 0; i < randomEventIdexsArr.length; i++){
+                    eventArr.push(data[randomEventIdexsArr[i]])
+                }
+                setRandomEvents(eventArr);
+                // setRandomEvents(eventArr);
             }
-            // console.log(randomEventIdexsArr)
-            let eventArr = [];
-            for(let i = 0; i < randomEventIdexsArr.length; i++){
-                eventArr.push(data[randomEventIdexsArr[i]])
+            else {
+                setRandomEvents(data);
             }
-            // console.log(eventArr);
-            setRandomEvents(eventArr);
-            // setRandomEvents(eventArr);
         }
         catch (err) {
             console.log(err.response.data);
@@ -99,6 +146,7 @@ const OrgPage = () => {
     }, []);
     useEffect(() => {
         fetchEvent();
+        fetchGetSub();
     }, [organization]);
 
     const isAuthor = () => {
@@ -128,6 +176,14 @@ const OrgPage = () => {
             <p className={`${classes.org_name}`}>{organization.name}</p>
             <div className={classes.org_image_container}>
                 <img className={classes.org_image} src={organization.img} alt={organization.name} />
+            </div>
+            <div className={classes.notification_contaner}>
+                {isSub 
+                    ?
+                    <NotificationsActiveRoundedIcon onClick={fetchSub} className={classes.notifications}/>
+                    :
+                    <NotificationsOffRoundedIcon onClick={fetchSub} className={classes.notifications}/>
+                }
             </div>
             <p className={`${classes.org_header} ${classes.org_text}`}>About:</p>
             <p className={`${classes.org_description} ${classes.org_text}`}>{organization.description}</p>
@@ -164,7 +220,9 @@ const OrgPage = () => {
             {randomEvents.length > 0 
                 ?
                 <div className={classes.events_container}>
+                    {console.log(randomEvents)}
                     {randomEvents.map((element, index) =>
+                        // console.log()
                         <EventPreview 
                             adress={`http://localhost:3000/events/${element.event_id}`}
                             event={element}

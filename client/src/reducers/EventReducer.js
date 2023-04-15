@@ -25,11 +25,15 @@ export const EventReducer = (events = initialState, action) => {
             return {...events, subsriptions: action.payload}
         case 'deleteSub':
             return {...events, subsriptions: action.payload}
+        case 'deleteEvent':
+            return {...events, allEvents: action.payload}
 
         case 'createEvent':
             return {...events, allEvents: action.payload}
 
         case 'sortCategories':
+            return {...events, allEvents: action.payload}
+        case 'sortBytime':
             return {...events, allEvents: action.payload}
         default:
             return events;

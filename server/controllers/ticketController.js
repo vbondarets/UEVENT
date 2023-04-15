@@ -50,6 +50,7 @@ class ticketController {
     async check(req, res, next) {
         try {
             const {token} = req.params;
+            // console.log(token);
             if(token){
                 const decoded = jwt.verify(token, secureConfig.SECRET_KEY);
                 if(decoded){
@@ -67,7 +68,12 @@ class ticketController {
             }
             
         } catch (error) {
-            return next(ApiError.internal('Unknown error: ' + error));
+            // console.log(error);
+            // if(error.message === "JsonWebTokenError: invalid signature"){
+            //     return next(ApiError.forbiden('Acces deny'));
+            // }
+            // return next(ApiError.internal('Unknown error: ' + error));
+            return next(ApiError.forbiden('Acces deny: ' + error));
         }
     }
 }

@@ -7,6 +7,7 @@ const router = require('./routes/index');
 const errorHandler = require('./middleware/ErrorHanlingMinddleware');
 const seqelize = require('./models/db');
 const eventClearing = require("./helpers/eventCleaning");
+const subQueue = require('./services/subscriptionQueue');
 
 
 const app = express();
@@ -29,6 +30,7 @@ const start = async () =>{
     }
 }
 start();
+subQueue();
 setInterval(
     () => eventClearing(), 
     8 * 60 * 60 * 1000 //vremya =kajdie 8 chasov

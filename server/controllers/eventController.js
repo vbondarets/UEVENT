@@ -6,6 +6,7 @@ const { json } = require("body-parser");
 const { Op } = require("sequelize");
 const uuid = require('uuid');
 const path = require('path');
+const { OrganizationSubModel, OrganizationModel, UserModel } = require("../models/userModel");
 
 class EventController {
     async getAll(req, res, next) {
@@ -49,12 +50,37 @@ class EventController {
     async create(req, res, next) {
         try {
             const {name, startDateTime, endDateTime, tickets_count, region, category_id, price, description, type_id, imgLink, organization_id} = req.body;
-            // console.log(type_id);
-            // const {img} = req.files;
-            // const fileName = uuid.v4()+ ".jpg";
             EventModel.create({
                 name, startDateTime, endDateTime, tickets_count, price, region, imgLink, category_id, description,type_id,organization_id
             }).then(() => {
+                OrganizationSubModel.findAll({
+                    where: {
+                        organization_id
+                    }
+                }).then(async (subs) => {
+                    if(subs.length > 0){
+                        subs.forEach(async (sub) => {
+                            const Org = await OrganizationModel.findOne({where: {organization_id, user_id: sub.user_id}}).catch(error => {
+                                console.log(error)
+                            }).catch((error) => {
+                                console.log(error);
+                            })
+                            UserModel.findOne({
+                                where: {
+                                    user_id: sub.user_id
+                                }
+                            }).then((User) => {
+                                notificationService({
+                                    link: `http://localhost:3000/organizations/${organization_id}`,
+                                    text: `Hello dear ${User.fullna}\n\nOrganization ${Org.name}\n publish a new event`,
+                                    header: `Check new events`
+                                }, User.email)
+                            }).catch(error => {
+                                console.log(error)
+                            })
+                        })
+                    }
+                })
                 return res.json("Event created");
             }).catch(err => {
                 return next(ApiError.internal('Unknown error: ' + err));
@@ -225,6 +251,23 @@ class EventController {
                     return next(ApiError.badRequest('Not Found'));
                 }
             })
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error));
+        }
+    }
+
+    async DeleteEvent ( req, res, next) {
+        try {
+            const {event_id} = req.params
+            console.log(event_id);
+            EventModel.destroy({
+                where:{
+                    event_id:event_id
+                }
+            }).then(resp => {
+                return res.json(resp)
+            })
+            
         } catch (error) {
             return next(ApiError.internal('Unknown error: ' + error));
         }

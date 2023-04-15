@@ -1,7 +1,8 @@
-const {OrganizationModel, OrganizationPostModel} = require('../models/userModel');
+const {OrganizationModel, OrganizationPostModel, OrganizationSubModel, UserModel} = require('../models/userModel');
 const ApiError = require("../helpers/error/ApiError");
 const uuid = require('uuid');
 const path = require('path');
+const notificationService = require('../services/notification/notificationMailService');
 
 class organizationController {
     
@@ -155,7 +156,33 @@ class organizationController {
                 organization_id, 
                 text,   
                 header
-            }).then(() => {
+            }).then(async () => {
+                OrganizationSubModel.findAll({
+                    where: {
+                        organization_id
+                    }
+                }).then(async (subs) => {
+                    if(subs.length > 0){
+                        subs.forEach(async (sub) => {
+                            const Org = await OrganizationModel.findOne({where: {organization_id}}).catch(error => {
+                                console.log(error)
+                            })
+                            UserModel.findOne({
+                                where: {
+                                    user_id: sub.user_id
+                                }
+                            }).then((User) => {
+                                notificationService({
+                                    link: `http://localhost:3000/organizations/${organization_id}`,
+                                    text: `Hello dear ${User.fullna}\n\nOrganization ${Org.name}\n publish a new post`,
+                                    header: `Check new post`
+                                }, User.email)
+                            }).catch(error => {
+                                console.log(error)
+                            })
+                        })
+                    }
+                })
                 return res.json("Post created");
             }).catch(error => {
                 console.log(error)
@@ -198,6 +225,60 @@ class organizationController {
                 return next(ApiError.internal('Unknown error: ' + error));
             })
         } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error));
+        }
+    }
+    async getSub(req, res, next) {
+        try {
+            const {organization_id, user_id} = req.body;
+            OrganizationSubModel.findOne({
+                where:{
+                    organization_id,
+                    user_id
+                }
+            }).then((sub) => {
+                return res.json(sub);
+            }).catch(error => {
+                console.log(error)
+                return next(ApiError.internal('Unknown error: ' + error));
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error));
+        }
+    }
+    async createSub(req, res, next) {
+        try {
+            const {organization_id, user_id} = req.body;
+            OrganizationSubModel.findOrCreate({
+                where:{
+                    organization_id,
+                    user_id
+                }
+            }).then(() => {
+                return res.json("Sub created");
+            }).catch(error => {
+                return next(ApiError.internal('Unknown error: ' + error));
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error));
+        }
+    }
+    async deleteSub(req, res, next) {
+        try {
+            const {organization_id, user_id} = req.body;
+            OrganizationSubModel.destroy({
+                where:{
+                    organization_id,
+                    user_id
+                }
+            }).then(() => {
+                return res.json("Sub deleted");
+            }).catch(error => {
+                console.log(error);
+                return next(ApiError.internal('Unknown error: ' + error));
+            })
+        } catch (error) {
+            console.log(error);
             return next(ApiError.internal('Unknown error: ' + error));
         }
     }

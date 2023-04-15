@@ -1,0 +1,13 @@
+.header_ok{
+    text-align: center;
+    color: rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    font-size: 25px;
+}
+.header_no{
+    text-align: center;
+    color: rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    font-size: 35px;
+    text-decoration: underline;
+}

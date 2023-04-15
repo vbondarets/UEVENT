@@ -4,6 +4,7 @@ const { Sequelize } = require('sequelize');
 // const sequelize = new Sequelize(/* ... */);
 const queryInterface = sequelize.getQueryInterface();
 const orgLinks = require('../imgLinks.json');
+const bcrypt = require('bcrypt');
 
 const orgFilling = () =>{
     OrganizationModel.bulkCreate([{
@@ -147,6 +148,24 @@ const OrganizationPostModel = sequelize.define('organization_post', {
         allowNull: false
     }
 });
+const OrganizationSubModel = sequelize.define('organization_sub', {
+    sub_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        unique: true,
+        autoIncrement: true
+    },
+    user_id: {
+        type: DataTypes.INTEGER,
+        unique: false,
+        allowNull: false
+    },
+    organization_id: {
+        type: DataTypes.INTEGER,
+        unique: false,
+        allowNull: false
+    }
+});
 
 UserModel.hasMany(OrganizationModel, {
 });
@@ -191,7 +210,7 @@ try {
             UserModel.create({
                 login: "admin",
                 email: "admin@admin.com",
-                fullName: "Admin Admin",
+                fullname: "Admin Admin",
                 password: hashedPassword,
                 role: "ADMIN"
             }).catch((error) => {
@@ -208,5 +227,6 @@ try {
 module.exports = {
     OrganizationModel,
     UserModel,
-    OrganizationPostModel
+    OrganizationPostModel,
+    OrganizationSubModel
 };

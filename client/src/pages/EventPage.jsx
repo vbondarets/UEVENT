@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { DeleteSubscribe, EventById, getAllCategory, getAllEventsAction, getAllSubsOnEvent, SubscribeOnEvent } from "../actions/EventAction";
+import { DeleteEvent, DeleteSubscribe, EventById, getAllCategory, getAllEventsAction, getAllSubsOnEvent, SubscribeOnEvent } from "../actions/EventAction";
 import moment from 'moment'
 import { getAllOrg } from "../actions/OrganizationAction";
 import { getTypes } from "../actions/TypeAction";
@@ -17,9 +17,9 @@ import MyModal from '../components/UI/MyModal/MyModal';
 import OrgForm from "../components/OrgForm";
 import { ConfirmationForm } from "./ConfirmationForm";
 import { getAllTicketsOnEvent } from "../actions/TicketAction";
+import DeleteIcon from '@mui/icons-material/Delete';
 
-
-Geocode.setApiKey("");
+Geocode.setApiKey("AIzaSyBabtxg-u839rG6tmVUIZXD1DoOVcNhyIk");
 const geocodingQuery = async (address) => {
     const res = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=ApiKey`);
     const json = res.data;
@@ -72,7 +72,7 @@ const EventPage = (props) => {
     let themes = ThemesStore
     let allEvents = EventsStrore
     let subs = SubsStore
-    
+    let boolAuthor = false
     if (Event.length !== 0) {
         let adress = Event[0].region
         let bought = false
@@ -92,6 +92,9 @@ const EventPage = (props) => {
                 organization_name = organization[index].name
                 description_organization = organization[index].description
                 organization_id = organization[index].organization_id
+            }
+            if (organization[index].organization_id === Event[0].organization_id && organization[index].author_id === UserStore.user.userId) {
+                boolAuthor = true
             }
         }
         for (let index = 0; index < themes.length; index++) {
@@ -153,23 +156,34 @@ const EventPage = (props) => {
                         
                     </div>
                     <div className={style.info_event}>
-                        <div style={{display:'flex', alignItems:'center'}}>
-                            <h1>About Event</h1>
-                            {isSub === false ?
-                            <NotificationsIcon
-                                onClick = { () => {dispatch(SubscribeOnEvent(id, UserStore.user.userId)); isSub = true}}
-                                className={style.NotificationsIcon} />
+                        <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+                            <h1 style={{marginLeft:'5%'}}>About Event</h1>
+                            {boolAuthor === true ? 
+                            <>
+                                <DeleteIcon className={style.NotificationsIcon} 
+                                    onClick = { () => {
+                                    dispatch(DeleteEvent(id))
+                                    history.push('/events')
+                                }}/>
+                            </>
                             :
-                            <NotificationsActiveIcon 
-                                onClick = { () => {dispatch(DeleteSubscribe(id, UserStore.user.userId)); isSub = false}}
-                                className={style.NotificationsActiveIcon}/>}
+                            <>
+                                {isSub === false ?
+                                <NotificationsIcon
+                                    onClick = { () => {dispatch(SubscribeOnEvent(id, UserStore.user.userId)); isSub = true}}
+                                    className={style.NotificationsIcon} />
+                                :
+                                <NotificationsActiveIcon 
+                                    onClick = { () => {dispatch(DeleteSubscribe(id, UserStore.user.userId)); isSub = false}}
+                                    className={style.NotificationsActiveIcon}/>}
+                            </>}
                         </div>
                         <p className={style.info_event_p}><b>Region:</b> {Event[0].region}</p>
                         <p className={style.info_event_p}><b>Category:</b> {category}</p>
                         <p className={style.info_event_p}><b>Type:</b> {theme}</p>
                         <p className={style.info_event_p}><b>Organization:</b> {organization_name}</p>
-                        <p className={style.info_event_p}><b>Start at:</b> {moment(Event[0].startDateTime).format('MMMM Do YYYY')}</p>
-                        <p className={style.info_event_p}><b>End at:</b> {moment(Event[0].endDateTime).format('MMMM Do YYYY')}</p>
+                        <p className={style.info_event_p}><b>Start at:</b> {moment(Event[0].startDateTime).format('MMMM Do YYYY HH:mm')}</p>
+                        <p className={style.info_event_p}><b>End at:</b> {moment(Event[0].endDateTime).format('MMMM Do YYYY HH:mm')}</p>
                         <p className={style.info_event_p}><b>Price:</b> {Event[0].price} uah</p>
                         <p className={style.left_tickets}>{Event[0].tickets_count} tickets left...</p>
                         <button onClick={() => {
