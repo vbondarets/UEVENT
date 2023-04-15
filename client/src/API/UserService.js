@@ -14,7 +14,7 @@ export default class UserSevice {
         return response;
     }
     static async getUserById(id) {
-        const response = await axios.get(`https://uevent-vbondarets.pp.ua/api/users/${id}`);
+        const response = await axios.get(`https://uevent-vbondarets.pp.ua/api/auth/user/${id}`);
         return response;
     }
     static async getAll() {

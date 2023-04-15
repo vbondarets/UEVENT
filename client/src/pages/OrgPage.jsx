@@ -123,7 +123,7 @@ const OrgPage = () => {
         // router.replace(link)
         // router.push("events")
         // router.go("/")
-        window.location.replace(link)
+        window.location.href = link;
         console.log(router);
         console.log(window.location);
     }

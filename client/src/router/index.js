@@ -10,6 +10,7 @@ import OrgPage from '../pages/OrgPage';
 import Organizations from '../pages/Organizations';
 import ListOfUsersPage from '../pages/ListOfUsersPage';
 import TicketCheck from '../pages/TicketCheck';
+import PaymentPage from '../pages/PaymentPage';
 
 export const publicRoutes = [
     {path: "/login", component: loginPage, exact: true},
@@ -21,7 +22,8 @@ export const publicRoutes = [
     {path: "/events/:id", component: EventPage, exact: true},
     {path: "/organizations", component: Organizations, exact: true},
     {path: "/organizations/:id", component: OrgPage, exact: true},
-    {path: "/error", component: registrationPage, exact: true}
+    {path: "/error", component: registrationPage, exact: true},
+    {path: '/ticket/check/:token', component: TicketCheck, exact:true}
 ];
 
 export const privateRoutes = [
@@ -35,7 +37,7 @@ export const privateRoutes = [
     {path: '/create_event', component: CreateEventPage, exact: true},
     {path: '/list/:event_id', component: ListOfUsersPage, exact:true},
     {path: '/ticket/check/:token', component: TicketCheck, exact:true},
-    {path: '/payment', component: ListOfUsersPage, exact:true}
+    {path: '/payment', component: PaymentPage, exact:true}
 ];
 
 export const adminRoutes = [
