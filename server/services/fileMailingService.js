@@ -11,21 +11,21 @@ const fileMailingService = async (email, filePath) => {
 
 
 
-    // host: "sandbox.smtp.mailtrap.io",
-    // port: 2525,
-    // auth: {
-    //   user: "09a71704903760",
-    //   pass: "51b8e5c4ea9fc4"
-    // }
+    host: "sandbox.smtp.mailtrap.io",
+    port: 2525,
+    auth: {
+      user: "09a71704903760",
+      pass: "51b8e5c4ea9fc4"
+    }
 
 
     ////////////////
-    host: "sandbox.smtp.mailtrap.io",
-    port: 2525,
-    username: "api",
-    Password:"4792259ac48032d3b23fd0491b98e921",
-    Auth: "PLAIN, LOGIN",
-    STARTTLS: "Required"
+    // host: "sandbox.smtp.mailtrap.io",
+    // port: 2525,
+    // username: "api",
+    // Password:"4792259ac48032d3b23fd0491b98e921",
+    // Auth: "PLAIN, LOGIN",
+    // STARTTLS: "Required"
   });
   const message = {
     from: "no-reply@ucode-uevent.com",
