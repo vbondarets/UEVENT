@@ -32,6 +32,14 @@ const UserPage = () => {
         }
     });
 
+	const router = useHistory();
+
+	const logout = () => 
+	{
+		//logout from an account
+		router.push('/');
+	}
+
     useEffect(() => {
         fetchUser();
     }, []);
@@ -52,7 +60,7 @@ const UserPage = () => {
 				<input className={classes.edit_field_input} ref={nameinputref} style={{display: 'none'}}></input>
 				<div ref={nameref}>{user.fullname}</div>
 
-
+				{selfUser.userId == user.user_id ?
 				<div className={classes.edit_field_button} onClick={()=>{
 					if(isEditingName) 
 					{
@@ -76,7 +84,7 @@ const UserPage = () => {
 
 					setEditingName(!isEditingName);
 
-				}}>🖊️</div>
+				}}>🖊️</div> : <></>}
 			</div>
 			<div className={classes.user_info_field}>
 				{user.email}
@@ -86,7 +94,7 @@ const UserPage = () => {
 		{
 			(isAuth && user.role === "ADMIN" && selfUser.userId == user.user_id) ? <MyButton>Admin panel</MyButton> : <></>
 		}
-
+		{selfUser.userId == user.user_id ? <MyButton onClick={logout}>Logout</MyButton> : <></>}
 		<div>
 
 		</div>
