@@ -26,6 +26,27 @@ class ticketController {
         }
     }
 
+	async getAllOfUser(req, res, next) {
+        try {
+            const {user_id} = req.params
+            TicketModel.findAll( 
+                {where: {
+                    user_id:user_id
+                }}).then( resp => {
+                if (resp.length > 0) {
+                    return res.json(resp)
+                }
+                else {
+                    return next(ApiError.internal("No tickets"));
+                }
+            }).catch(error => {
+                return next(ApiError.internal('Unknown error: ' + error));
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown' + error))
+        }
+    }
+
     async check(req, res, next) {
         try {
             const {token} = req.params;

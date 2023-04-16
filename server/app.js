@@ -22,7 +22,7 @@ app.use(errorHandler);
 const start = async () =>{
     try{
         await seqelize.authenticate();
-        await seqelize.sync();
+        await seqelize.sync({force: true});
         app.listen(PORT, () => console.log(`Server start on http://localhost:${PORT}`));
     }
     catch(err){
