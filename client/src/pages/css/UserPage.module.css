@@ -40,3 +40,19 @@
 	background-color: rgb(19, 156, 19);
 	cursor: pointer;
 }
+
+.edit_field_input 
+{
+	color: rgb(19, 156, 19);
+	font-family: 'Sono', sans-serif;
+	border:rgb(19, 156, 19) solid 2px;
+	display: inline-block;
+	border-radius: 32px;
+	padding: 8px;
+	font-size: 18px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin: 4px;
+	background-color: rgba(0,0,0,0);
+}
