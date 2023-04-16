@@ -82,7 +82,7 @@ const OrgPage = () => {
         try {
             const { data } = await OrgSevice.getByOrg(id);
             console.log(data)
-            setPosts(data);
+            setPosts(data.reverse());
         }
         catch (err) {
             console.log(err.response.data);

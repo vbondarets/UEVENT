@@ -174,7 +174,7 @@ class organizationController {
                             }).then((User) => {
                                 notificationService({
                                     link: `http://localhost:3000/organizations/${organization_id}`,
-                                    text: `Hello dear ${User.fullna}\n\nOrganization ${Org.name}\n publish a new post`,
+                                    text: `Hello dear ${User.fullname}\n\nOrganization ${Org.name}\n publish a new post`,
                                     header: `Check new post`
                                 }, User.email)
                             }).catch(error => {
