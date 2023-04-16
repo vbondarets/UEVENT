@@ -21,6 +21,7 @@ const UserPage = () => {
 
     const [fetchUser, isUserLoading, userError] = useFetching(async () => {
         try {
+			console.log(window.location.pathname.split('/')[2]);
 			console.log("a");
 			let id = window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1);
             const { data } = await UserSevice.getUserById(id);

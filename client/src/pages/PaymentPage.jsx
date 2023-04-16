@@ -22,7 +22,8 @@ const PaymentPage = () => {
           </pre>
           {
             setTimeout(() => {
-              router.goBack();
+              // router.goBack();
+              window.location.href = "http://127.0.0.1:3000/user"
             }, 2000)
           }
         </div>
@@ -34,7 +35,8 @@ const PaymentPage = () => {
           </pre>
           {
             setTimeout(() => {
-              router.goBack();
+              // router.goBack();
+              window.location.href = "http://127.0.0.1:3000/user"
             }, 2000)
           }
         </div>
