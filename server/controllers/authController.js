@@ -186,6 +186,31 @@ class AuthController {
             return next(ApiError.internal('Unknown error: ' + err));
         }
     };
+    async updateUser(req, res, next) {
+        try {
+            const {id} = req.params;
+            const {login, fullname, email} = req.params;
+            if (!email, !login, !fullname) {
+                return next(ApiError.conflict('Missing Data'));
+            }
+            else {
+                await UserModel.update({
+                    login, email, fullname
+                },{
+                    where: {
+                        user_id: id
+                    }
+                }).then((result) => {
+                        return res.json(result)
+                    })
+                    .catch(err => {
+                        return next(ApiError.internal('Unknown error: ' + err));
+                    })
+            }
+        } catch (err) {
+            return next(ApiError.internal('Unknown error: ' + err));
+        }
+    };
 }
 
 module.exports = new AuthController();

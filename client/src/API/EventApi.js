@@ -7,7 +7,7 @@ const api = axios.create({
 export const getAllEvents = () => api.get('https://uevent-vbondarets.pp.ua/api/event/')
 export const getEventById = (id) => api.get(`https://uevent-vbondarets.pp.ua/api/event/event/${id}`)
 export const getAllCategories = () => api.get('https://uevent-vbondarets.pp.ua/api/event/allcategories')
-export const getLanLog = (address) => api.get(`http://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=Apikey`)
+export const getLanLog = (address) => api.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyBabtxg-u839rG6tmVUIZXD1DoOVcNhyIk`)
 export const getAllSubs = (event_id) => api.get(`https://uevent-vbondarets.pp.ua/api/event/subscribe/${event_id}`)
 
 export const Subscripe = (event_id, user_id) => api.post(`https://uevent-vbondarets.pp.ua/api/event/subscripe/${event_id}`, {user_id: user_id})

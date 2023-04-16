@@ -31,13 +31,33 @@ class ticketController {
             const {user_id} = req.params
             TicketModel.findAll( 
                 {where: {
-                    user_id:user_id
+                    user_id
                 }}).then( resp => {
                 if (resp.length > 0) {
                     return res.json(resp)
                 }
                 else {
-                    return next(ApiError.internal("No tickets"));
+                    return next(ApiError.badRequest("No tickets"));
+                }
+            }).catch(error => {
+                return next(ApiError.internal('Unknown error: ' + error));
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown' + error))
+        }
+    }
+    async downloadById(req, res, next) {
+        try {
+            const {id} = req.params
+            TicketModel.findOne( 
+                {where: {
+                    ticket_id: id
+                }}).then( resp => {
+                if (resp.path) {
+                    return res.download(resp.path, "ticket.pdf")
+                }
+                else {
+                    return next(ApiError.badRequest("No ticket"));
                 }
             }).catch(error => {
                 return next(ApiError.internal('Unknown error: ' + error));
@@ -50,7 +70,6 @@ class ticketController {
     async check(req, res, next) {
         try {
             const {token} = req.params;
-            // console.log(token);
             if(token){
                 const decoded = jwt.verify(token, secureConfig.SECRET_KEY);
                 if(decoded){
@@ -68,11 +87,6 @@ class ticketController {
             }
             
         } catch (error) {
-            // console.log(error);
-            // if(error.message === "JsonWebTokenError: invalid signature"){
-            //     return next(ApiError.forbiden('Acces deny'));
-            // }
-            // return next(ApiError.internal('Unknown error: ' + error));
             return next(ApiError.forbiden('Acces deny: ' + error));
         }
     }
