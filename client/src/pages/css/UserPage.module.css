@@ -1,29 +1,33 @@
 .user_info_container{
     display: flex;
     flex-direction: column;
-    height: 200px;
+    height: 250px;
     border-bottom: 1px solid rgb(19, 156, 19);
     justify-content: space-around;
 	padding-left: 20px;
 }
 
-.user_tickets_container{
+.user_tickets_list{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+	column-gap: 16px;
+	row-gap: 16px;
+	padding: 16px;
 }
 
 .user_info_field 
 {
     color: rgb(19, 156, 19);
-    font-family: 'Sono', sans-serif;
+    font-family: 'Climate Crisis';
 	display: flex;
 	align-items: center;
+	font-size: 22px;
 }
 
 .edit_field_button 
 {
 	color: rgb(19, 156, 19);
-	font-family: 'Sono', sans-serif;
+	font-family: 'Climate Crisis', sans-serif;
 	border:rgb(19, 156, 19) solid 2px;
 	display: inline-block;
 	width: 28px;
@@ -55,4 +59,24 @@
 	align-items: center;
 	margin: 4px;
 	background-color: rgba(0,0,0,0);
+}
+
+.user_ticket_container 
+{
+	background-color: gray;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 8px;
+	padding: 15px;
+	border-radius: 12px;
+}
+
+.ticket_list_header 
+{
+	color: rgb(19, 156, 19);
+	font-family: 'Climate Crisis', sans-serif;
+	font-size: 28px;
+	border-top:rgb(19, 156, 19) solid 2px;
+	border-bottom:rgb(19, 156, 19) solid 6px;
 }
