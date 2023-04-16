@@ -1,0 +1,19 @@
+.message{
+    text-align: center;
+    color: rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    font-size: 30px;
+}
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.text_container{
+    margin-top: auto;
+    margin-bottom: auto;
+    height: fit-content;
+    width: fit-content;
+}

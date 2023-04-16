@@ -20,7 +20,9 @@ export const getAllTicketsOnEvent = (event_id) => async(dispatch) => {
 export const buyTickets = (order_id, order_desc, currency, merchant_data, promoCode, amount) => async(dispatch) => {
     try {
         const data = await buyTicket(order_id, order_desc, currency, merchant_data, promoCode, amount)
-        return dispatch({type:"buy_ticket", payload: data})
+        // console.log(data.data.response.checkout_url)
+        window.location.href = data.data.response.checkout_url;
+        // return dispatch({type:"buy_ticket", payload: data});
     } catch (error) {
         console.log(error);
     }
