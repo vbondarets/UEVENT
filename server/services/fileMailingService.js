@@ -23,7 +23,7 @@ const fileMailingService = async (email, filePath) => {
     host: "sandbox.smtp.mailtrap.io",
     port: 2525,
     username: "api",
-    Password:f6b3993366ee0da88c46343005f95014,
+    Password:"4792259ac48032d3b23fd0491b98e921",
     Auth: "PLAIN, LOGIN",
     STARTTLS: "Required"
   });
