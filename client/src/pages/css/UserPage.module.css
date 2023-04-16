@@ -1,13 +1,42 @@
 .user_info_container{
     display: flex;
-    flex-direction: row;
-    max-height: 400px;
-    height: 400px;
+    flex-direction: column;
+    height: 200px;
     border-bottom: 1px solid rgb(19, 156, 19);
     justify-content: space-around;
+	padding-left: 20px;
 }
 
 .user_tickets_container{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.user_info_field 
+{
+    color: rgb(19, 156, 19);
+    font-family: 'Sono', sans-serif;
+	display: flex;
+	align-items: center;
+}
+
+.edit_field_button 
+{
+	color: rgb(19, 156, 19);
+	font-family: 'Sono', sans-serif;
+	border:rgb(19, 156, 19) solid 2px;
+	display: inline-block;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin: 4px;
+}
+
+.edit_field_button:hover
+{
+	background-color: rgb(19, 156, 19);
+	cursor: pointer;
 }
