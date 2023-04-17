@@ -93,6 +93,7 @@
     padding-left: 0.5%;
     padding-bottom: 0.5%;
     border-radius: 10px;
+    height: fit-content;
 }
 
 .other_info_container p {

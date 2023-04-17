@@ -1,0 +1,29 @@
+.header_ok{
+    text-align: center;
+    color: rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    font-size: 25px;
+}
+.header_no{
+    text-align: center;
+    color: rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    font-size: 35px;
+    text-decoration: underline;
+}
+.ticket_header{
+    color: rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    font-size: 25px;
+}
+.ticket_info{
+    color: rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    font-size: 20px;
+}
+.ticket_event{
+    text-align: center;
+    color: rgb(19, 156, 19);
+    font-family: 'Climate Crisis', cursive;
+    font-size: 25px;
+}

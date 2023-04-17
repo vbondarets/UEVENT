@@ -26,6 +26,47 @@ class ticketController {
         }
     }
 
+	async getAllOfUser(req, res, next) {
+        try {
+            const {user_id} = req.params
+            TicketModel.findAll( 
+                {where: {
+                    user_id
+                }}).then( resp => {
+                if (resp.length > 0) {
+                    return res.json(resp)
+                }
+                else {
+                    return next(ApiError.badRequest("No tickets"));
+                }
+            }).catch(error => {
+                return next(ApiError.internal('Unknown error: ' + error));
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown' + error))
+        }
+    }
+    async downloadById(req, res, next) {
+        try {
+            const {id} = req.params
+            TicketModel.findOne( 
+                {where: {
+                    ticket_id: id
+                }}).then( resp => {
+                if (resp.path) {
+                    return res.download(resp.path, "ticket.pdf")
+                }
+                else {
+                    return next(ApiError.badRequest("No ticket"));
+                }
+            }).catch(error => {
+                return next(ApiError.internal('Unknown error: ' + error));
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown' + error))
+        }
+    }
+
     async check(req, res, next) {
         try {
             const {token} = req.params;
@@ -46,7 +87,7 @@ class ticketController {
             }
             
         } catch (error) {
-            return next(ApiError.internal('Unknown error: ' + error));
+            return next(ApiError.forbiden('Acces deny: ' + error));
         }
     }
 }

@@ -25,6 +25,7 @@ const getRandomLocation = () => {
 }
 const descriptionParsing = (eventName) => {
     const result = eventName.split('vs.');
+    const sec_result = eventName.split('v.');
     if(result.length >= 2){
         if(result[0].length > 0 && result[1].length > 0){
             return "Amazing sport event"
@@ -34,21 +35,38 @@ const descriptionParsing = (eventName) => {
         }
     }
     else {
+        if(sec_result >= 2){
+            if(result[0].length > 0 && result[1].length > 0){
+                return "Amazing sport event"
+            }
+            else {
+                return "Amazing music show"
+            }
+        }
         return "Amazing music show"
     }
 }
 const typeParsing = (eventName) => {
     const result = eventName.split('vs.');
+    const sec_result = eventName.split('v.');
     if(result.length >= 2){
         if(result[0].length > 0 && result[1].length > 0){
             return 7
         }
         else {
-            return 4
+            return 3
         }
     }
     else {
-        return 4
+        if(sec_result >= 2){
+            if(result[0].length > 0 && result[1].length > 0){
+                return 7
+            }
+            else {
+                return 3
+            }
+        }
+        return 3
     }
 }
 

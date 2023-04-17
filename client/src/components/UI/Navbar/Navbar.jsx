@@ -47,7 +47,7 @@ const Navbar = () => {
                             <></>
                         }
                         <Link className={classes.navbar__link} to="/organizations">organizations</Link>
-                        <Link className={`${classes.navbar__link__username} + ${classes.navbar__link}`} to="/myaccount">{user.login}</Link>
+                        <Link className={`${classes.navbar__link__username} + ${classes.navbar__link}`} to={`/user/${user.userId}`}>{user.login}</Link>
                     </div>
                 </div>
             )
@@ -63,9 +63,10 @@ const Navbar = () => {
                     <div className={classes.navbar__links}>
                         <Link className={`${classes.navbar__title} + ${classes.navbar__link}`} to="/">UEVENT</Link>
                         <Link className={classes.navbar__link} to="/events">events</Link>
-                        <Link className={classes.navbar__link} to="/organization">organizations</Link>
+                        <Link className={classes.navbar__link} to="/organizations">organizations</Link>
                         <Link className={classes.navbar__link} to="/create_event">create event</Link>
-                        <Link className={`${classes.navbar__link__username} + ${classes.navbar__link}`} to="/myaccount">{user.login}</Link>
+                        <Link className={`${classes.navbar__link__username} + ${classes.navbar__link}`} to={`/user/${user.userId}`}>{user.login}</Link>
+                        {/* {console.log(user)} */}
                     </div>
                 </div>
             )

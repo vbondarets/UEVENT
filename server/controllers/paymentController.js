@@ -8,6 +8,7 @@ const fs = require("fs");
 const { UserModel } = require("../models/userModel");
 const { TicketModel, PromoModel } = require("../models/ticketModel");
 const { EventModel } = require("../models/eventModel");
+const JwtGenerator = require("../helpers/jwtGenerators/jwtGenerator");
 
 class PaymentController {
     async createPayment(req, res, next) {
@@ -56,6 +57,7 @@ class PaymentController {
             if (response_status === "success") {
                 console.log(merchant_data.seqToken);
                 const decoded = jwt.verify(merchant_data.seqToken, secureConfig.SECRET_KEY);
+                console.log("decoded");
                 console.log(decoded);
                 if (decoded) {
                     const User = await UserModel.findAll({
@@ -69,7 +71,8 @@ class PaymentController {
                         }
                     });
                     if (Event[0].tickets_count > 0) {
-                        const path = await PdfGenerator(merchant_data.seqToken, Event[0], User[0]);
+                        const seqToken = JwtGenerator(merchant_data);
+                        const path = await PdfGenerator(seqToken, Event[0], User[0]);
                         await fileMailingService(User[0].email, path);
                         EventModel.update(
                             {

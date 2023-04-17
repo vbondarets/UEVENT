@@ -20,6 +20,16 @@ class AuthController {
             return next(ApiError.internal('Unknown error: ' + error));
         }
     }
+    async getUserById (req, res, next) {
+        const {id} = req.params
+        try {
+            UserModel.findOne({where:{user_id: id}}).then(resolve => {
+                return res.json(resolve)
+            })
+        } catch (error) {
+            return next(ApiError.internal('Unknown error: ' + error));
+        }
+    }
 
     async registration(req, res, next) {
         try {
@@ -172,6 +182,31 @@ class AuthController {
                 })
             }
 
+        } catch (err) {
+            return next(ApiError.internal('Unknown error: ' + err));
+        }
+    };
+    async updateUser(req, res, next) {
+        try {
+            const {id} = req.params;
+            const {login, fullname, email} = req.params;
+            if (!email, !login, !fullname) {
+                return next(ApiError.conflict('Missing Data'));
+            }
+            else {
+                await UserModel.update({
+                    login, email, fullname
+                },{
+                    where: {
+                        user_id: id
+                    }
+                }).then((result) => {
+                        return res.json(result)
+                    })
+                    .catch(err => {
+                        return next(ApiError.internal('Unknown error: ' + err));
+                    })
+            }
         } catch (err) {
             return next(ApiError.internal('Unknown error: ' + err));
         }
