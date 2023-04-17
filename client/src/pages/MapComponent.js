@@ -7,6 +7,7 @@ export const MapComponent = (props) => {
     const {address} = props
     console.log(address);
     const Map = useSelector(store => store.Events.map)
+    console.log(Map);
     let [lat_number, setLat] = useState()
     let [lng_number, setLng] = useState()
 
@@ -37,7 +38,7 @@ export const MapComponent = (props) => {
         else {
             return (
                 <div>
-                    <LoadScript googleMapsApiKey="ApiKey">
+                    <LoadScript googleMapsApiKey="AIzaSyBabtxg-u839rG6tmVUIZXD1DoOVcNhyIk">
                         <GoogleMap 
                             mapContainerStyle={mapStyle} 
                             center={center}

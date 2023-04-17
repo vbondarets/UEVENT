@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack';
 import { useDispatch, useSelector } from "react-redux";
 import { createEvent, getAllCategory } from "../actions/EventAction";
 import { getTypes } from "../actions/TypeAction";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { Checkbox, FormControl, InputLabel, MenuItem, Select, FormControlLabel } from "@mui/material";
 import { getAllOrg } from "../actions/OrganizationAction";
 import moment from 'moment'
 import { useHistory } from "react-router-dom";
@@ -172,6 +172,12 @@ const CreateEventPage = () => {
                             </Select>
                         </FormControl>
                     </div>
+                    <FormControlLabel
+                        control={
+                        <Checkbox name="create" style={{marginLeft:'8%', color:'rgb(19, 156, 19)'}} />
+                        }
+                        label="Create user list" style={{color:'rgb(19, 156, 19)'}}
+                    />
                     <button className={style.buttonCreate} onClick={ (e) => {sendReq(e)}}>Create event</button>        
                 </div>
             </>

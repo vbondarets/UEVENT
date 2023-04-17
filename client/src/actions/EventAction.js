@@ -75,6 +75,7 @@ export const DeleteSubscribe = (event_id, user_id) => async(dispatch) => {
 export const getMap = (address) => async(dispatch) => {
     try {
         const Data = await getLanLog(address)
+        console.log(Data);
         const info = Data.data.results
         if (info.length === 0) {
             return dispatch( {type:'map', payload:null})
